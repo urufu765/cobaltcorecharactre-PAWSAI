@@ -5,19 +5,71 @@
             "desc": "<c=60ba67>PAWSAI</c>\nAn agile defense support machine. Its cards provide sufficient <c=keyword>tanking</c> as well as <c=keyword>situational movement</c>."
         },
         "status": {
+            "Repulsion": {
+                "name": "Repulsion Mod",
+                "desc": "When shot while shield is active, the hit is bounced back as a {0} damage attack.\n<c=downside>Decreases by 1 at the start of next turn.</c>"
+            },
+            "Repetition": {
+                "name": "Repetition",
+                "desc": "The next {0} cards' actions are played again.\n<c=downside>Decreases by 1 at the start of next turn, or on activation.</c>\n<c=keyword>Actions that give <c=status>REPETITION</c> is ignored.</c>"
+            },
+            "Regeneration": {
+                "name": "Shield Regen",
+                "desc": "At the start of each turn, gain 1 <c=status>SHIELD</c> <c=downside>and decrease this by 1</c>."
+            }
         },
         "action": {
+            "PivotIn": {
+                "name": "Pivot Inward",
+                "desc": "Move both ships {0} spaces toward each other.\nIf centered, <c=downside>does nothing</c>."
+            },
+            "PivotOut": {
+                "name": "Pivot Outward",
+                "desc": "Move both ships {0} spaces away from each other.\nIf centered, pick a random direction to move away from each other."
+            },
+            "MirrorMoveLeft": {
+                "name": "Mirror Move Left",
+                "desc": "Instantly move both ships {0} spaces to the <c=keyword>LEFT</c>."
+            },
+            "MirrorMoveRight": {
+                "name": "Mirror Move Right",
+                "desc": "Instantly move both ships {0} spaces to the <c=keyword>RIGHT</c>."
+            }
         },
         "event": {
         },
         "trait": {
         },
         "object": {
+            "pawnchor": {
+                "name": "Paw Anchor",
+                "desc": "When pivoting, move based on this anchor as origin instead of the point between two ships.\n<c=keyword>If multiple <c=midrow>Paw Anchors</c> exist in the field, only respect the youngest.</c>"
+            }
         },
         "artifact": {
             "Common": {
+                "OffensiveDefense": {
+                    "name": "OFFENSIVE DEFENSE",
+                    "desc": "Insert an Attack at the top of every <c=60ba67>PAWSAI</c> card, with <c=keyword>fixed</c> damage based on <c=keyword>card cost</c>.\n<c=keyword>Fixed damage is not affected by any status, but can be affected by part traits.</c>"
+                },
+                "ManyConsequences": {
+                    "name": "MANY CONSEQUENCES",
+                    "desc": "Permanently gain <c=keyword>+5 max shield</c> on pickup.\n<c=downside>At the start of every combat, if you have more hull than max shield, take 1 hull damage.</c>"
+                },
+                "PowerPrep": {
+                    "name": "POWER PREP",
+                    "desc": "At the start of each combat, gain 1 <c=status>REPETITION</c>."
+                }
             },
             "Boss": {
+                "DelayedStart": {
+                    "name": "DELAYED START",
+                    "desc": "At the end of the first turn in combat, double all of your statuses."
+                },
+                "PainCruiser": {
+                    "name": "PAIN CRUISER",
+                    "desc": "Whenever you take more than 3 damage per hit, gain 1 <c=status>PAYBACK</c>."
+                }
             },
             "EventOnly": {
             },
@@ -28,10 +80,87 @@
         },
         "card": {
             "Common": {
+                "PullShot": {
+                    "name": "Pull Shot"
+                },
+                "Safeguard": {
+                    "name": "Safeguard"
+                },
+                "Repulsion": {
+                    "name": "Repulsion"
+                },
+                "ShieldRush": {
+                    "name": "Shield Rush"
+                },
+                "Desync": {
+                    "name": "De-sync"
+                },
+                "ShieldShift": {
+                    "name": "Shield Shift"
+                },
+                "Chase": {
+                    "name": "Chase"
+                },
+                "ThrustRedirect": {
+                    "name": "Thrust Redirect"
+                },
+                "EXE": {
+                    "name": "PAWSAI.EXE"
+                }
             },
             "Uncommon": {
+                "EmergencyRetreat": {
+                    "name": "Emergency Retreat",
+                    "desc": "Move <c=keyword>{0}</c> until you no longer overlap with enemy.\n<c=keyword>End turn.</c>",
+                    "descB": "Move <c=keyword>{0}</c> until you no longer overlap with enemy.\n<c=downside>Lose <c=status>EVADE</c> next turn.</c>\n<c=keyword>End turn.</c>",
+                    "l": "LEFT",
+                    "r": "RIGHT"
+                },
+                "SpikedShield": {
+                    "name": "Spiked Shield"
+                },
+                "EnergizedMove": {
+                    "name": "Energized Move"
+                },
+                "ShieldShort": {
+                    "name": "Shield Short"
+                },
+                "HeavySlugger": {
+                    "name": "Heavy Slugger"
+                },
+                "HeavyShielding": {
+                    "name": "Heavy Shielding"
+                },
+                "SpeedChaser": {
+                    "name": "Speed Chaser"
+                }
             },
             "Rare": {
+                "SmartAlignment": {
+                    "name": "Smart Alignment",
+                    "desc": "Line up your <c=keyword>{0}-most</c> cannon to closest enemy <c=keyword>{1}</c> part.\n<c=downside><c=status>EVADE</c>=0.</c>",
+                    "l": "left",
+                    "r": "right",
+                    "b": "brittle",
+                    "w": "weak",
+                    "n": "Non-armored"
+                },
+                "Potentiomatic": {
+                    "name": "Potentiomatic",
+                    "desc": "X=Missing Shield\n2X {0}{1} Attack\n-X Max Shield",
+                    "descA": "X=Missing Shield\n3X {0}{1} Attack\n-X Max Shield",
+                    "descB": "X=Missing Shield\n2X {0}{1} Pierce Attack\n-X Max Shield",
+                    "s": " Stun"
+                },
+                "Ultimatomatic": {
+                    "name": "Ultimatomatic"
+                },
+                "CautiousRepeater": {
+                    "name": "Cautious Repeater"
+                },
+                "ShieldPayout": {
+                    "name": "Shield Payout"
+                }
             },
             "Token": {
             }

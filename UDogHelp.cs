@@ -32,24 +32,24 @@ public static class UhDuhHundo
         return ac;
     }
 
-    public static void ArtifactRemover(ref State state, string artifactName)
-    {
-        string artifactType = $"{ModEntry.Instance.UniqueName}::{artifactName}";
-        foreach (Character character in state.characters)
-        {
-            if (character.deckType == ModEntry.Instance.WethDeck.Deck)
-            {
-                foreach (Artifact artifact in character.artifacts)
-                {
-                    if (artifact.Key() == artifactType)
-                    {
-                        artifact.OnRemoveArtifact(state);
-                    }
-                }
-                character.artifacts.RemoveAll(a => a.Key() == artifactType);
-            }
-        }
-    }
+    // public static void ArtifactRemover(ref State state, string artifactName)
+    // {
+    //     string artifactType = $"{ModEntry.Instance.UniqueName}::{artifactName}";
+    //     foreach (Character character in state.characters)
+    //     {
+    //         if (character.deckType == ModEntry.Instance.WethDeck.Deck)
+    //         {
+    //             foreach (Artifact artifact in character.artifacts)
+    //             {
+    //                 if (artifact.Key() == artifactType)
+    //                 {
+    //                     artifact.OnRemoveArtifact(state);
+    //                 }
+    //             }
+    //             character.artifacts.RemoveAll(a => a.Key() == artifactType);
+    //         }
+    //     }
+    // }
 
     public static void ApplySubtleCrystalOverlayGlow(Vec? anchorPoint, (Vec pos, Vec size)[] spots, Color color, double timer, double cycleTime = 4, double minGlow = 0, double maxGlow = 1, bool cascade = false, Vec? extraSize = null)
     {
