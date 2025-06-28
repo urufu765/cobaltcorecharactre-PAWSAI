@@ -1,41 +1,192 @@
 ﻿{
-    "character": {
-        "JollyJolly":
-        {
-            "name": "Jolly",
-            "desc": "<c=2a767d>JOLLY</c>\nA negotiator. His cards focus on <c=keyword>midrow</c> and <c=keyword>trading blows with the enemy</c>."
+    "Pawsai": {
+        "character": {
+            "name": "PAWSAI",
+            "desc": "<c=60ba67>PAWSAI</c>\nAn agile defense support machine. Its cards provide sufficient <c=keyword>tanking</c> as well as <c=keyword>situational movement</c>."
+        },
+        "status": {
+        },
+        "action": {
+        },
+        "event": {
+        },
+        "trait": {
+        },
+        "object": {
+        },
+        "artifact": {
+            "Common": {
+            },
+            "Boss": {
+            },
+            "EventOnly": {
+            },
+            "Unreleased": {
+            },
+            "Tooltips": {
+            }
+        },
+        "card": {
+            "Common": {
+            },
+            "Uncommon": {
+            },
+            "Rare": {
+            },
+            "Token": {
+            }
         }
     },
-    "status": {
-    },
-    "action": {
-    },
-    "event": {
-    },
-    "trait": {
-    },
-    "object": {
-    },
-    "artifact": {
-        "Common": {
+    "Kodijen": {
+        "character": {
+            "name": "Kodijen",
+            "desc": "<c=2a767d>KODIJEN</c>\nA battle drone expert. His cards command large <c=keyword>automated drones</c> that he built himself."
         },
-        "Boss": {
+        "status": {
         },
-        "EventOnly": {
+        "action": {
         },
-        "Unreleased": {
+        "event": {
         },
-        "Tooltips": {
+        "trait": {
+        },
+        "object": {
+        },
+        "artifact": {
+            "Common": {
+            },
+            "Boss": {
+            },
+            "EventOnly": {
+            },
+            "Unreleased": {
+            },
+            "Tooltips": {
+            }
+        },
+        "card": {
+            "Common": {
+            },
+            "Uncommon": {
+            },
+            "Rare": {
+            },
+            "Token": {
+            }
         }
     },
-    "card": {
-        "Common": {
+    "Varrigradona": {
+        "character": {
+            "name": "Varrigradona",
+            "desc": "<c=7b3258>VARRIGRADONA</c>\nA freelancer. Her cards <c=keyword>manipulate</c> other cards by <c=keyword>holding onto them</c> until you need it, either for dependency or power."
         },
-        "Uncommon": {
+        "status": {
         },
-        "Rare": {
+        "action": {
         },
-        "Token": {
+        "event": {
+        },
+        "trait": {
+        },
+        "object": {
+        },
+        "artifact": {
+            "Common": {
+            },
+            "Boss": {
+            },
+            "EventOnly": {
+            },
+            "Unreleased": {
+            },
+            "Tooltips": {
+            }
+        },
+        "card": {
+            "Common": {
+            },
+            "Uncommon": {
+            },
+            "Rare": {
+            },
+            "Token": {
+            }
+        }
+    },
+    "Bauie": {
+        "character": {
+            "name": "Bauie",
+            "desc": "<c=2a767d>BAUIE</c>\nAn artillery expert. His cards hit <c=keyword>hard</c>, but require some <c=keyword>setting up and cooling down</c>."
+        },
+        "status": {
+        },
+        "action": {
+        },
+        "event": {
+        },
+        "trait": {
+        },
+        "object": {
+        },
+        "artifact": {
+            "Common": {
+            },
+            "Boss": {
+            },
+            "EventOnly": {
+            },
+            "Unreleased": {
+            },
+            "Tooltips": {
+            }
+        },
+        "card": {
+            "Common": {
+            },
+            "Uncommon": {
+            },
+            "Rare": {
+            },
+            "Token": {
+            }
+        }
+    },
+    "Parmesan": {
+        "character": {
+            "name": "Parmesan",
+            "desc": "<c=2a767d>PARMESAN</c>\nA sneaky deviant. Their cards focus on <c=keyword>evasion</c> and <c=keyword>sneak attacks</c>."
+        },
+        "status": {
+        },
+        "action": {
+        },
+        "event": {
+        },
+        "trait": {
+        },
+        "object": {
+        },
+        "artifact": {
+            "Common": {
+            },
+            "Boss": {
+            },
+            "EventOnly": {
+            },
+            "Unreleased": {
+            },
+            "Tooltips": {
+            }
+        },
+        "card": {
+            "Common": {
+            },
+            "Uncommon": {
+            },
+            "Rare": {
+            },
+            "Token": {
+            }
         }
     }
 }

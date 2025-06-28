@@ -6,16 +6,16 @@ using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
-using JollyJolly.Artifacts;
+using Starhunters.Artifacts;
 // using JollyJolly.Cards;
-using JollyJolly.External;
+using Starhunters.External;
 // using JollyJolly.Features;
 using System.Reflection;
 // using JollyJolly.Actions;
-using JollyJolly.Conversation;
+using Starhunters.Conversation;
 //using System.Reflection;
 
-namespace JollyJolly;
+namespace Starhunters;
 
 internal partial class ModEntry : SimpleMod
 {

@@ -6,10 +6,10 @@ using Microsoft.Extensions.Logging;
 using Nanoray.PluginManager;
 using Nickel;
 
-namespace JollyJolly.External;
+namespace Starhunters.External;
 
 /**
-ver.0.17
+ver.0.18
 
 To get DialogueMachine and the custom dialogue stuff working:
 - edit the namespace of this file to at least match your project namespace
@@ -405,6 +405,10 @@ public class DialogueMachine : StoryNode
 /// </summary>
 public class RetainOrig : Instruction
 {
+    public override string ToString()
+    {
+        return "RetainPlease";
+    }
 }
 
 /// <summary>
@@ -829,26 +833,14 @@ public class LocalDB
     {
         try
         {
-            StoryNode result = existingStory;
+            StoryNode result = existingStory;  // Assumes that the existing story lines has already been converted from DialogueMachine recognized say to game recognized say
             if (existingStory.lines is not null)
             {
-                bool newIsOriginal = false;
-
-                // Check which node is the original
-                for (int w = 0; w < existingStory.lines.Count; w++)
-                {
-                    if (existingStory.lines[w] is RetainOrig)
-                    {
-                        newIsOriginal = true;
-                    }
-                }
-
-                result = newIsOriginal ? newStory : existingStory;
-                StoryNode start = newIsOriginal ? existingStory : newStory;
+                StoryNode start = newStory;
 
                 for (int x = 0; x < result.lines.Count && x < start.lines.Count; x++)
                 {
-                    if (result.lines[x] is RetainOrig)
+                    if (result.lines[x].ToString() == "RetainPlease")
                     {
                         MakeLinesRecognisable(start.lines[x], script);
                         result.lines[x] = start.lines[x];

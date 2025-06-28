@@ -2,7 +2,7 @@ using System.Linq;
 using Microsoft.Extensions.Logging;
 using Nickel;
 
-namespace JollyJolly.Conversation;
+namespace Starhunters.Conversation;
 
 /// <summary>
 /// For if a dialogue needs to be registered AFTER mods have been loaded

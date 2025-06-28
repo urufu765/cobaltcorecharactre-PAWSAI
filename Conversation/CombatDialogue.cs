@@ -2,11 +2,11 @@ using System.Collections.Generic;
 using Microsoft.Xna.Framework.Graphics;
 using Nanoray.PluginManager;
 using Nickel;
-using JollyJolly.Artifacts;
-using JollyJolly.External;
-using static JollyJolly.Conversation.CommonDefinitions;
+using Starhunters.Artifacts;
+using Starhunters.External;
+using static Starhunters.Conversation.CommonDefinitions;
 
-namespace JollyJolly.Conversation;
+namespace Starhunters.Conversation;
 
 internal class CombatDialogue : IRegisterable, IDialogueRegisterable
 {

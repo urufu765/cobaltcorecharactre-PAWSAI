@@ -6,25 +6,24 @@ using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
-using JollyJolly.Artifacts;
+using Starhunters.Artifacts;
 // using JollyJolly.Cards;
-using JollyJolly.External;
+using Starhunters.External;
 // using JollyJolly.Features;
 using System.Reflection;
 // using JollyJolly.Actions;
-using JollyJolly.Conversation;
+using Starhunters.Conversation;
 //using System.Reflection;
 
-namespace JollyJolly;
+namespace Starhunters;
 
 internal partial class ModEntry : SimpleMod
 {
     public ModEntry(IPluginPackage<IModManifest> package, IModHelper helper, ILogger logger) : base(package, helper, logger)
     {
         Instance = this;
-        Harmony = new Harmony("urufudoggo.JollyJolly");
+        Harmony = new Harmony("urufudoggo.Starhunters");
         UniqueName = package.Manifest.UniqueName;
-        modDialogueInited = false;
         /*
          * Some mods provide an API, which can be requested from the ModRegistry.
          * The following is an example of a required dependency - the code would have unexpected errors if Kokoro was not present.
@@ -39,24 +38,22 @@ internal partial class ModEntry : SimpleMod
             {
                 if (DuoArtifactsApi is not null)
                 {
-                    foreach (Type type in WethDuoArtifacts)
+                    foreach (Type type in PawsaiDuoArtifactTypes)
                     {
                         DuoArtifactMeta? dam = type.GetCustomAttribute<DuoArtifactMeta>();
                         if (dam is not null)
                         {
                             if (dam.duoModDeck is null)
                             {
-                                DuoArtifactsApi.RegisterDuoArtifact(type, [WethDeck!.Deck, dam.duoDeck]);
+                                DuoArtifactsApi.RegisterDuoArtifact(type, [PawsaiDeck!.Deck, dam.duoDeck]);
                             }
                             else if (helper.Content.Decks.LookupByUniqueName(dam.duoModDeck) is IDeckEntry ide)
                             {
-                                DuoArtifactsApi.RegisterDuoArtifact(type, [WethDeck!.Deck, ide.Deck]);
+                                DuoArtifactsApi.RegisterDuoArtifact(type, [PawsaiDeck!.Deck, ide.Deck]);
                             }
                         }
                     }
                 }
-                foreach (Type type in WethDialogues)
-                    AccessTools.DeclaredMethod(type, nameof(IDialogueRegisterable.LateRegister))?.Invoke(null, null);
                 localDB = new(helper, package);
             }
         };
@@ -76,11 +73,8 @@ internal partial class ModEntry : SimpleMod
             new CurrentLocaleOrEnglishLocalizationProvider<IReadOnlyList<string>>(AnyLocalizations)
         );
 
-        /*
-         * A deck only defines how cards should be grouped, for things such as codex sorting and Second Opinions.
-         * A character must be defined with a deck to allow the cards to be obtainable as a character's cards.
-         */
-        WethDeck = helper.Content.Decks.RegisterDeck("weth", new DeckConfiguration
+        #region PAWSAI stuff
+        PawsaiDeck = helper.Content.Decks.RegisterDeck("pawsai", new DeckConfiguration
         {
             Definition = new DeckDef
             {
@@ -89,118 +83,53 @@ internal partial class ModEntry : SimpleMod
                  * TODO On cards, it dictates the sheen on higher rarities, as well as influences the color of the energy cost.
                  * If this deck is given to a playable character, their name will be this color, and their mini will have this color as their border.
                  */
-                color = new Color("2a767d"),
+                color = new Color("98a9ba"),
 
-                titleColor = new Color("93c4c8").addClarityBright()
+                titleColor = new Color("113f15")
             },
 
             DefaultCardArt = StableSpr.cards_Cannon,
-            BorderSprite = RegisterSprite(package, "assets/Borders/frame_weth.png").Sprite,
-            Name = AnyLocalizations.Bind(["character", "Weth", "name"]).Localize,
-            ShineColorOverride = _ => new Color(0, 0, 0),
+            BorderSprite = RegisterSprite(package, "assets/frame/frame_pawsai.png").Sprite,
+            Name = AnyLocalizations.Bind(["Pawsai", "character", "name"]).Localize
         });
 
-        /*
-         * Characters have required animations, recommended animations, and you have the option to add more.
-         * In addition, they must be registered before the character themselves is registered.
-         * The game requires you to have a neutral animation and mini animation, used for normal gameplay and the map and run start screen, respectively.
-         * The game uses the squint animation for the Extra-Planar Being and High-Pitched Static events, and the gameover animation while you are dying.
-         * You may define any other animations, and they will only be used when explicitly referenced (such as dialogue).
-         */
-        foreach (string s1 in Weth1Anims)
+        foreach (KeyValuePair<int, List<string>> anims in PawsaiAnims)
         {
-            RegisterAnimation(package, s1, $"assets/Animation/weth_{s1}", 1);
-        }
-        foreach (string s3 in Weth3Anims)
-        {
-            RegisterAnimation(package, s3, $"assets/Animation/weth_{s3}", 3);
-        }
-        foreach (string s4 in Weth4Anims)
-        {
-            RegisterAnimation(package, s4, $"assets/Animation/weth_{s4}", 4);
-        }
-        foreach (string s5 in Weth5Anims)
-        {
-            RegisterAnimation(package, s5, $"assets/Animation/weth_{s5}", 5);
-        }
-        foreach (string s6 in Weth6Anims)
-        {
-            RegisterAnimation(package, s6, $"assets/Animation/weth_{s6}", 6);
+            foreach (string anim in anims.Value)
+            {
+                RegisterAnimation(PawsaiDeck.Deck.Key(), package, anim, $"assets/animation/pawsai/p_{anim}", anims.Key);
+            }
         }
 
-        WethTheSnep = helper.Content.Characters.V2.RegisterPlayableCharacter("weth", new PlayableCharacterConfigurationV2
+        Pawsai = helper.Content.Characters.V2.RegisterPlayableCharacter("pawsai", new PlayableCharacterConfigurationV2
         {
-            Deck = WethDeck.Deck,
-            BorderSprite = WethFramePast,
+            Deck = PawsaiDeck.Deck,
+            BorderSprite = RegisterSprite(package, "assets/frame/char_frame_pawsai.png").Sprite,
             Starters = new StarterDeck
             {
                 cards = [
-                    new TrashDispenser(),
-                    new SplitshotCard()
-                ],
-                /*
-                 * Some characters have starting artifacts, in addition to starting cards.
-                 * This is where they would be added, much like their starter cards.
-                 * This can be safely removed if you have no starting artifacts.
-                 */
-                artifacts = [
-                    new TreasureHunter()
-                ]
-            },
-            Description = AnyLocalizations.Bind(["character", "Weth", "desc"]).Localize,
-            SoloStarters = new StarterDeck
-            {
-                cards = [
-                    new Bloom(),
-                    new DodgeColorless(),
-                    new TrashDispenser(),
-                    new GiantTrash(),
-                    new SplitshotCard(),
-                    new SplitshotCard()
+                    
                 ],
                 artifacts = [
-                    new TreasureHunter()
                 ]
             },
-            ExeCardType = typeof(WethExe)
+            Description = AnyLocalizations.Bind(["Pawsai", "character", "desc"]).Localize,
+            ExeCardType = typeof(PawsaiExe)
         });
 
-        MoreDifficultiesApi?.RegisterAltStarters(WethDeck.Deck, new StarterDeck
+        MoreDifficultiesApi?.RegisterAltStarters(PawsaiDeck.Deck, new StarterDeck
         {
             cards = [
-                new PulsedriveCard(),
-                new Puckshot(),
             ],
             artifacts =
             [
-                new TreasureHunter()
             ]
         });
 
-        /*
-         * Statuses are used to achieve many mechanics.
-         * However, statuses themselves do not contain any code - they just keep track of how much you have.
-         */
-        /*
-         * Managers are typically made to register themselves when constructed.
-         * _ = makes the compiler not complain about the fact that you are constructing something for seemingly no reason.
-         */
-        //_ = new KnowledgeManager();
-        //_ = new Otherdriving();
-
-        /*
-         * Some classes require so little management that a manager may not be worth writing.
-         * In AGainPonder's case, it is simply a need for two sprites and evaluation of an artifact's effect.
-         */
-        //AGainPonder.DrawSpr = RegisterSprite(package, "assets/ponder_draw.png").Sprite;
-        //AGainPonder.DiscardSpr = RegisterSprite(package, "assets/ponder_discard.png").Sprite;
-        //AOverthink.Spr = RegisterSprite(package, "assets/overthink.png").Sprite;
-
-        // Artifact Section
-        foreach (Type ta in WethArtifactTypes)
+        foreach (Type ta in PawsaiArtifactTypes)
         {
-            Deck deck = WethDeck.Deck;
-            if (WethDuoArtifacts.Contains(ta))
+            Deck deck = PawsaiDeck.Deck;
+            if (PawsaiDuoArtifactTypes.Contains(ta))
             {
                 if (DuoArtifactsApi is null)
                 {
@@ -211,18 +140,16 @@ internal partial class ModEntry : SimpleMod
                     deck = DuoArtifactsApi.DuoArtifactVanillaDeck;
                 }
             }
-            helper.Content.Artifacts.RegisterArtifact(ta.Name, UhDuhHundo.ArtifactRegistrationHelper(ta, RegisterSprite(package, "assets/Artifact/" + ta.Name + ".png").Sprite, deck));
+            helper.Content.Artifacts.RegisterArtifact(ta.Name, UhDuhHundo.ArtifactRegistrationHelper(ta, RegisterSprite(package, "assets/artifact/pawsai" + ta.Name + ".png").Sprite, deck, "Pawsai"));
         }
 
-        /*
-         * All the IRegisterable types placed into the static lists at the start of the class are initialized here.
-         * This snippet invokes all of them, allowing them to register themselves with the package and helper.
-         */
+        #endregion
+
+
         foreach (var type in AllRegisterableTypes)
             AccessTools.DeclaredMethod(type, nameof(IRegisterable.Register))?.Invoke(null, [package, helper]);
 
         Apply(Harmony);
-        //BayBlastIconography.Apply(Harmony);
     }
 
     /*
@@ -246,11 +173,11 @@ internal partial class ModEntry : SimpleMod
      * It expects the animation to start at frame 0, up to frames - 1.
      * TODO It is advised to avoid animations consisting of 2 or 3 frames.
      */
-    public static ICharacterAnimationEntryV2 RegisterAnimation(IPluginPackage<IModManifest> package, string tag, string dir, int frames)
+    public static ICharacterAnimationEntryV2 RegisterAnimation(string characterType, IPluginPackage<IModManifest> package, string tag, string dir, int frames)
     {
         return Instance.Helper.Content.Characters.V2.RegisterCharacterAnimation(new CharacterAnimationConfigurationV2
         {
-            CharacterType = Instance.WethDeck.Deck.Key(),
+            CharacterType = characterType,
             LoopTag = tag,
             Frames = Enumerable.Range(0, frames)
                 .Select(i => RegisterSprite(package, dir + i + ".png").Sprite)

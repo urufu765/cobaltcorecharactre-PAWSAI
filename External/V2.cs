@@ -1,4 +1,4 @@
-﻿namespace JollyJolly.External;
+﻿namespace Starhunters.External;
 
 /// <summary>
 /// Allows accessing all of Kokoro library APIs.

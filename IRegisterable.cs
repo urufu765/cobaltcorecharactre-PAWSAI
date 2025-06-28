@@ -1,7 +1,7 @@
 ﻿using Nanoray.PluginManager;
 using Nickel;
 
-namespace JollyJolly;
+namespace Starhunters;
 
 internal interface IRegisterable
 {

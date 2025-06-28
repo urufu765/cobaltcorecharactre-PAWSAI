@@ -8,7 +8,7 @@ using Nickel;
 // using JollyJolly.Cards;
 
 
-namespace JollyJolly.Artifacts;
+namespace Starhunters.Artifacts;
 
 public class DuoArtifactMeta : Attribute
 {

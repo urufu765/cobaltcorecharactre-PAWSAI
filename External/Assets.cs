@@ -1,6 +1,6 @@
 ﻿using daisyowl.text;
 
-namespace JollyJolly.External;
+namespace Starhunters.External;
 
 public partial interface IKokoroApi
 {

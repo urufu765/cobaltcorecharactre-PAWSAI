@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Nickel;
 
-namespace JollyJolly.External;
+namespace Starhunters.External;
 
 public partial interface IKokoroApi
 {

@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace JollyJolly.Objects;
+namespace Starhunters.Objects;
 
 public class BayblastObject : StuffBase
 {

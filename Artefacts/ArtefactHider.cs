@@ -4,7 +4,7 @@ using System.Linq;
 using HarmonyLib;
 using Microsoft.Extensions.Logging;
 
-namespace JollyJolly.Artifacts;
+namespace Starhunters.Artifacts;
 
 public static class Artifacthider
 {

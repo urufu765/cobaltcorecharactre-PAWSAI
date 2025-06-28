@@ -1,11 +1,11 @@
 {
-  "UniqueName": "urufudoggo.JollyRanger",
+  "UniqueName": "urufudoggo.starhunters",
   "Version": "{{ModVersion}}",
   "Author": "urufudoggo",
-  "DisplayName": "Jolly",
-  "Description": "The identity of this creature is-",
+  "DisplayName": "Starhunters",
+  "Description": "A collection of bounty hunters, of multiple talents and skills.",
   "RequiredApiVersion": "1.15.0",
-  "EntryPointAssembly": "JollyJolly.dll",
+  "EntryPointAssembly": "Starhunters.dll",
   "LoadPhase": "AfterDbInit",
   "Dependencies": [
     {

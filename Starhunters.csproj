@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
-		<RootNamespace>JollyJolly</RootNamespace>
+		<RootNamespace>Starhunters</RootNamespace>
 		<Version>0.0.1</Version>
 		<!-- <IncludedModProjectPaths>i18n;assets</IncludedModProjectPaths> -->
 

@@ -1,6 +1,6 @@
 using CobaltCoreModding.Definitions.ExternalItems;
 
-namespace JollyJolly.External;
+namespace Starhunters.External;
 
 public interface IMoreDifficultiesApi
 {

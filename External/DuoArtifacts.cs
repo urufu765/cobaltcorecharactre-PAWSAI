@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace JollyJolly.External;
+namespace Starhunters.External;
 
 public interface IDuoArtifactsApi
 {

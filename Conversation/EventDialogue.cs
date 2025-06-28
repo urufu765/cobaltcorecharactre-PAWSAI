@@ -1,10 +1,10 @@
 using System.Collections.Generic;
 using Nanoray.PluginManager;
 using Nickel;
-using JollyJolly.External;
-using static JollyJolly.Conversation.CommonDefinitions;
+using Starhunters.External;
+using static Starhunters.Conversation.CommonDefinitions;
 
-namespace JollyJolly.Conversation;
+namespace Starhunters.Conversation;
 
 internal class EventDialogue : IRegisterable
 {
