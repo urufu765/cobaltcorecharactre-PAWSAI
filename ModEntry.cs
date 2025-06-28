@@ -13,6 +13,7 @@ using Starhunters.External;
 using System.Reflection;
 // using JollyJolly.Actions;
 using Starhunters.Conversation;
+using Starhunters.Pawsai.Cards;
 //using System.Reflection;
 
 namespace Starhunters;

@@ -79,20 +79,20 @@
             }
         },
         "card": {
-            "Common": {
+            "common": {
                 "PullShot": {
                     "name": "Pull Shot"
                 },
                 "Safeguard": {
                     "name": "Safeguard"
                 },
-                "Repulsion": {
+                "RepulsionCard": {
                     "name": "Repulsion"
                 },
                 "ShieldRush": {
                     "name": "Shield Rush"
                 },
-                "Desync": {
+                "DeSync": {
                     "name": "De-sync"
                 },
                 "ShieldShift": {
@@ -108,7 +108,7 @@
                     "name": "PAWSAI.EXE"
                 }
             },
-            "Uncommon": {
+            "uncommon": {
                 "EmergencyRetreat": {
                     "name": "Emergency Retreat",
                     "desc": "Move <c=keyword>{0}</c> until you no longer overlap with enemy.\n<c=keyword>End turn.</c>",
@@ -135,22 +135,24 @@
                     "name": "Speed Chaser"
                 }
             },
-            "Rare": {
+            "rare": {
                 "SmartAlignment": {
                     "name": "Smart Alignment",
-                    "desc": "Line up your <c=keyword>{0}-most</c> cannon to closest enemy <c=keyword>{1}</c> part.\n<c=downside><c=status>EVADE</c>=0.</c>",
+                    "desc": "Line up your <c=keyword>{0}-most</c> cannon to closest enemy<c=keyword>{1}</c> part.\n<c=downside><c=status>EVADE</c>=0.</c>",
                     "l": "left",
                     "r": "right",
-                    "b": "brittle",
-                    "w": "weak",
-                    "n": "Non-armored"
+                    "b": " brittle",
+                    "w": " weak",
+                    "n": " Non-armored",
+                    "f": ""
                 },
                 "Potentiomatic": {
                     "name": "Potentiomatic",
                     "desc": "X=Missing Shield\n2X {0}{1} Attack\n-X Max Shield",
                     "descA": "X=Missing Shield\n3X {0}{1} Attack\n-X Max Shield",
                     "descB": "X=Missing Shield\n2X {0}{1} Pierce Attack\n-X Max Shield",
-                    "s": " Stun"
+                    "s": " Stun",
+                    "f": ""
                 },
                 "Ultimatomatic": {
                     "name": "Ultimatomatic"

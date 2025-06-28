@@ -7,6 +7,7 @@ using Starhunters.Artifacts;
 //using Starhunters.Cards;
 using Starhunters.External;
 using Starhunters.Conversation;
+using Starhunters.Pawsai.Cards;
 
 namespace Starhunters;
 
@@ -39,11 +40,33 @@ internal partial class ModEntry : SimpleMod
     internal IStatusEntry Status_Repetition { get; private set; } = null!;
     internal IStatusEntry Status_Regeneration { get; private set; } = null!;
     private readonly static List<Type> PawsaiCardTypes = [
-    // Common
-    // Uncommon
-    // Rare
-    // Token
-    // Unreleased
+        // Common
+        typeof(PullShot),
+        typeof(Safeguard),
+        typeof(RepulsionCard),
+        typeof(ShieldRush),
+        typeof(DeSync),
+        typeof(ShieldShift),
+        typeof(ShieldRecovery),
+        typeof(Chase),
+        typeof(ThrustRedirect),
+        typeof(PawsaiExe),
+        // Uncommon
+        typeof(EmergencyRetreat),
+        typeof(SpikedShield),
+        typeof(EnergizedMove),
+        typeof(ShieldShort),
+        typeof(HeavySlugger),
+        typeof(HeavyShielding),
+        typeof(SpeedChaser),
+        // Rare
+        typeof(SmartAlignment),
+        typeof(Potentiomatic),
+        typeof(Ultimatomatic),
+        typeof(CautiousRepeater),
+        typeof(ShieldPayout),
+        // Token
+        // Unreleased
     ];
     private readonly static List<Type> PawsaiDuoArtifactTypes = [
     // typeof(),  // CAT
@@ -59,9 +82,15 @@ internal partial class ModEntry : SimpleMod
     // typeof(),  // Parmesan
     ];
     private readonly static IEnumerable<Type> PawsaiArtifactTypes = 
-        new List<Type> {
+        new List<Type>
+        {
             // Common
+            typeof(OffensiveDefense),
+            typeof(ManyConsequences),
+            typeof(PowerPrep),
             // Boss
+            typeof(DelayedStart),
+            typeof(PainCruiser)
             // Event
             // Unreleased
         }.Concat(PawsaiDuoArtifactTypes);
