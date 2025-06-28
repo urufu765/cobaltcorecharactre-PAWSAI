@@ -1,0 +1,41 @@
+﻿{
+    "character": {
+        "JollyJolly":
+        {
+            "name": "Jolly",
+            "desc": "<c=2a767d>JOLLY</c>\nA negotiator. His cards focus on <c=keyword>midrow</c> and <c=keyword>trading blows with the enemy</c>."
+        }
+    },
+    "status": {
+    },
+    "action": {
+    },
+    "event": {
+    },
+    "trait": {
+    },
+    "object": {
+    },
+    "artifact": {
+        "Common": {
+        },
+        "Boss": {
+        },
+        "EventOnly": {
+        },
+        "Unreleased": {
+        },
+        "Tooltips": {
+        }
+    },
+    "card": {
+        "Common": {
+        },
+        "Uncommon": {
+        },
+        "Rare": {
+        },
+        "Token": {
+        }
+    }
+}

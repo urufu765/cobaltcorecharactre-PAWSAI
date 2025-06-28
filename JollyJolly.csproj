@@ -1,0 +1,29 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<RootNamespace>JollyJolly</RootNamespace>
+		<Version>0.0.1</Version>
+		<!-- <IncludedModProjectPaths>i18n;assets</IncludedModProjectPaths> -->
+
+		<TargetFramework>net8.0</TargetFramework>
+		<LangVersion>12.0</LangVersion>
+		<ImplicitUsings>disable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+		<WarningsAsErrors>Nullable</WarningsAsErrors>
+		<ModLoaderPath>A:\SteamLibrary\steamapps\common\Cobalt Core\Nickel</ModLoaderPath>
+		<GameExePath>A:\SteamLibrary\steamapps\common\Cobalt Core\CobaltCore.exe</GameExePath>
+		<ModZipPath>$(MSBuildProjectDirectory)\.release\$(MSBuildProjectName)-$(Version).zip</ModZipPath>
+		<GameDllPath>$(MSBuildProjectDirectory)\..\..\..\Decompiled\CobaltCore.dll</GameDllPath>
+	</PropertyGroup>
+	<ItemGroup>
+		<ModFiles Include="assets/**" />
+		<ModFiles Include="i18n/**" />
+		<PackageReference Include="Nickel.ModBuildConfig" Version="2.0.2" />
+		<PackageReference Include="EnumByNameSourceGenerator" Version="1.1.2" />
+	</ItemGroup> 
+	<ItemGroup>
+		<Reference Include="CobaltCoreModding.Definitions">
+			<HintPath>lib\CobaltCoreModding.Definitions.dll</HintPath>
+			<Private>False</Private>
+		</Reference>
+	</ItemGroup>
+</Project>

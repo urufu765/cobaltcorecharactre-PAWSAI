@@ -1,0 +1,21 @@
+{
+  "UniqueName": "urufudoggo.JollyRanger",
+  "Version": "{{ModVersion}}",
+  "Author": "urufudoggo",
+  "DisplayName": "Jolly",
+  "Description": "The identity of this creature is-",
+  "RequiredApiVersion": "1.15.0",
+  "EntryPointAssembly": "JollyJolly.dll",
+  "LoadPhase": "AfterDbInit",
+  "Dependencies": [
+    {
+      "UniqueName": "Shockah.Kokoro",
+      "Version": "2.8.0"
+    }
+  ],
+  "UpdateChecks": {
+    "NexusMods": {
+      "ID": 1984
+    }
+  }
+}
