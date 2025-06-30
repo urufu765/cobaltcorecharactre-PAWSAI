@@ -193,7 +193,7 @@ internal partial class ModEntry : SimpleMod
 
         _ = new ShieldRegen();
         _ = new Repetition();
-        //_ = new Repulsion();
+        _ = new Repulsion();
 
         #endregion
 
