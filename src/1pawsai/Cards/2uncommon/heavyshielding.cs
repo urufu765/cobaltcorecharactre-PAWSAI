@@ -19,6 +19,7 @@ public class HeavyShielding : Card, IRegisterable
             Meta = new CardMeta
             {
                 rarity = rare,
+                deck = ModEntry.Instance.PawsaiDeck.Deck,
                 upgradesTo = [Upgrade.A, Upgrade.B]
             },
             Name = ModEntry.Instance.AnyLocalizations.Bind(["Pawsai", "card", rare.ToString(), MethodBase.GetCurrentMethod()!.DeclaringType!.Name, "name"]).Localize,

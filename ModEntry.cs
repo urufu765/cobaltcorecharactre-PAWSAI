@@ -76,6 +76,10 @@ internal partial class ModEntry : SimpleMod
             new CurrentLocaleOrEnglishLocalizationProvider<IReadOnlyList<string>>(AnyLocalizations)
         );
 
+        
+        SpriteLoading.RegisterSprites(typeof(ModEntry), package);
+
+
         #region PAWSAI stuff
         PawsaiDeck = helper.Content.Decks.RegisterDeck("pawsai", new DeckConfiguration
         {
@@ -100,7 +104,7 @@ internal partial class ModEntry : SimpleMod
         {
             foreach (string anim in anims.Value)
             {
-                RegisterAnimation(PawsaiDeck.Deck.Key(), package, anim, $"assets/animation/pawsai/p_{anim}", anims.Key);
+                RegisterAnimation(PawsaiDeck.Deck.Key(), package, anim, $"assets/animation/pawsai/pawsai_{anim}", anims.Key);
             }
         }
 
@@ -130,6 +134,43 @@ internal partial class ModEntry : SimpleMod
             artifacts =
             [
             ]
+        });
+
+        Status_Regeneration = helper.Content.Statuses.RegisterStatus("Tarnish", new StatusConfiguration
+        {
+            Definition = new StatusDef
+            {
+                isGood = true,
+                affectedByTimestop = true,
+                color = new Color("00ff00"),
+                icon = ModEntry.RegisterSprite(package, "assets/icon/pawsai/Status_Regeneration.png").Sprite
+            },
+            Name = AnyLocalizations.Bind(["Pawsai", "status", "Regeneration", "name"]).Localize,
+            Description = AnyLocalizations.Bind(["Pawsai", "status", "Regeneration", "desc"]).Localize
+        });
+        Status_Repulsion = helper.Content.Statuses.RegisterStatus("Repulsion", new StatusConfiguration
+        {
+            Definition = new StatusDef
+            {
+                isGood = true,
+                affectedByTimestop = true,
+                color = new Color("00c8ff"),
+                icon = ModEntry.RegisterSprite(package, "assets/icon/pawsai/Status_Repulsion.png").Sprite
+            },
+            Name = AnyLocalizations.Bind(["Pawsai", "status", "Repulsion", "name"]).Localize,
+            Description = AnyLocalizations.Bind(["Pawsai", "status", "Repulsion", "desc"]).Localize
+        });
+        Status_Repetition = helper.Content.Statuses.RegisterStatus("Repetition", new StatusConfiguration
+        {
+            Definition = new StatusDef
+            {
+                isGood = true,
+                affectedByTimestop = true,
+                color = new Color("ff8500"),
+                icon = ModEntry.RegisterSprite(package, "assets/icon/pawsai/Status_Repetition.png").Sprite
+            },
+            Name = AnyLocalizations.Bind(["Pawsai", "status", "Repetition", "name"]).Localize,
+            Description = AnyLocalizations.Bind(["Pawsai", "status", "Repetition", "desc"]).Localize
         });
 
         foreach (Type ta in PawsaiArtifactTypes)

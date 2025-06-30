@@ -6,7 +6,7 @@ A collection of five (or more) bounty hunters!
 
 ### Pre-release
 
-* **(0.0.6)*: Sprite-d some so it's actually launch-able, testing
+* **(0.0.6)**: Sprite-d some so it's actually launch-able, testing
 * **(0.0.5)**: Fully implemented the wip cards
 * **(0.0.4)**: Implemented custom moves
 * **(0.0.3)**: Most cards implemented with placeholder actions

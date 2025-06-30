@@ -9,6 +9,7 @@ using Starhunters.External;
 using Starhunters.Conversation;
 using Starhunters.Pawsai.Cards;
 using Nanoray.PluginManager;
+using Nanoray.EnumByNameSourceGenerator;
 
 namespace Starhunters;
 
@@ -16,10 +17,10 @@ internal partial class ModEntry : SimpleMod
 {
     internal static ModEntry Instance { get; private set; } = null!;
     internal static IPlayableCharacterEntryV2 Pawsai { get; private set; } = null!;  // Defense
-    internal static IPlayableCharacterEntryV2 Kodijen { get; private set; } = null!;  // Mid-row
-    internal static IPlayableCharacterEntryV2 Varrigradona { get; private set; } = null!;  // ???
-    internal static IPlayableCharacterEntryV2 Bauie { get; private set; } = null!;  // Offense
-    internal static IPlayableCharacterEntryV2 Parmesan { get; private set; } = null!;  // Movement? (Teleportation)
+    // internal static IPlayableCharacterEntryV2 Kodijen { get; private set; } = null!;  // Mid-row
+    // internal static IPlayableCharacterEntryV2 Varrigradona { get; private set; } = null!;  // ???
+    // internal static IPlayableCharacterEntryV2 Bauie { get; private set; } = null!;  // Offense
+    // internal static IPlayableCharacterEntryV2 Parmesan { get; private set; } = null!;  // Movement? (Teleportation)
     internal string UniqueName { get; private set; }
     internal Harmony Harmony;
     internal IKokoroApi KokoroApi;
@@ -43,21 +44,30 @@ internal partial class ModEntry : SimpleMod
     internal IStatusEntry Status_Repulsion { get; private set; }
     internal IStatusEntry Status_Repetition { get; private set; }
     internal IStatusEntry Status_Regeneration { get; private set; }
-    internal Spr Action_MirrorMove_Random { get; private set; }
-    internal Spr Action_MirrorMove_RandomLeft { get; private set; }
-    internal Spr Action_MirrorMove_Zero { get; private set; }
-    internal Spr Action_MirrorMove_Left { get; private set; }
-    internal Spr Action_MirrorMove_Right { get; private set; }
-    internal Spr Action_MirrorMove_RandomFoe { get; private set; }
-    internal Spr Action_MirrorMove_ZeroFoe { get; private set; }
-    internal Spr Action_MirrorMove_LeftFoe { get; private set; }
-    internal Spr Action_MirrorMove_RightFoe { get; private set; }
-    internal Spr Action_PivotIn_Zero { get; private set; }
-    internal Spr Action_PivotOut_Zero { get; private set; }
-    internal Spr Action_PivotIn_Left { get; private set; }
-    internal Spr Action_PivotIn_Right { get; private set; }
-    internal Spr Action_PivotOut_Left { get; private set; }
-    internal Spr Action_PivotOut_Right { get; private set; }
+
+    [SpriteLoading("icon", "pawsai")]
+    public Spr Action_MirrorMove_Random { get; private set; }
+    [SpriteLoading("icon", "pawsai")]
+    public Spr Action_MirrorMove_RandomLeft { get; private set; }
+    [SpriteLoading("icon", "pawsai")]
+    public Spr Action_MirrorMove_Zero { get; private set; }
+    [SpriteLoading("icon", "pawsai")]
+    public Spr Action_MirrorMove_Left { get; private set; }
+    [SpriteLoading("icon", "pawsai")]
+    public Spr Action_MirrorMove_Right { get; private set; }
+    [SpriteLoading("icon", "pawsai")]
+    public Spr Action_PivotIn_Zero { get; private set; }
+    [SpriteLoading("icon", "pawsai")]
+    public Spr Action_PivotOut_Zero { get; private set; }
+    [SpriteLoading("icon", "pawsai")]
+    public Spr Action_PivotIn_Left { get; private set; }
+    [SpriteLoading("icon", "pawsai")]
+    public Spr Action_PivotIn_Right { get; private set; }
+    [SpriteLoading("icon", "pawsai")]
+    public Spr Action_PivotOut_Left { get; private set; }
+    [SpriteLoading("icon", "pawsai")]
+    public Spr Action_PivotOut_Right { get; private set; }
+
     private readonly static List<Type> PawsaiCardTypes = [
         // Common
         typeof(PullShot),
@@ -100,7 +110,7 @@ internal partial class ModEntry : SimpleMod
     // typeof(),  // Bauie
     // typeof(),  // Parmesan
     ];
-    private readonly static IEnumerable<Type> PawsaiArtifactTypes = 
+    private readonly static IEnumerable<Type> PawsaiArtifactTypes =
         new List<Type>
         {
             // Common

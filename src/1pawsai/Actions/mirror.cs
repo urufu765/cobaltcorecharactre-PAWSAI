@@ -100,7 +100,8 @@ public class AMirrorMove : AMove
                 {
                     Title = ModEntry.Instance.Localizations.Localize(["Pawsai", "action", "MirrorMoveRandom", "title"]),
                     Icon = ModEntry.Instance.Action_MirrorMove_Random,
-                    Description = ModEntry.Instance.Localizations.Localize(["Pawsai", "action", "MirrorMoveRandom", "desc"], new List<string>(){GetActualMovement(s).ToString()})
+                    Description = ModEntry.Instance.Localizations.Localize(["Pawsai", "action", "MirrorMoveRandom", "desc"]),
+                    vals = [GetActualMovement(s)]
                 }
                 // new GlossaryTooltip("randomMirrorMovement")
                 // {
@@ -117,19 +118,22 @@ public class AMirrorMove : AMove
                 {
                     Title = ModEntry.Instance.Localizations.Localize(["Pawsai", "action", "MirrorMoveRight", "title"]),
                     Icon = ModEntry.Instance.Action_MirrorMove_Right,
-                    Description = ModEntry.Instance.Localizations.Localize(["Pawsai", "action", "MirrorMoveRight", "desc"], new List<string>(){GetActualMovement(s).ToString()})
+                    Description = ModEntry.Instance.Localizations.Localize(["Pawsai", "action", "MirrorMoveRight", "desc"]),
+                    vals = [GetActualMovement(s)]
                 }],
             (<0, _) => [new GlossaryTooltip("leftMirrorMovement")
                 {
                     Title = ModEntry.Instance.Localizations.Localize(["Pawsai", "action", "MirrorMoveLeft", "title"]),
                     Icon = ModEntry.Instance.Action_MirrorMove_Left,
-                    Description = ModEntry.Instance.Localizations.Localize(["Pawsai", "action", "MirrorMoveLeft", "desc"], new List<string>(){GetActualMovement(s).ToString()})
+                    Description = ModEntry.Instance.Localizations.Localize(["Pawsai", "action", "MirrorMoveLeft", "desc"]),
+                    vals = [GetActualMovement(s)]
                 }],
             (_, _) => [new GlossaryTooltip("zeroMirrorMovement")
                 {
                     Title = ModEntry.Instance.Localizations.Localize(["Pawsai", "action", "MirrorMoveZero", "title"]),
                     Icon = ModEntry.Instance.Action_MirrorMove_Zero,
-                    Description = ModEntry.Instance.Localizations.Localize(["Pawsai", "action", "MirrorMoveZero", "desc"], new List<string>(){GetActualMovement(s).ToString()})
+                    Description = ModEntry.Instance.Localizations.Localize(["Pawsai", "action", "MirrorMoveZero", "desc"]),
+                    vals = [GetActualMovement(s)]
                 }]
         };
     }

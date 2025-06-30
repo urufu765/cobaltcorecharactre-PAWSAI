@@ -20,6 +20,7 @@ public class EmergencyRetreat : Card, IRegisterable, IHasCustomCardTraits
             Meta = new CardMeta
             {
                 rarity = rare,
+                deck = ModEntry.Instance.PawsaiDeck.Deck,
                 upgradesTo = [Upgrade.A, Upgrade.B]
             },
             Name = ModEntry.Instance.AnyLocalizations.Bind(["Pawsai", "card", rare.ToString(), MethodBase.GetCurrentMethod()!.DeclaringType!.Name, "name"]).Localize,
@@ -145,8 +146,8 @@ public class EmergencyRetreat : Card, IRegisterable, IHasCustomCardTraits
         };
         cd.description = ModEntry.Instance.Localizations.Localize(
             ["Pawsai", "card", rare.ToString(), MethodBase.GetCurrentMethod()!.DeclaringType!.Name, upgrade == Upgrade.B ? "descB" : "desc"],
-            new List<string>() {
-                ModEntry.Instance.Localizations.Localize(
+            new {
+                direction = ModEntry.Instance.Localizations.Localize(
                     ["Pawsai", "card", rare.ToString(), MethodBase.GetCurrentMethod()!.DeclaringType!.Name, flipped ? "r" : "l"]
         )});
         return cd;

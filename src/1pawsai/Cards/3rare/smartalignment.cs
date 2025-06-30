@@ -32,6 +32,7 @@ public class SmartAlignment : Card, IRegisterable, IHasCustomCardTraits
             Meta = new CardMeta
             {
                 rarity = rare,
+                deck = ModEntry.Instance.PawsaiDeck.Deck,
                 upgradesTo = [Upgrade.A, Upgrade.B]
             },
             Name = ModEntry.Instance.AnyLocalizations.Bind(["Pawsai", "card", rare.ToString(), MethodBase.GetCurrentMethod()!.DeclaringType!.Name, "name"]).Localize,
@@ -221,10 +222,10 @@ public class SmartAlignment : Card, IRegisterable, IHasCustomCardTraits
             }
         };
 
-        cd.description = ModEntry.Instance.Localizations.Localize(["Pawsai", "card", rare.ToString(), MethodBase.GetCurrentMethod()!.DeclaringType!.Name, "desc"], new List<string>()
+        cd.description = ModEntry.Instance.Localizations.Localize(["Pawsai", "card", rare.ToString(), MethodBase.GetCurrentMethod()!.DeclaringType!.Name, "desc"], new
         {
-            ModEntry.Instance.Localizations.Localize(["Pawsai", "card", rare.ToString(), MethodBase.GetCurrentMethod()!.DeclaringType!.Name, flipped ? "l" : "r"]),
-            ModEntry.Instance.Localizations.Localize(["Pawsai", "card", rare.ToString(), MethodBase.GetCurrentMethod()!.DeclaringType!.Name,
+            direction = ModEntry.Instance.Localizations.Localize(["Pawsai", "card", rare.ToString(), MethodBase.GetCurrentMethod()!.DeclaringType!.Name, flipped ? "l" : "r"]),
+            part = ModEntry.Instance.Localizations.Localize(["Pawsai", "card", rare.ToString(), MethodBase.GetCurrentMethod()!.DeclaringType!.Name,
                 availableMode switch
                 {
                     SmartAlignmentMode.nonArmored => "n",

@@ -23,10 +23,10 @@ internal partial class ModEntry : SimpleMod
     private static void Apply(Harmony harmony)
     {
         // Artifacthider
-        harmony.Patch(
-            original: typeof(ArtifactReward).GetMethod("GetBlockedArtifacts", AccessTools.all),
-            postfix: new HarmonyMethod(typeof(Artifacthider), nameof(Artifacthider.ArtifactRewardPreventer))
-        );
+        // harmony.Patch(
+        //     original: typeof(ArtifactReward).GetMethod("GetBlockedArtifacts", AccessTools.all),
+        //     postfix: new HarmonyMethod(typeof(Artifacthider), nameof(Artifacthider.ArtifactRewardPreventer))
+        // );
 
         // Movement flipper
         harmony.Patch(

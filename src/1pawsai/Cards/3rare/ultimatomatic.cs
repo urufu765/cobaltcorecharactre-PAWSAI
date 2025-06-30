@@ -20,6 +20,7 @@ public class Ultimatomatic : Card, IRegisterable
             Meta = new CardMeta
             {
                 rarity = rare,
+                deck = ModEntry.Instance.PawsaiDeck.Deck,
                 upgradesTo = [Upgrade.A, Upgrade.B]
             },
             Name = ModEntry.Instance.AnyLocalizations.Bind(["Pawsai", "card", rare.ToString(), MethodBase.GetCurrentMethod()!.DeclaringType!.Name, "name"]).Localize,
@@ -101,9 +102,11 @@ public class Ultimatomatic : Card, IRegisterable
                 Upgrade.B => "descB",
                 Upgrade.A => "descA",
                 _ => "desc"
-            }], new List<string>()
-        {
-            ModEntry.Instance.Localizations.Localize(["Pawsai", "card", rare.ToString(), MethodBase.GetCurrentMethod()!.DeclaringType!.Name, state.ship.Get(Status.stunCharge) > 0? "s" : "f"]),
+            }], new
+            {
+                amount = state.ship.GetMaxShield() - state.ship.Get(Status.shield),
+                attack = GetDmg(state, 1),
+                stun = ModEntry.Instance.Localizations.Localize(["Pawsai", "card", rare.ToString(), MethodBase.GetCurrentMethod()!.DeclaringType!.Name, state.ship.Get(Status.stunCharge) > 0? "s" : "f"]),
         });
         return cd;
     }

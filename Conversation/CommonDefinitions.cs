@@ -16,8 +16,8 @@ static class CommonDefinitions
 {
     internal static ModEntry Instance => ModEntry.Instance;
 
-    internal static string AmWeth => Instance.WethDeck.UniqueName;
-    internal static Deck AmWethDeck => Instance.WethDeck.Deck;
+    // internal static string AmWeth => Instance.WethDeck.UniqueName;
+    // internal static Deck AmWethDeck => Instance.WethDeck.Deck;
     internal const string AmUnknown = "johndoe";
     internal const string AmCat = "comp";
     internal static string AmDizzy => Deck.dizzy.Key();
@@ -34,39 +34,25 @@ static class CommonDefinitions
     internal const string AmWizbo = "wizard";
     internal readonly static string AmIlleana = "urufudoggo.Illeana::illeana";
 
-    internal static Status MissingWeth => ModEntry.WethTheSnep.MissingStatus.Status;
-    internal static Status IsPulsedrive => ModEntry.Instance.KokoroApi.V2.DriveStatus.Pulsedrive;
-    internal static Status IsMinidrive => ModEntry.Instance.KokoroApi.V2.DriveStatus.Minidrive;
+    // internal static Status MissingWeth => ModEntry.WethTheSnep.MissingStatus.Status;
+    // internal static Status IsPulsedrive => ModEntry.Instance.KokoroApi.V2.DriveStatus.Pulsedrive;
+    // internal static Status IsMinidrive => ModEntry.Instance.KokoroApi.V2.DriveStatus.Minidrive;
 
 
-    /// <summary>
-    /// Safety checks if specific illeana animation exists, provides a placeholder if false
-    /// </summary>
-    /// <param name="loopTag">The Looptag of the animation</param>
-    /// <returns>a valid looptag</returns>
-    internal static string Check(this string loopTag)
-    {
-        if (ModEntry.WethAnims.Contains(loopTag))
-        {
-            return loopTag;
-        }
-        return "placeholder";
-    }
-
-    internal static Status TryGetMissing(this string who)
-    {
-        if (
-            who is not null &&
-            // ModEntry.Instance.Helper.Content.Decks.LookupByUniqueName(who) is IDeckEntry ide &&
-            // ModEntry.Instance.Helper.Content.Characters.V2.LookupByDeck(ide.Deck) is IPlayableCharacterEntryV2 ipce
-            ModEntry.Instance.Helper.Content.Characters.V2.LookupByUniqueName(who) is IPlayableCharacterEntryV2 ipce
-            )
-        {
-            return ipce.MissingStatus.Status;
-        }
-        ModEntry.Instance.Logger.LogWarning("Couldn't find a missing!");
-        return MissingWeth;
-    }
+    // internal static Status TryGetMissing(this string who)
+    // {
+    //     if (
+    //         who is not null &&
+    //         // ModEntry.Instance.Helper.Content.Decks.LookupByUniqueName(who) is IDeckEntry ide &&
+    //         // ModEntry.Instance.Helper.Content.Characters.V2.LookupByDeck(ide.Deck) is IPlayableCharacterEntryV2 ipce
+    //         ModEntry.Instance.Helper.Content.Characters.V2.LookupByUniqueName(who) is IPlayableCharacterEntryV2 ipce
+    //         )
+    //     {
+    //         return ipce.MissingStatus.Status;
+    //     }
+    //     ModEntry.Instance.Logger.LogWarning("Couldn't find a missing!");
+    //     return MissingWeth;
+    // }
 
 
     /// <summary>

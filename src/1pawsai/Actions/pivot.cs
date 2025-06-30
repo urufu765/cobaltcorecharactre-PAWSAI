@@ -187,7 +187,7 @@ public class APivot : AMove
     {
         return
         [
-            new GlossaryTooltip("randomMirrorMovement")
+            new GlossaryTooltip("pivoter")
             {
                 Title = ModEntry.Instance.Localizations.Localize(["Pawsai", "action", outward? "PivotOut" : "PivotIn", "title"]),
                 Icon = (GetAdvertisedMovement(s), outward) switch
@@ -199,8 +199,9 @@ public class APivot : AMove
                     (_, true) => ModEntry.Instance.Action_PivotOut_Zero,
                     (_, _) => ModEntry.Instance.Action_PivotIn_Right
                 },
-                IsWideIcon = true,
-                Description = ModEntry.Instance.Localizations.Localize(["Pawsai", "action", outward? "PivotOut" : "PivotIn", "desc"], new List<string>(){Math.Abs(GetAdvertisedMovement(s)).ToString()})
+                //IsWideIcon = true,
+                Description = ModEntry.Instance.Localizations.Localize(["Pawsai", "action", outward? "PivotOut" : "PivotIn", "desc"]),
+                vals = [Math.Abs(GetAdvertisedMovement(s))]
             }
         ];
     }
