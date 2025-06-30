@@ -14,6 +14,7 @@ using System.Reflection;
 // using JollyJolly.Actions;
 using Starhunters.Conversation;
 using Starhunters.Pawsai.Actions;
+using Starhunters.Pawsai.Artifacts;
 //using System.Reflection;
 
 namespace Starhunters;
@@ -32,6 +33,11 @@ internal partial class ModEntry : SimpleMod
         harmony.Patch(
             original: typeof(Card).GetMethod(nameof(Card.GetActionsOverridden), AccessTools.all),
             postfix: new HarmonyMethod(typeof(PawsaiMovingHelper), nameof(PawsaiMovingHelper.FlipThemActionsOverriden))
+        );
+
+        harmony.Patch(
+            original: typeof(Ship).GetMethod(nameof(Ship.DirectHullDamage), AccessTools.all),
+            prefix: new HarmonyMethod(typeof(PainCruiserHelper), nameof(PainCruiserHelper.HopeYouLikePain))
         );
     }
 }

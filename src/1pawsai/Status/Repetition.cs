@@ -1,10 +1,11 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
 using HarmonyLib;
 using Starhunters.External;
 
-namespace Starhunters.Pawsai.Features;
+namespace Starhunters.Pawsai.Statuses;
 
 public class Repetition : IKokoroApi.IV2.IStatusLogicApi.IHook
 {
@@ -18,17 +19,18 @@ public class Repetition : IKokoroApi.IV2.IStatusLogicApi.IHook
         );
     }
 
-    private void LetsSeeThatAgain(bool __result, Combat __instance, State s, Card card)
+    private static void LetsSeeThatAgain(bool __result, Combat __instance, State s, Card card)
     {
         if (!__result) return;
         if (s.ship.Get(ModEntry.Instance.Status_Repetition.Status) > 0)
         {
-            List<CardAction> actionz = card.GetActionsOverridden(s, __instance);
-            foreach (CardAction action in actionz)
+            List<CardAction> actions = [.. card.GetActionsOverridden(s, __instance).Where(action => !(action is AStatus ast && ast.status == ModEntry.Instance.Status_Repetition.Status))];
+
+            foreach (CardAction action in actions)
             {
                 action.whoDidThis = card.GetMeta().deck;
             }
-            __instance.Queue(actionz);
+            __instance.Queue(actions);
             s.ship.Add(ModEntry.Instance.Status_Repetition.Status, -1);
         }
     }

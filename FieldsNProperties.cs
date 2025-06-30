@@ -10,6 +10,7 @@ using Starhunters.Conversation;
 using Starhunters.Pawsai.Cards;
 using Nanoray.PluginManager;
 using Nanoray.EnumByNameSourceGenerator;
+using Starhunters.Pawsai.Artifacts;
 
 namespace Starhunters;
 
@@ -114,12 +115,12 @@ internal partial class ModEntry : SimpleMod
         new List<Type>
         {
             // Common
-            // typeof(OffensiveDefense),
-            // typeof(ManyConsequences),
-            // typeof(PowerPrep),
+            typeof(OffensiveDefense),
+            typeof(ManyConsequences),
+            typeof(PowerPrep),
             // Boss
-            // typeof(DelayedStart),
-            // typeof(PainCruiser)
+            typeof(DelayedStart),
+            typeof(PainCruiser)
             // Event
             // Unreleased
         }.Concat(PawsaiDuoArtifactTypes);

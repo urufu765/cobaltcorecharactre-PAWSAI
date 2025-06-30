@@ -6,6 +6,7 @@ A collection of five (or more) bounty hunters!
 
 ### Pre-release
 
+* **(0.0.9)**: Artifacts
 * **(0.0.8)**: Implemented statuses 2/3
 * **(0.0.7)**: Fixed emergency retreat
 * **(0.0.6)**: Sprite-d some so it's actually launch-able, testing

@@ -3,13 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using FMOD;
 using FSPRO;
+using Starhunters.Pawsai.Artifacts;
 
 namespace Starhunters.Pawsai.Actions;
 
 public static class PawsaiMovingHelper
 {
-    public static void FlipThemActionsOverriden(Card __instance, ref List<CardAction> __result)
+    public static void FlipThemActionsOverriden(Card __instance, ref List<CardAction> __result, State s)
     {
+        // Flip them actions
         if (__instance.flipped)
         {
             foreach (CardAction cardAction in __result)
@@ -24,6 +26,17 @@ public static class PawsaiMovingHelper
                     am.preferRightWhenZero = !am.preferRightWhenZero;
                 }
             }
+        }
+
+        // OffensiveDefense
+        if (__instance.GetMeta().deck == ModEntry.Instance.PawsaiDeck.Deck && s.EnumerateAllArtifacts().Find(a => a is OffensiveDefense) is OffensiveDefense od)
+        {
+            __result.Insert(0, new AAttack
+            {
+                damage = __instance.GetDataWithOverrides(s).cost,
+                fast = true,
+                artifactPulse = od.Key()
+            });
         }
     }
 

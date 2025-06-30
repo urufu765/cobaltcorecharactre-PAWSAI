@@ -3,7 +3,7 @@ using System.Reflection;
 using HarmonyLib;
 using Starhunters.External;
 
-namespace Starhunters.Pawsai.Features;
+namespace Starhunters.Pawsai.Statuses;
 
 public class Repulsion : IKokoroApi.IV2.IStatusLogicApi.IHook
 {
