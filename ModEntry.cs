@@ -109,7 +109,8 @@ internal partial class ModEntry : SimpleMod
             Starters = new StarterDeck
             {
                 cards = [
-                    
+                    new PullShot(),
+                    new Safeguard()
                 ],
                 artifacts = [
                 ]
@@ -121,6 +122,8 @@ internal partial class ModEntry : SimpleMod
         MoreDifficultiesApi?.RegisterAltStarters(PawsaiDeck.Deck, new StarterDeck
         {
             cards = [
+                new RepulsionCard(),
+                new ShieldRecovery()
             ],
             artifacts =
             [

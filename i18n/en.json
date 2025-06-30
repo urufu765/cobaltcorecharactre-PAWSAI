@@ -21,19 +21,28 @@
         "action": {
             "PivotIn": {
                 "name": "Pivot Inward",
+                "title": "PIVOT INWARD",
                 "desc": "Move both ships {0} spaces toward each other.\nIf centered, <c=downside>does nothing</c>."
             },
             "PivotOut": {
                 "name": "Pivot Outward",
+                "title": "PIVOT OUTWARD",
                 "desc": "Move both ships {0} spaces away from each other.\nIf centered, pick a random direction to move away from each other."
             },
             "MirrorMoveLeft": {
                 "name": "Mirror Move Left",
+                "title": "MIRROR MOVE LEFT",
                 "desc": "Instantly move both ships {0} spaces to the <c=keyword>LEFT</c>."
             },
             "MirrorMoveRight": {
                 "name": "Mirror Move Right",
+                "title": "MIRROR MOVE RIGHT",
                 "desc": "Instantly move both ships {0} spaces to the <c=keyword>RIGHT</c>."
+            },
+            "MirrorMoveRandom": {
+                "name": "Mirror Move Random",
+                "title": "MIRROR MOVE RANDOM",
+                "desc": "Instantly move both ships {0} spaces in an equally <c=keyword>random</c> direction."
             }
         },
         "event": {

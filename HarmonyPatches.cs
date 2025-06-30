@@ -13,6 +13,7 @@ using Starhunters.External;
 using System.Reflection;
 // using JollyJolly.Actions;
 using Starhunters.Conversation;
+using Starhunters.Pawsai.Actions;
 //using System.Reflection;
 
 namespace Starhunters;
@@ -25,6 +26,12 @@ internal partial class ModEntry : SimpleMod
         harmony.Patch(
             original: typeof(ArtifactReward).GetMethod("GetBlockedArtifacts", AccessTools.all),
             postfix: new HarmonyMethod(typeof(Artifacthider), nameof(Artifacthider.ArtifactRewardPreventer))
+        );
+
+        // Movement flipper
+        harmony.Patch(
+            original: typeof(Card).GetMethod(nameof(Card.GetActionsOverridden), AccessTools.all),
+            postfix: new HarmonyMethod(typeof(PawsaiMovingHelper), nameof(PawsaiMovingHelper.FlipThemActionsOverriden))
         );
     }
 }

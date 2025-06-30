@@ -24,8 +24,8 @@ internal partial class ModEntry : SimpleMod
     internal IKokoroApi KokoroApi;
     internal ILocalizationProvider<IReadOnlyList<string>> AnyLocalizations { get; }
     internal ILocaleBoundNonNullLocalizationProvider<IReadOnlyList<string>> Localizations { get; }
-    internal IMoreDifficultiesApi? MoreDifficultiesApi { get; private set; } = null!;
-    internal IDuoArtifactsApi? DuoArtifactsApi { get; private set; } = null!;
+    internal IMoreDifficultiesApi? MoreDifficultiesApi { get; private set; }
+    internal IDuoArtifactsApi? DuoArtifactsApi { get; private set; }
     public LocalDB localDB { get; set; } = null!;
     // internal IModSoundEntry MidiTestJourneyV { get; private set; }
     // internal IModSoundEntry MidiTestIncompetentB { get; private set; }
@@ -36,9 +36,24 @@ internal partial class ModEntry : SimpleMod
 
     #region PAWSAI stuff
     internal IDeckEntry PawsaiDeck;
-    internal IStatusEntry Status_Repulsion { get; private set; } = null!;
-    internal IStatusEntry Status_Repetition { get; private set; } = null!;
-    internal IStatusEntry Status_Regeneration { get; private set; } = null!;
+    internal IStatusEntry Status_Repulsion { get; private set; }
+    internal IStatusEntry Status_Repetition { get; private set; }
+    internal IStatusEntry Status_Regeneration { get; private set; }
+    internal Spr Action_MirrorMove_Random { get; private set; }
+    internal Spr Action_MirrorMove_RandomLeft { get; private set; }
+    internal Spr Action_MirrorMove_Zero { get; private set; }
+    internal Spr Action_MirrorMove_Left { get; private set; }
+    internal Spr Action_MirrorMove_Right { get; private set; }
+    internal Spr Action_MirrorMove_RandomFoe { get; private set; }
+    internal Spr Action_MirrorMove_ZeroFoe { get; private set; }
+    internal Spr Action_MirrorMove_LeftFoe { get; private set; }
+    internal Spr Action_MirrorMove_RightFoe { get; private set; }
+    internal Spr Action_PivotIn_Zero { get; private set; }
+    internal Spr Action_PivotOut_Zero { get; private set; }
+    internal Spr Action_PivotIn_Left { get; private set; }
+    internal Spr Action_PivotIn_Right { get; private set; }
+    internal Spr Action_PivotOut_Left { get; private set; }
+    internal Spr Action_PivotOut_Right { get; private set; }
     private readonly static List<Type> PawsaiCardTypes = [
         // Common
         typeof(PullShot),
@@ -85,12 +100,12 @@ internal partial class ModEntry : SimpleMod
         new List<Type>
         {
             // Common
-            typeof(OffensiveDefense),
-            typeof(ManyConsequences),
-            typeof(PowerPrep),
+            // typeof(OffensiveDefense),
+            // typeof(ManyConsequences),
+            // typeof(PowerPrep),
             // Boss
-            typeof(DelayedStart),
-            typeof(PainCruiser)
+            // typeof(DelayedStart),
+            // typeof(PainCruiser)
             // Event
             // Unreleased
         }.Concat(PawsaiDuoArtifactTypes);
