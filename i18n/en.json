@@ -1,4 +1,12 @@
 ﻿{
+    "Generic": {
+        "settings": {
+            "AccurateCalculation": {
+                "name": "Accurate Calculations",
+                "desc": "Increases accuracy of calculations in some cards, at the cost of performance."
+            }
+        }
+    },
     "Pawsai": {
         "character": {
             "name": "PAWSAI",
@@ -121,7 +129,7 @@
                 "EmergencyRetreat": {
                     "name": "Emergency Retreat",
                     "desc": "Move <c=keyword>{0}</c> until you no longer overlap with enemy.\n<c=keyword>End turn.</c>",
-                    "descB": "Move <c=keyword>{0}</c> until you no longer overlap with enemy.\n<c=downside>Lose <c=status>EVADE</c> next turn.</c>\n<c=keyword>End turn.</c>",
+                    "descB": "Move <c=keyword>{0}</c> until you no longer overlap with enemy.\n<c=downside><c=status>EVADE</c> = 0</c>\n<c=keyword>End turn.</c>",
                     "l": "LEFT",
                     "r": "RIGHT"
                 },

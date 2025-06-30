@@ -39,6 +39,7 @@ public class Ultimatomatic : Card, IRegisterable
                     .Select(_ => new AAttack
                     {
                         damage = GetDmg(s, 1),
+                        fast = true,
                         piercing = true
                     })
                     .Cast<CardAction>(),
@@ -55,6 +56,7 @@ public class Ultimatomatic : Card, IRegisterable
                     .Select(_ => new AAttack
                     {
                         damage = GetDmg(s, 1),
+                        fast = true
                     })
                     .Cast<CardAction>(),
                 new AStatus
@@ -70,6 +72,7 @@ public class Ultimatomatic : Card, IRegisterable
                     .Select(_ => new AAttack
                     {
                         damage = GetDmg(s, 1),
+                        fast = true
                     })
                     .Cast<CardAction>(),
                 new AStatus

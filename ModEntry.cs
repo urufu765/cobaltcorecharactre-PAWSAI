@@ -33,6 +33,8 @@ internal partial class ModEntry : SimpleMod
         KokoroApi = helper.ModRegistry.GetApi<IKokoroApi>("Shockah.Kokoro")!;
         MoreDifficultiesApi = helper.ModRegistry.GetApi<IMoreDifficultiesApi>("TheJazMaster.MoreDifficulties");
         DuoArtifactsApi = helper.ModRegistry.GetApi<IDuoArtifactsApi>("Shockah.DuoArtifacts");
+        settings = helper.Storage.LoadJson<Settings>(SettingsFile);
+
         helper.Events.OnModLoadPhaseFinished += (_, phase) =>
         {
             if (phase == ModLoadPhase.AfterDbInit)
@@ -154,6 +156,29 @@ internal partial class ModEntry : SimpleMod
             AccessTools.DeclaredMethod(type, nameof(IRegisterable.Register))?.Invoke(null, [package, helper]);
 
         Apply(Harmony);
+
+        helper.ModRegistry.AwaitApi<IModSettingsApi>(
+            "Nickel.ModSettings",
+            api => api.RegisterModSettings(api.MakeList([
+                api.MakeProfileSelector(
+                    () => package.Manifest.DisplayName ?? package.Manifest.UniqueName,
+                    settings.ProfileBased
+                ),
+                api.MakeCheckbox(
+                    () => Localizations.Localize(["Generic", "settings", "AccurateCalculation", "name"]),
+                    () => settings.ProfileBased.Current.AccurateCalculations,
+                    (_, _, value) => settings.ProfileBased.Current.AccurateCalculations = value
+                ).SetTooltips(() => [
+                    new GlossaryTooltip("starhuntersSettings.accurateCalculation")
+                    {
+                        Description = Localizations.Localize(["Generic", "settings", "AccurateCalculation", "desc"])
+                    }
+                ])
+            ]).SubscribeToOnMenuClose(_ =>
+            {
+                helper.Storage.SaveJson(SettingsFile, settings);
+            }))
+        );
     }
 
     /*

@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Reflection;
 using Nanoray.PluginManager;
@@ -19,6 +20,9 @@ public enum SmartAlignmentMode
 public class SmartAlignment : Card, IRegisterable, IHasCustomCardTraits
 {
     public SmartAlignmentMode availableMode;
+    public bool museumMode = false;
+    public double clock = 0;
+
     private static Rarity rare = Rarity.rare;
     public static void Register(IPluginPackage<IModManifest> package, IModHelper helper)
     {
@@ -38,24 +42,166 @@ public class SmartAlignment : Card, IRegisterable, IHasCustomCardTraits
 
     public override List<CardAction> GetActions(State s, Combat c)
     {
-        // TODO: Line up shit
+        availableMode = FindClosestDestination(s, c, out int moveAmount);
+
+
         return upgrade switch
         {
-            Upgrade.B =>
-            [
-            ],
-            Upgrade.A =>
-            [
-            ],
             _ =>
             [
+                new AMove
+                {
+                    dir = moveAmount,
+                    targetPlayer = true
+                },
+                new AStatus
+                {
+                    status = Status.evade,
+                    statusAmount = 0,
+                    mode = AStatusMode.Set,
+                    targetPlayer = true
+                },
             ],
         };
+    }
+
+    /// <summary>
+    /// Finds the closest destination of something... TODO: Optimize
+    /// </summary>
+    /// <param name="s"></param>
+    /// <param name="c"></param>
+    /// <param name="movement"></param>
+    /// <returns></returns>
+    private SmartAlignmentMode FindClosestDestination(State s, Combat c, out int movement)
+    {
+        // Check for cannon then get the worldX
+        int cannonX = s.ship.x;
+        for (int i = 0; i < s.ship.parts.Count; i++)
+        {
+            if (s.ship.parts[i].type == PType.cannon)
+            {
+                cannonX = s.ship.x + i;
+                if (!flipped) break; // First cannon is left cannon
+            }
+        }
+
+        SmartAlignmentMode sam = SmartAlignmentMode.none;
+        int brittleX = 1000;
+        int weakX = 1000;
+        int normalX = 1000;
+        // check the location of nearest brittle (ignore hidden)
+        // check the other locations too, then fall back if not found
+        for (int j = 0; j < c.otherShip.parts.Count; j++)
+        {
+            if (c.otherShip.parts[j].GetDamageModifier() == PDamMod.brittle && !c.otherShip.parts[j].brittleIsHidden)
+            {
+                if (sam < SmartAlignmentMode.brittle)
+                {
+                    sam = SmartAlignmentMode.brittle;
+                }
+                if (Math.Abs(c.otherShip.x + j - cannonX) < Math.Abs(brittleX))
+                {
+                    brittleX = c.otherShip.x + j - cannonX;
+                }
+                else if (Math.Abs(c.otherShip.x + j - cannonX) == Math.Abs(brittleX))
+                {
+                    if (flipped)  // Right cannon, Left bias
+                    {
+                        if (c.otherShip.x + j - cannonX < brittleX)
+                        {
+                            brittleX = c.otherShip.x + j - cannonX;
+                        }
+                    }
+                    else  // Left cannon, right bias
+                    {
+                        if (c.otherShip.x + j - cannonX > brittleX)
+                        {
+                            brittleX = c.otherShip.x + j - cannonX;
+                        }
+                    }
+                }
+            }
+            else if (c.otherShip.parts[j].GetDamageModifier() == PDamMod.weak && sam <= SmartAlignmentMode.weak)
+            {
+                if (sam < SmartAlignmentMode.weak)
+                {
+                    sam = SmartAlignmentMode.weak;
+                }
+                if (Math.Abs(c.otherShip.x + j - cannonX) < Math.Abs(weakX))
+                {
+                    weakX = c.otherShip.x + j - cannonX;
+                }
+                else if (Math.Abs(c.otherShip.x + j - cannonX) == Math.Abs(weakX))
+                {
+                    if (flipped)  // Right cannon, Left bias
+                    {
+                        if (c.otherShip.x + j - cannonX < weakX)
+                        {
+                            weakX = c.otherShip.x + j - cannonX;
+                        }
+                    }
+                    else  // Left cannon, right bias
+                    {
+                        if (c.otherShip.x + j - cannonX > weakX)
+                        {
+                            weakX = c.otherShip.x + j - cannonX;
+                        }
+                    }
+                }
+            }
+            else if (c.otherShip.parts[j].GetDamageModifier() == PDamMod.none && sam <= SmartAlignmentMode.nonArmored)
+            {
+                if (sam < SmartAlignmentMode.nonArmored)
+                {
+                    sam = SmartAlignmentMode.nonArmored;
+                }
+                if (Math.Abs(c.otherShip.x + j - cannonX) < Math.Abs(normalX))
+                {
+                    normalX = c.otherShip.x + j - cannonX;
+                }
+                else if (Math.Abs(c.otherShip.x + j - cannonX) == Math.Abs(normalX))
+                {
+                    if (flipped)  // Right cannon, Left bias
+                    {
+                        if (c.otherShip.x + j - cannonX < normalX)
+                        {
+                            normalX = c.otherShip.x + j - cannonX;
+                        }
+                    }
+                    else  // Left cannon, right bias
+                    {
+                        if (c.otherShip.x + j - cannonX > normalX)
+                        {
+                            normalX = c.otherShip.x + j - cannonX;
+                        }
+                    }
+                }
+            }
+        }
+
+        movement = sam switch
+        {
+            SmartAlignmentMode.brittle => brittleX,
+            SmartAlignmentMode.weak => weakX,
+            SmartAlignmentMode.nonArmored => normalX,
+            _ => 0
+        };
+        return sam;
     }
 
 
     public override CardData GetData(State state)
     {
+        if (museumMode)
+        {
+            availableMode = (Math.Round(clock) % 3) switch
+            {
+                0 => SmartAlignmentMode.nonArmored,
+                1 => SmartAlignmentMode.weak,
+                2 => SmartAlignmentMode.brittle,
+                _ => SmartAlignmentMode.none
+            };
+        }
         CardData cd = upgrade switch
         {
             Upgrade.B => new CardData
@@ -91,8 +237,21 @@ public class SmartAlignment : Card, IRegisterable, IHasCustomCardTraits
         return cd;
     }
 
+    public override void ExtraRender(G g, Vec v)
+    {
+        if (g.state?.route is Combat)
+        {
+            museumMode = false;
+        }
+        else if (g.state?.route is not Combat)
+        {
+            museumMode = true;
+        }
+        clock += g.dt / 2;
+    }
+
     public IReadOnlySet<ICardTraitEntry> GetInnateTraits(State state)
     {
-        return upgrade == Upgrade.B? new HashSet<ICardTraitEntry>{ModEntry.Instance.KokoroApi.V2.Fleeting.Trait} : [];
+        return upgrade == Upgrade.B ? new HashSet<ICardTraitEntry> { ModEntry.Instance.KokoroApi.V2.Fleeting.Trait } : [];
     }
 }

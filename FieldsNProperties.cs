@@ -8,6 +8,7 @@ using Starhunters.Artifacts;
 using Starhunters.External;
 using Starhunters.Conversation;
 using Starhunters.Pawsai.Cards;
+using Nanoray.PluginManager;
 
 namespace Starhunters;
 
@@ -26,6 +27,9 @@ internal partial class ModEntry : SimpleMod
     internal ILocaleBoundNonNullLocalizationProvider<IReadOnlyList<string>> Localizations { get; }
     internal IMoreDifficultiesApi? MoreDifficultiesApi { get; private set; }
     internal IDuoArtifactsApi? DuoArtifactsApi { get; private set; }
+    internal Settings settings;
+    private IWritableFileInfo SettingsFile => Helper.Storage.GetMainStorageFile("json");
+
     public LocalDB localDB { get; set; } = null!;
     // internal IModSoundEntry MidiTestJourneyV { get; private set; }
     // internal IModSoundEntry MidiTestIncompetentB { get; private set; }
