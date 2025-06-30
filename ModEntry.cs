@@ -14,6 +14,7 @@ using System.Reflection;
 // using JollyJolly.Actions;
 using Starhunters.Conversation;
 using Starhunters.Pawsai.Cards;
+using Starhunters.Pawsai.Features;
 //using System.Reflection;
 
 namespace Starhunters;
@@ -76,7 +77,7 @@ internal partial class ModEntry : SimpleMod
             new CurrentLocaleOrEnglishLocalizationProvider<IReadOnlyList<string>>(AnyLocalizations)
         );
 
-        
+
         SpriteLoading.RegisterSprites(typeof(ModEntry), package);
 
 
@@ -189,6 +190,10 @@ internal partial class ModEntry : SimpleMod
             }
             helper.Content.Artifacts.RegisterArtifact(ta.Name, UhDuhHundo.ArtifactRegistrationHelper(ta, RegisterSprite(package, "assets/artifact/pawsai" + ta.Name + ".png").Sprite, deck, "Pawsai"));
         }
+
+        _ = new ShieldRegen();
+        _ = new Repetition();
+        _ = new Repulsion();
 
         #endregion
 
