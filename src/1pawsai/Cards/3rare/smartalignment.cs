@@ -17,7 +17,7 @@ public enum SmartAlignmentMode
 /// <summary>
 /// Pawsai.
 /// </summary>
-public class SmartAlignment : Card, IRegisterable, IHasCustomCardTraits
+public class SmartAlignment : Card, IRegisterable
 {
     public SmartAlignmentMode availableMode;
     public bool museumMode = false;
@@ -54,14 +54,7 @@ public class SmartAlignment : Card, IRegisterable, IHasCustomCardTraits
                 {
                     dir = moveAmount,
                     targetPlayer = true
-                },
-                new AStatus
-                {
-                    status = Status.evade,
-                    statusAmount = 0,
-                    mode = AStatusMode.Set,
-                    targetPlayer = true
-                },
+                }
             ],
         };
     }
@@ -207,18 +200,18 @@ public class SmartAlignment : Card, IRegisterable, IHasCustomCardTraits
         {
             Upgrade.B => new CardData
             {
-                cost = 1,
+                cost = 0
             },
             Upgrade.A => new CardData
             {
                 cost = 1,
                 flippable = true,
-                exhaust = true,
+                retain = true
             },
             _ => new CardData
             {
                 cost = 1,
-                exhaust = true
+                flippable = true
             }
         };
 
@@ -249,10 +242,5 @@ public class SmartAlignment : Card, IRegisterable, IHasCustomCardTraits
             museumMode = true;
         }
         clock += g.dt / 2;
-    }
-
-    public IReadOnlySet<ICardTraitEntry> GetInnateTraits(State state)
-    {
-        return upgrade == Upgrade.B ? new HashSet<ICardTraitEntry> { ModEntry.Instance.KokoroApi.V2.Fleeting.Trait } : [];
     }
 }

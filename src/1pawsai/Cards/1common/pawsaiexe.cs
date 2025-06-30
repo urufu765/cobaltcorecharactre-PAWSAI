@@ -21,7 +21,7 @@ public class PawsaiExe : Card, IRegisterable
                 upgradesTo = [Upgrade.A, Upgrade.B]
             },
             Name = ModEntry.Instance.AnyLocalizations.Bind(["Pawsai", "card", "Common", "EXE", "name"]).Localize,
-            Art = ModEntry.RegisterSprite(package, "assets/card/pawsai/1/EXE.png").Sprite
+            Art = ModEntry.RegisterSprite(package, "assets/card/pawsai/common/EXE.png").Sprite
         });
     }
 

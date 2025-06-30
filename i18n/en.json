@@ -131,7 +131,7 @@
             "uncommon": {
                 "EmergencyRetreat": {
                     "name": "Emergency Retreat",
-                    "desc": "Move <c=keyword>{{direction}}</c> until you no longer overlap with enemy.\n<c=keyword>End turn.</c>",
+                    "desc": "Move <c=keyword>{{direction}}</c> until you don't overlap with enemy.\n<c=keyword>End turn.</c>",
                     "descB": "Move <c=keyword>{{direction}}</c> until you don't overlap with foe.\n<c=downside><c=status>EVADE</c> = 0</c>\n<c=keyword>End turn.</c>",
                     "l": "LEFT",
                     "r": "RIGHT"
@@ -158,7 +158,7 @@
             "rare": {
                 "SmartAlignment": {
                     "name": "Smart Alignment",
-                    "desc": "Line up your <c=keyword>{{direction}}-most</c> cannon to closest enemy<c=keyword>{{part}}</c> part.\n<c=downside><c=status>EVADE</c>=0.</c>",
+                    "desc": "Line up your <c=keyword>{{direction}}-most</c> cannon to closest enemy<c=keyword>{{part}}</c> part.",
                     "l": "left",
                     "r": "right",
                     "b": " brittle",
@@ -171,9 +171,9 @@
                 },
                 "Ultimatomatic": {
                     "name": "Ultimato-matic",
-                    "desc": "X=Missing Shield\n<c=action>2X({{amount}}) {{attack}}{{stun}} Atk</c>\n-X Max Shield",
-                    "descA": "X=Missing Shield\n<c=action>3X({{amount}}) {{attack}}{{stun}} Atk</c>\n-X Max Shield",
-                    "descB": "X=Missing Shield\n<c=action>2X({{amount}}) {{attack}}{{stun}} Pierce Atk</c>\n-X Max Shield",
+                    "desc": "X=Missing Shield\n<c=action>2X({{amount}}) {{attack}}{{stun}} Atk</c>\n<c=downside>-X Max Shield</c>",
+                    "descA": "X=Missing Shield\n<c=action>3X({{amount}}) {{attack}}{{stun}} Atk</c>\n<c=downside>-X Max Shield</c>",
+                    "descB": "X=Missing Shield\n<c=action>2X({{amount}}) {{attack}}{{stun}} Pierce Atk</c>\n<c=downside>-X Max Shield</c>",
                     "s": " Stun",
                     "f": ""
                 },

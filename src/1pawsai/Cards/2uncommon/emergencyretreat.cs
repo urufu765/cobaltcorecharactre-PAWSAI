@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Reflection;
+using Microsoft.Extensions.Logging;
 using Nanoray.PluginManager;
 using Nickel;
 
@@ -31,14 +32,14 @@ public class EmergencyRetreat : Card, IRegisterable, IHasCustomCardTraits
 
     public override List<CardAction> GetActions(State s, Combat c)
     {
-        int moveAmount = 0;
+        int toMove;
         if (ModEntry.Instance.settings.ProfileBased.Current.AccurateCalculations)
         {
-            moveAmount = CalculatePreciselyHowMuchToMove(s, c, flipped);
+            toMove = CalculatePreciselyHowMuchToMove(s, c);
         }
         else
         {
-            moveAmount = GuessHowMuchToMove(s, c, flipped);
+            toMove = GuessHowMuchToMove(s, c);
         }
         
         return upgrade switch
@@ -47,7 +48,7 @@ public class EmergencyRetreat : Card, IRegisterable, IHasCustomCardTraits
             [
                 new AMove
                 {
-                    dir = moveAmount,
+                    dir = toMove,
                     targetPlayer = true
                 },
                 new AStatus
@@ -63,7 +64,7 @@ public class EmergencyRetreat : Card, IRegisterable, IHasCustomCardTraits
             [
                 new AMove
                 {
-                    dir = moveAmount,
+                    dir = toMove,
                     targetPlayer = true
                 },
                 new AEndTurn()
@@ -71,37 +72,42 @@ public class EmergencyRetreat : Card, IRegisterable, IHasCustomCardTraits
         };
     }
 
-    private static int GuessHowMuchToMove(State s, Combat c, bool flip)
+    private int GuessHowMuchToMove(State s, Combat c)
     {
+        if (s.ship.x >= c.otherShip.x + c.otherShip.parts.Count || s.ship.x + s.ship.parts.Count <= c.otherShip.x)
+        {
+            return 0;
+        }
+        
         int moving;
-        if (flip)  // move right
+        if (!flipped)  // move right
         {
             // check rightmost enemy with leftmost player
             int enemyRight = c.otherShip.x + c.otherShip.parts.Count;  // +1 just in case
             int playerLeft = s.ship.x;
-            moving = Math.Min(enemyRight - playerLeft, 0);
+            moving = enemyRight - playerLeft;
         }
         else
         {
             int enemyLeft = c.otherShip.x;
-            int playerRight = s.ship.x = s.ship.parts.Count;  // +1 just in case
-            moving = Math.Max(enemyLeft - playerRight, 0);
+            int playerRight = s.ship.x + s.ship.parts.Count;  // +1 just in case
+            moving = enemyLeft - playerRight;
         }
-        return moving;
+        return Math.Abs(moving);
     }
 
-    private static int CalculatePreciselyHowMuchToMove(State s, Combat c, bool flip)
+    public int CalculatePreciselyHowMuchToMove(State s, Combat c)
     {
         int moving = 0;
         bool overlapping = s.ship.x < c.otherShip.x + c.otherShip.parts.Count && s.ship.x + s.ship.parts.Count > c.otherShip.x;
         while (overlapping)
         {
-            moving += flip ? 1 : -1;
+            moving += flipped ? -1 : 1;
 
             bool noOverlappingParts = true;
-            for (int i = s.ship.x + moving; i < s.ship.x + moving + s.ship.parts.Count; i++)
+            for (int i = 0; i < s.ship.parts.Count; i++)
             {
-                if (s.ship.GetPartAtWorldX(i) is Part sp && c.otherShip.GetPartAtWorldX(i) is Part cp && sp.type != PType.empty && cp.type != PType.empty)
+                if (s.ship.parts[i] is Part sp && c.otherShip.GetPartAtWorldX(i + s.ship.x + moving) is Part cp && sp.type != PType.empty && cp.type != PType.empty)
                 {
                     noOverlappingParts = false;
                     break;
@@ -118,7 +124,7 @@ public class EmergencyRetreat : Card, IRegisterable, IHasCustomCardTraits
                 overlapping = false;
             }
         }
-        return moving;
+        return Math.Abs(moving);
     }
 
     public override CardData GetData(State state)
@@ -148,7 +154,7 @@ public class EmergencyRetreat : Card, IRegisterable, IHasCustomCardTraits
             ["Pawsai", "card", rare.ToString(), MethodBase.GetCurrentMethod()!.DeclaringType!.Name, upgrade == Upgrade.B ? "descB" : "desc"],
             new {
                 direction = ModEntry.Instance.Localizations.Localize(
-                    ["Pawsai", "card", rare.ToString(), MethodBase.GetCurrentMethod()!.DeclaringType!.Name, flipped ? "r" : "l"]
+                    ["Pawsai", "card", rare.ToString(), MethodBase.GetCurrentMethod()!.DeclaringType!.Name, flipped ? "l" : "r"]
         )});
         return cd;
     }
