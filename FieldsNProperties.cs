@@ -18,10 +18,10 @@ internal partial class ModEntry : SimpleMod
 {
     internal static ModEntry Instance { get; private set; } = null!;
     internal static IPlayableCharacterEntryV2 Pawsai { get; private set; } = null!;  // Defense
-    // internal static IPlayableCharacterEntryV2 Kodijen { get; private set; } = null!;  // Mid-row
-    // internal static IPlayableCharacterEntryV2 Varrigradona { get; private set; } = null!;  // ???
     // internal static IPlayableCharacterEntryV2 Bauie { get; private set; } = null!;  // Offense
+    // internal static IPlayableCharacterEntryV2 Kodijen { get; private set; } = null!;  // Mid-row
     // internal static IPlayableCharacterEntryV2 Parmesan { get; private set; } = null!;  // Movement? (Teleportation)
+    // internal static IPlayableCharacterEntryV2 Varrigradona { get; private set; } = null!;  // ???
     internal string UniqueName { get; private set; }
     internal Harmony Harmony;
     internal IKokoroApi KokoroApi;

@@ -158,12 +158,12 @@
             "rare": {
                 "SmartAlignment": {
                     "name": "Smart Alignment",
-                    "desc": "Line up your <c=keyword>{{direction}}-most</c> cannon to closest enemy<c=keyword>{{part}}</c> part.",
+                    "desc": "Line up your <c=keyword>{{direction}}-most</c> cannon to closest foe<c=keyword>{{part}}</c> part.",
                     "l": "left",
                     "r": "right",
                     "b": " brittle",
                     "w": " weak",
-                    "n": " Non-armored",
+                    "n": " unarmored",
                     "f": ""
                 },
                 "Potentiomatic": {

@@ -6,6 +6,7 @@ A collection of five (or more) bounty hunters!
 
 ### Pre-release
 
+* **(0.0.10)**: Preview sent to discord
 * **(0.0.9)**: Artifacts
 * **(0.0.8)**: Implemented statuses 2/3
 * **(0.0.7)**: Fixed emergency retreat
