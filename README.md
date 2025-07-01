@@ -6,7 +6,8 @@ A collection of five (or more) bounty hunters!
 
 ### Pre-release
 
-* **(0.0.11)x**: Fixed missing PAWSAI.EXE string, started on Ravage
+* **(0.0.12)x**: Bruno Cards implemented
+* **(0.0.11)x**: Fixed missing PAWSAI.EXE string, started on Bruno
 * **(0.0.10)**: Preview sent to discord
 * **(0.0.9)**: Artifacts
 * **(0.0.8)**: Implemented statuses 2/3

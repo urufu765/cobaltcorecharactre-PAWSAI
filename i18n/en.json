@@ -188,10 +188,10 @@
             }
         }
     },
-    "Grum": {
+    "Bruno": {
         "character": {
-            "name": "Grum",
-            "desc": "<c=764535>GRUM</c>\nAn artillery expert. His cards hit <c=keyword>hard</c>, but require some <c=downside>setting up and cooling down</c>."
+            "name": "Bruno",
+            "desc": "<c=764535>BRUNO</c>\nAn artillery expert. His cards hit <c=keyword>hard</c>, but require some <c=downside>setting up and cooling down</c>."
         },
         "status": {
             "Recoil": {
@@ -287,7 +287,8 @@
                 },
                 "TouchyTrigger": {
                     "name": "Touchy Trigger",
-                    "desc": "When drawn:\n<c=action><c=redd>{{attack}}</c> Heavy Attack</c>\n{{temp}} <c=status>TEMP SHIELD</c>"
+                    "desc": "When drawn:\n<c=action><c=redd>{{attack}}</c> Heavy Attack</c>\n{{temp}} <c=status>TEMP SHIELD</c>",
+                    "descB": "When drawn:\n<c=action><c=redd>{{attack}}</c> Heavy Attack</c>\n{{temp}} <c=status>TEMP SHIELD</c>\n1 <c=status>MITIGATE</c>"
                 },
                 "Swig": {
                     "name": "Swig"
@@ -305,8 +306,8 @@
                 "Breather": {
                     "name": "Breather"
                 },
-                "SurpriseAttack": {
-                    "name": "Surprise Attack"
+                "UnexpectedBlast": {
+                    "name": "Unexpected Blast"
                 },
                 "OptimizedBlast": {
                     "name": "Optimized Blast"
@@ -330,8 +331,8 @@
                 },
                 "DeepClean": {
                     "name": "Deep Clean",
-                    "desc": "X = Hand\nY = <c=energy>Energy</c>\nX <c=status>MITIGATE</c>\nY <c=status>HYPERDRIVE</c>\n<c=keyword>Destroy all cards in hand</c>",
-                    "descA": "X = Hand\nY = <c=energy>Energy</c>\nX <c=status>MITIGATE</c>\nY <c=status>HYPERDRIVE</c>\n<c=keyword>Exhaust all cards in hand</c>"
+                    "descA": "X = Hand\nY = <c=energy>Energy</c>\nX <c=status>MITIGATE</c>\nY <c=status>HYPERDRIVE</c>\n<c=keyword>Destroy all cards in hand</c>",
+                    "desc": "X = Hand\nY = <c=energy>Energy</c>\nX <c=status>MITIGATE</c>\nY <c=status>HYPERDRIVE</c>\n<c=keyword>Exhaust all cards in hand</c>"
                 },
                 "RecoilRebound": {
                     "name": "Recoil Rebound"
@@ -342,7 +343,7 @@
             },
             "token": {
                 "EXE": {
-                    "name": "Grum.EXE"
+                    "name": "Bruno.EXE"
                 }
             }
         }

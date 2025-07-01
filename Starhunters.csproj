@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
 		<RootNamespace>Starhunters</RootNamespace>
-		<Version>0.0.11</Version>
+		<Version>0.0.12</Version>
 		<!-- <IncludedModProjectPaths>i18n;assets</IncludedModProjectPaths> -->
 
 		<TargetFramework>net8.0</TargetFramework>

@@ -11,6 +11,7 @@ using Starhunters.Pawsai.Cards;
 using Nanoray.PluginManager;
 using Nanoray.EnumByNameSourceGenerator;
 using Starhunters.Pawsai.Artifacts;
+using Starhunters.Bruno.Cards;
 
 namespace Starhunters;
 
@@ -18,7 +19,7 @@ internal partial class ModEntry : SimpleMod
 {
     internal static ModEntry Instance { get; private set; } = null!;
     internal static IPlayableCharacterEntryV2 Pawsai { get; private set; } = null!;  // Defense
-    internal static IPlayableCharacterEntryV2 Grum { get; private set; } = null!;  // Offense
+    internal static IPlayableCharacterEntryV2 Bruno { get; private set; } = null!;  // Offense
     // internal static IPlayableCharacterEntryV2 Kodijen { get; private set; } = null!;  // Mid-row
     // internal static IPlayableCharacterEntryV2 Parmesan { get; private set; } = null!;  // Movement? (Teleportation)
     // internal static IPlayableCharacterEntryV2 Varrigradona { get; private set; } = null!;  // ???
@@ -108,7 +109,7 @@ internal partial class ModEntry : SimpleMod
     // typeof(),  // Riggs
     // typeof(),  // Kodijen
     // typeof(),  // Varrigradona
-    // typeof(),  // Grum
+    // typeof(),  // Bruno
     // typeof(),  // Parmesan
     ];
     private readonly static IEnumerable<Type> PawsaiArtifactTypes =
@@ -145,15 +146,15 @@ internal partial class ModEntry : SimpleMod
     };
     #endregion
 
-    #region Grum stuff
-    internal IDeckEntry GrumDeck;
+    #region Bruno stuff
+    internal IDeckEntry BrunoDeck;
     internal IStatusEntry Status_Recoil { get; private set; }
     internal IStatusEntry Status_Hyperdrive { get; private set; }
     internal IStatusEntry Status_Mitigate { get; private set; }
     internal IStatusEntry Status_SlowBurn { get; private set; }
     internal IStatusEntry Status_Hamper { get; private set; }
 
-    private readonly static List<Type> GrumCardTypes = [
+    private readonly static List<Type> BrunoCardTypes = [
         // Common
         typeof(Breacher),
         typeof(ToughenUp),
@@ -167,7 +168,7 @@ internal partial class ModEntry : SimpleMod
         // Uncommon
         typeof(MomentaryBoost),
         typeof(Breather),
-        typeof(SurpriseAttack),
+        typeof(UnexpectedBlast),
         typeof(OptimizedBlast),
         typeof(EpicBreacher),
         typeof(NaggingSafety),
@@ -179,10 +180,10 @@ internal partial class ModEntry : SimpleMod
         typeof(RecoilRebound),
         typeof(Opportunist),
         // Token
-        typeof(GrumExe),
+        typeof(BrunoExe),
         // Unreleased
     ];
-    private readonly static List<Type> GrumDuoArtifactTypes = [
+    private readonly static List<Type> BrunoDuoArtifactTypes = [
     // typeof(),  // CAT
     // typeof(),  // Peri
     // typeof(),  // Isaac
@@ -195,7 +196,7 @@ internal partial class ModEntry : SimpleMod
     // typeof(),  // PAWSAI
     // typeof(),  // Parmesan
     ];
-    private readonly static IEnumerable<Type> GrumArtifactTypes =
+    private readonly static IEnumerable<Type> BrunoArtifactTypes =
         new List<Type>
         {
             // Common
@@ -207,8 +208,8 @@ internal partial class ModEntry : SimpleMod
             typeof(ForsakenSafety)
             // Event
             // Unreleased
-        }.Concat(GrumDuoArtifactTypes);
-    // private readonly static List<Type> GrumDialogues = [
+        }.Concat(BrunoDuoArtifactTypes);
+    // private readonly static List<Type> BrunoDialogues = [
     //     typeof(StoryDialogue),
     //     typeof(EventDialogue),
     //     typeof(CombatDialogue),
@@ -216,7 +217,7 @@ internal partial class ModEntry : SimpleMod
     //     typeof(CardDialogue),
     //     typeof(MemoryDialogue)
     // ];
-    public readonly static Dictionary<int, List<string>> GrumAnims = new()
+    public readonly static Dictionary<int, List<string>> BrunoAnims = new()
     {
         {1, [
             "mini",
@@ -232,6 +233,6 @@ internal partial class ModEntry : SimpleMod
 
     private readonly static IEnumerable<Type> AllRegisterableTypes =
         PawsaiCardTypes
-            .Concat(GrumCardTypes);
+            .Concat(BrunoCardTypes);
 
 }

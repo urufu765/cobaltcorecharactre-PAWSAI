@@ -3,26 +3,27 @@ using System.Reflection;
 using Nanoray.PluginManager;
 using Nickel;
 
-namespace Starhunters.Pawsai.Cards;
+namespace Starhunters.Bruno.Cards;
 
 /// <summary>
-/// Pawsai.
+/// Bruno.
 /// </summary>
 public class Template : Card, IRegisterable
 {
     public static void Register(IPluginPackage<IModManifest> package, IModHelper helper)
     {
-        Rarity rare = Rarity.uncommon;
+        Rarity rare = Rarity.rare;
         helper.Content.Cards.RegisterCard(new CardConfiguration
         {
             CardType = MethodBase.GetCurrentMethod()!.DeclaringType!,
             Meta = new CardMeta
             {
                 rarity = rare,
-                upgradesTo = [Upgrade.A, Upgrade.B]
+                upgradesTo = [Upgrade.A, Upgrade.B],
+                deck = ModEntry.Instance.BrunoDeck.Deck
             },
-            Name = ModEntry.Instance.AnyLocalizations.Bind(["Pawsai", "card", rare.ToString(), MethodBase.GetCurrentMethod()!.DeclaringType!.Name, "name"]).Localize,
-            Art = ModEntry.RegisterSprite(package, $"assets/card/pawsai/{rare}/{MethodBase.GetCurrentMethod()!.DeclaringType!.Name}.png").Sprite
+            Name = ModEntry.Instance.AnyLocalizations.Bind(["Bruno", "card", rare.ToString(), MethodBase.GetCurrentMethod()!.DeclaringType!.Name, "name"]).Localize,
+            Art = ModEntry.RegisterSprite(package, $"assets/card/bruno/{rare}/{MethodBase.GetCurrentMethod()!.DeclaringType!.Name}.png").Sprite
         });
     }
 
@@ -31,14 +32,23 @@ public class Template : Card, IRegisterable
     {
         return upgrade switch
         {
-            Upgrade.B => 
+            Upgrade.B =>
             [
+                
+                new AStatus
+                {
+                    status = ModEntry.Instance.Status_Mitigate.Status,
+                    statusAmount = 3,
+                    targetPlayer = true
+                }
             ],
-            Upgrade.A => 
+            Upgrade.A =>
             [
+                
             ],
-            _ => 
+            _ =>
             [
+                
             ],
         };
     }
