@@ -123,9 +123,6 @@
                 },
                 "ThrustRedirect": {
                     "name": "Thrust Redirect"
-                },
-                "EXE": {
-                    "name": "PAWSAI.EXE"
                 }
             },
             "uncommon": {
@@ -171,9 +168,9 @@
                 },
                 "Ultimatomatic": {
                     "name": "Ultimato-matic",
-                    "desc": "X=Missing Shield\n<c=action>2X({{amount}}) {{attack}}{{stun}} Atk</c>\n<c=downside>-X Max Shield</c>",
-                    "descA": "X=Missing Shield\n<c=action>3X({{amount}}) {{attack}}{{stun}} Atk</c>\n<c=downside>-X Max Shield</c>",
-                    "descB": "X=Missing Shield\n<c=action>2X({{amount}}) {{attack}}{{stun}} Pierce Atk</c>\n<c=downside>-X Max Shield</c>",
+                    "desc": "X=Missing Shield\n<c=action>2X({{amount}}) <c=redd>{{attack}}</c>{{stun}} Atk</c>\n<c=downside>-X Max Shield</c>",
+                    "descA": "X=Missing Shield\n<c=action>3X({{amount}}) <c=redd>{{attack}}</c>{{stun}} Atk</c>\n<c=downside>-X Max Shield</c>",
+                    "descB": "X=Missing Shield\n<c=action>2X({{amount}}) <c=redd>{{attack}}</c>{{stun}} Pierce Atk</c>\n<c=downside>-X Max Shield</c>",
                     "s": " Stun",
                     "f": ""
                 },
@@ -184,7 +181,169 @@
                     "name": "Shield Payout"
                 }
             },
-            "Token": {
+            "token": {
+                "EXE": {
+                    "name": "PAWSAI.EXE"
+                }
+            }
+        }
+    },
+    "Grum": {
+        "character": {
+            "name": "Grum",
+            "desc": "<c=764535>GRUM</c>\nAn artillery expert. His cards hit <c=keyword>hard</c>, but require some <c=downside>setting up and cooling down</c>."
+        },
+        "status": {
+            "Recoil": {
+                "name": "Recoil",
+                "desc": "Your next {0} attacks <c=downside>deal no damage</c>.\n<c=downside>Goes away at start of next turn.</c>"
+            },
+            "Hyperdrive": {
+                "name": "Hyperdrive",
+                "desc": "Your next attack deals {0} additional damage.\n<c=downside>Goes away on use.</c>"
+            },
+            "Mitigate": {
+                "name": "Mitigate",
+                "desc": "Reduce up to {0} incoming damage and gain equal amount as <c=status>SLOW BURN</c>.\n<c=downside>Goes away at start of next turn.</c>"
+            },
+            "SlowBurn": {
+                "name": "Slow Burn",
+                "desc": "Take 1 damage whenever you lose 1 <c=status>SLOW BURN</c>.\n<c=downside>Decreases by 1 at the start of next turn.</c>"
+            },
+            "Hamper": {
+                "name": "Hamper",
+                "desc": "Your next {0} attacks do at most <c=downside>1</c> damage.\n<c=downside>Goes away at start of next turn.</c>"
+            }
+        },
+        "action": {
+            "HeavyAttack": {
+                "name": "Heavy Attack",
+                "title": "HEAVY ATTACK",
+                "desc": "Fire a {0} damage shot from your <c=part>cannon</c>.\n<c=keyword>Damage increase from statuses and artifacts is doubled.</c>\n<c=downside>Gain 1 <c=status>RECOIL</c>.</c>"
+            },
+            "BreachAttack": {
+                "name": "Breach Attack",
+                "title": "BREACH ATTACK",
+                "desc": "Fire a {0} damage shot from your <c=part>cannon</c>.\n<c=keyword>Damage is doubled if it hits a shielded foe.</c>\n<c=downside>Gain 1 <c=status>RECOIL</c>.</c>"
+            }
+        },
+        "event": {
+        },
+        "trait": {
+        },
+        "object": {
+        },
+        "artifact": {
+            "Common": {
+                "ThermoelectricCannonCooler": {
+                    "name": "THERMOELECTRIC CANNON COOLER",
+                    "desc": "Convert any <c=status>RECOIL</c> you get into <c=status>HAMPER</c>."
+                },
+                "UnfairAdvantage": {
+                    "name": "UNFAIR ADVANTAGE",
+                    "desc": "Once per combat, when you deplete enemy shields, cancel all intents."
+                },
+                "OverwhelmingStrike": {
+                    "name": "OVERWHELMING STRIKE",
+                    "desc": "Once per turn, if your attack does <c=keyword>more than 5</c> damage after status and artifact damage boosts, it also stuns."
+                }
+            },
+            "Boss": {
+                "DoubleEdgedCannon": {
+                    "name": "DOUBLE-EDGED CANNON",
+                    "desc": "Your attacks deal double hull damage.\n<c=downside>You take double hull damage from attacks</c>."
+                },
+                "ForsakenSafety": {
+                    "name": "FORSAKEN SAFETY",
+                    "desc": "Convert any <c=status>MITIGATION</c> into <c=status>PULSEDRIVE</c>."
+                }
+            },
+            "EventOnly": {
+            },
+            "Unreleased": {
+            },
+            "Tooltips": {
+            }
+        },
+        "card": {
+            "common": {
+                "Breacher": {
+                    "name": "Breacher"
+                },
+                "ToughenUp": {
+                    "name": "Toughen Up"
+                },
+                "HypeUp": {
+                    "name": "Hype Up"
+                },
+                "AllIn": {
+                    "name": "All In"
+                },
+                "RepeatedBreach": {
+                    "name": "Repeated Breach"
+                },
+                "ForwardsConverter": {
+                    "name": "Forwards Converter"
+                },
+                "TouchyTrigger": {
+                    "name": "Touchy Trigger",
+                    "desc": "When drawn:\n<c=action><c=redd>{{attack}}</c> Heavy Attack</c>\n{{temp}} <c=status>TEMP SHIELD</c>"
+                },
+                "Swig": {
+                    "name": "Swig"
+                },
+                "SafeChoice": {
+                    "name": "Safe Choice"
+                }
+            },
+            "uncommon": {
+                "MomentaryBoost": {
+                    "name": "Momentary Boost",
+                    "desc": "When drawn:\n{{hyper}} <c=status>HYPERDRIVE</c>\n1 <c=energy>ENERGY</c>",
+                    "descB": "When drawn:\n{{hyper}} <c=status>HYPERDRIVE</c>\n1 <c=energy>ENERGY</c>\n1 <c=status>MITIGATE</c>"
+                },
+                "Breather": {
+                    "name": "Breather"
+                },
+                "SurpriseAttack": {
+                    "name": "Surprise Attack"
+                },
+                "OptimizedBlast": {
+                    "name": "Optimized Blast"
+                },
+                "EpicBreacher": {
+                    "name": "Epic Breacher"
+                },
+                "NaggingSafety": {
+                    "name": "Nagging Safety"
+                },
+                "PrepWork": {
+                    "name": "Prep-work"
+                }
+            },
+            "rare": {
+                "HurtBurn": {
+                    "name": "Hurt Burn"
+                },
+                "PainfulChoices": {
+                    "name": "Painful Choices"
+                },
+                "DeepClean": {
+                    "name": "Deep Clean",
+                    "desc": "X = Hand\nY = <c=energy>Energy</c>\nX <c=status>MITIGATE</c>\nY <c=status>HYPERDRIVE</c>\n<c=keyword>Destroy all cards in hand</c>",
+                    "descA": "X = Hand\nY = <c=energy>Energy</c>\nX <c=status>MITIGATE</c>\nY <c=status>HYPERDRIVE</c>\n<c=keyword>Exhaust all cards in hand</c>"
+                },
+                "RecoilRebound": {
+                    "name": "Recoil Rebound"
+                },
+                "Opportunist": {
+                    "name": "Opportunist"
+                }
+            },
+            "token": {
+                "EXE": {
+                    "name": "Grum.EXE"
+                }
             }
         }
     },
@@ -216,89 +375,16 @@
             }
         },
         "card": {
-            "Common": {
+            "common": {
             },
-            "Uncommon": {
+            "uncommon": {
             },
-            "Rare": {
+            "rare": {
             },
-            "Token": {
-            }
-        }
-    },
-    "Varrigradona": {
-        "character": {
-            "name": "Varrigradona",
-            "desc": "<c=7b3258>VARRIGRADONA</c>\nA freelancer. Her cards <c=keyword>manipulate</c> other cards by <c=keyword>holding onto them</c> until you need it, either for dependency or power."
-        },
-        "status": {
-        },
-        "action": {
-        },
-        "event": {
-        },
-        "trait": {
-        },
-        "object": {
-        },
-        "artifact": {
-            "Common": {
-            },
-            "Boss": {
-            },
-            "EventOnly": {
-            },
-            "Unreleased": {
-            },
-            "Tooltips": {
-            }
-        },
-        "card": {
-            "Common": {
-            },
-            "Uncommon": {
-            },
-            "Rare": {
-            },
-            "Token": {
-            }
-        }
-    },
-    "Bauie": {
-        "character": {
-            "name": "Bauie",
-            "desc": "<c=2a767d>BAUIE</c>\nAn artillery expert. His cards hit <c=keyword>hard</c>, but require some <c=keyword>setting up and cooling down</c>."
-        },
-        "status": {
-        },
-        "action": {
-        },
-        "event": {
-        },
-        "trait": {
-        },
-        "object": {
-        },
-        "artifact": {
-            "Common": {
-            },
-            "Boss": {
-            },
-            "EventOnly": {
-            },
-            "Unreleased": {
-            },
-            "Tooltips": {
-            }
-        },
-        "card": {
-            "Common": {
-            },
-            "Uncommon": {
-            },
-            "Rare": {
-            },
-            "Token": {
+            "token": {
+                "EXE": {
+                    "name": "Kodijen.EXE"
+                }
             }
         }
     },
@@ -330,13 +416,57 @@
             }
         },
         "card": {
+            "common": {
+            },
+            "uncommon": {
+            },
+            "rare": {
+            },
+            "token": {
+                "EXE": {
+                    "name": "Parmesan.EXE"
+                }
+            }
+        }
+    },
+    "Varrigradona": {
+        "character": {
+            "name": "Varrigradona",
+            "desc": "<c=7b3258>VARRIGRADONA</c>\nA freelancer. Her cards <c=keyword>manipulate</c> other cards by <c=keyword>holding onto them</c> until you need it, either for dependency or power."
+        },
+        "status": {
+        },
+        "action": {
+        },
+        "event": {
+        },
+        "trait": {
+        },
+        "object": {
+        },
+        "artifact": {
             "Common": {
             },
-            "Uncommon": {
+            "Boss": {
             },
-            "Rare": {
+            "EventOnly": {
             },
-            "Token": {
+            "Unreleased": {
+            },
+            "Tooltips": {
+            }
+        },
+        "card": {
+            "common": {
+            },
+            "uncommon": {
+            },
+            "rare": {
+            },
+            "token": {
+                "EXE": {
+                    "name": "Varrigradona.EXE"
+                }
             }
         }
     }

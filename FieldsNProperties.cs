@@ -18,7 +18,7 @@ internal partial class ModEntry : SimpleMod
 {
     internal static ModEntry Instance { get; private set; } = null!;
     internal static IPlayableCharacterEntryV2 Pawsai { get; private set; } = null!;  // Defense
-    // internal static IPlayableCharacterEntryV2 Bauie { get; private set; } = null!;  // Offense
+    internal static IPlayableCharacterEntryV2 Grum { get; private set; } = null!;  // Offense
     // internal static IPlayableCharacterEntryV2 Kodijen { get; private set; } = null!;  // Mid-row
     // internal static IPlayableCharacterEntryV2 Parmesan { get; private set; } = null!;  // Movement? (Teleportation)
     // internal static IPlayableCharacterEntryV2 Varrigradona { get; private set; } = null!;  // ???
@@ -108,7 +108,7 @@ internal partial class ModEntry : SimpleMod
     // typeof(),  // Riggs
     // typeof(),  // Kodijen
     // typeof(),  // Varrigradona
-    // typeof(),  // Bauie
+    // typeof(),  // Grum
     // typeof(),  // Parmesan
     ];
     private readonly static IEnumerable<Type> PawsaiArtifactTypes =
@@ -124,14 +124,14 @@ internal partial class ModEntry : SimpleMod
             // Event
             // Unreleased
         }.Concat(PawsaiDuoArtifactTypes);
-    private readonly static List<Type> PawsaiDialogues = [
-        typeof(StoryDialogue),
-        typeof(EventDialogue),
-        typeof(CombatDialogue),
-        typeof(ArtifactDialogue),
-        typeof(CardDialogue),
-        typeof(MemoryDialogue)
-    ];
+    // private readonly static List<Type> PawsaiDialogues = [
+    //     typeof(StoryDialogue),
+    //     typeof(EventDialogue),
+    //     typeof(CombatDialogue),
+    //     typeof(ArtifactDialogue),
+    //     typeof(CardDialogue),
+    //     typeof(MemoryDialogue)
+    // ];
     public readonly static Dictionary<int, List<string>> PawsaiAnims = new()
     {
         {1, [
@@ -145,10 +145,93 @@ internal partial class ModEntry : SimpleMod
     };
     #endregion
 
+    #region Grum stuff
+    internal IDeckEntry GrumDeck;
+    internal IStatusEntry Status_Recoil { get; private set; }
+    internal IStatusEntry Status_Hyperdrive { get; private set; }
+    internal IStatusEntry Status_Mitigate { get; private set; }
+    internal IStatusEntry Status_SlowBurn { get; private set; }
+    internal IStatusEntry Status_Hamper { get; private set; }
 
+    private readonly static List<Type> GrumCardTypes = [
+        // Common
+        typeof(Breacher),
+        typeof(ToughenUp),
+        typeof(HypeUp),
+        typeof(AllIn),
+        typeof(RepeatedBreach),
+        typeof(ForwardsConverter),
+        typeof(TouchyTrigger),
+        typeof(Swig),
+        typeof(SafeChoice),
+        // Uncommon
+        typeof(MomentaryBoost),
+        typeof(Breather),
+        typeof(SurpriseAttack),
+        typeof(OptimizedBlast),
+        typeof(EpicBreacher),
+        typeof(NaggingSafety),
+        typeof(PrepWork),
+        // Rare
+        typeof(HurtBurn),
+        typeof(PainfulChoices),
+        typeof(DeepClean),
+        typeof(RecoilRebound),
+        typeof(Opportunist),
+        // Token
+        typeof(GrumExe),
+        // Unreleased
+    ];
+    private readonly static List<Type> GrumDuoArtifactTypes = [
+    // typeof(),  // CAT
+    // typeof(),  // Peri
+    // typeof(),  // Isaac
+    // typeof(),  // Books
+    // typeof(),  // Drake
+    // typeof(),  // Dizzy
+    // typeof(),  // Riggs
+    // typeof(),  // Kodijen
+    // typeof(),  // Varrigradona
+    // typeof(),  // PAWSAI
+    // typeof(),  // Parmesan
+    ];
+    private readonly static IEnumerable<Type> GrumArtifactTypes =
+        new List<Type>
+        {
+            // Common
+            typeof(ThermoelectricCannonCooler),
+            typeof(UnfairAdvantage),
+            typeof(OverwhelmingStrike),
+            // Boss
+            typeof(DoubleEdgedCannon),
+            typeof(ForsakenSafety)
+            // Event
+            // Unreleased
+        }.Concat(GrumDuoArtifactTypes);
+    // private readonly static List<Type> GrumDialogues = [
+    //     typeof(StoryDialogue),
+    //     typeof(EventDialogue),
+    //     typeof(CombatDialogue),
+    //     typeof(ArtifactDialogue),
+    //     typeof(CardDialogue),
+    //     typeof(MemoryDialogue)
+    // ];
+    public readonly static Dictionary<int, List<string>> GrumAnims = new()
+    {
+        {1, [
+            "mini",
+            "gameover",
+        ]},
+        {5, [
+            "squint",
+            "neutral",
+        ]}
+    };
+
+    #endregion
 
     private readonly static IEnumerable<Type> AllRegisterableTypes =
         PawsaiCardTypes
-            .Concat(PawsaiDialogues);
+            .Concat(GrumCardTypes);
 
 }
