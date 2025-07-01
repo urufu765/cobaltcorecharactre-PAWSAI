@@ -221,10 +221,20 @@
                 "title": "HEAVY ATTACK",
                 "desc": "Fire a {0} damage shot from your <c=part>cannon</c>.\n<c=keyword>Damage increase from statuses and artifacts is doubled.</c>\n<c=downside>Gain 1 <c=status>RECOIL</c>.</c>"
             },
+            "HeavyAttackPiercing": {
+                "name": "Heavy Attack Piercing",
+                "title": "PIERCING HEAVY ATTACK",
+                "desc": "Fire a piercing {0} damage shot from your <c=part>cannon</c> that ignores all shields and armor.\n<c=keyword>Damage increase from statuses and artifacts is doubled.</c>\n<c=downside>Gain 1 <c=status>RECOIL</c>.</c>"
+            },
             "BreachAttack": {
                 "name": "Breach Attack",
                 "title": "BREACH ATTACK",
-                "desc": "Fire a {0} damage shot from your <c=part>cannon</c>.\n<c=keyword>Damage is doubled if it hits a shielded foe.</c>\n<c=downside>Gain 1 <c=status>RECOIL</c>.</c>"
+                "desc": "Fire a {0} damage shot from your <c=part>cannon</c>.\n<c=keyword>Damage is doubled on shielded targets.</c>\n<c=downside>Gain 1 <c=status>RECOIL</c>.</c>"
+            },
+            "BreachAttackPiercing": {
+                "name": "Breach Attack Piercing",
+                "title": "PIERCING BREACH ATTACK",
+                "desc": "Fire a piercing {0} damage shot from your <c=part>cannon</c> that ignores all shields and armor.\n<c=keyword>Damage is doubled on shielded targets.</c>\n<c=downside>Gain 1 <c=status>RECOIL</c>.</c>"
             }
         },
         "event": {

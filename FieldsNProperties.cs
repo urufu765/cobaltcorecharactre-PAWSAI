@@ -154,6 +154,24 @@ internal partial class ModEntry : SimpleMod
     internal IStatusEntry Status_SlowBurn { get; private set; }
     internal IStatusEntry Status_Hamper { get; private set; }
 
+    [SpriteLoading("icon", "bruno")]
+    public Spr Action_HeavyAttack { get; private set; }
+    [SpriteLoading("icon", "bruno")]
+    public Spr Action_HeavyAttack_Pierce { get; private set; }
+    [SpriteLoading("icon", "bruno")]
+    public Spr Action_HeavyAttack_Fail { get; private set; }
+    [SpriteLoading("icon", "bruno")]
+    public Spr Action_HeavyAttack_PierceFail { get; private set; }
+    [SpriteLoading("icon", "bruno")]
+    public Spr Action_BreachAttack { get; private set; }
+    [SpriteLoading("icon", "bruno")]
+    public Spr Action_BreachAttack_Pierce { get; private set; }
+    [SpriteLoading("icon", "bruno")]
+    public Spr Action_BreachAttack_Fail { get; private set; }
+    [SpriteLoading("icon", "bruno")]
+    public Spr Action_BreachAttack_PierceFail { get; private set; }
+
+
     private readonly static List<Type> BrunoCardTypes = [
         // Common
         typeof(Breacher),
@@ -200,12 +218,12 @@ internal partial class ModEntry : SimpleMod
         new List<Type>
         {
             // Common
-            typeof(ThermoelectricCannonCooler),
-            typeof(UnfairAdvantage),
-            typeof(OverwhelmingStrike),
+            // typeof(ThermoelectricCannonCooler),
+            // typeof(UnfairAdvantage),
+            // typeof(OverwhelmingStrike),
             // Boss
-            typeof(DoubleEdgedCannon),
-            typeof(ForsakenSafety)
+            // typeof(DoubleEdgedCannon),
+            // typeof(ForsakenSafety)
             // Event
             // Unreleased
         }.Concat(BrunoDuoArtifactTypes);
