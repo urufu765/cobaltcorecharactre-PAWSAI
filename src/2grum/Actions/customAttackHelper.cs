@@ -26,7 +26,6 @@ public static class BrunoAttackHelper
         {
             aha.overrideDamage = true;
         }
-        
     }
 
     public static void SlapSomeRecoil(AAttack __instance, Combat c)

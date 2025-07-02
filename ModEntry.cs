@@ -16,6 +16,7 @@ using Starhunters.Conversation;
 using Starhunters.Pawsai.Cards;
 using Starhunters.Pawsai.Statuses;
 using Starhunters.Bruno.Cards;
+using Starhunters.Bruno.Statuses;
 //using System.Reflection;
 
 namespace Starhunters;
@@ -332,6 +333,12 @@ internal partial class ModEntry : SimpleMod
             }
             helper.Content.Artifacts.RegisterArtifact(ta.Name, UhDuhHundo.ArtifactRegistrationHelper(ta, RegisterSprite(package, "assets/artifact/bruno/" + ta.Name + ".png").Sprite, deck, "Bruno"));
         }
+
+        _ = new Hamper();
+        _ = new Hyperdrive();
+        _ = new Mitigate();
+        _ = new Recoil();
+        _ = new SlowBurn();
         #endregion
 
 

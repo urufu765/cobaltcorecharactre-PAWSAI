@@ -252,10 +252,6 @@
                 "UnfairAdvantage": {
                     "name": "UNFAIR ADVANTAGE",
                     "desc": "Once per combat, when you deplete enemy shields, cancel all intents."
-                },
-                "OverwhelmingStrike": {
-                    "name": "OVERWHELMING STRIKE",
-                    "desc": "Once per turn, if your attack does <c=keyword>more than 5</c> damage after status and artifact damage boosts, it also stuns."
                 }
             },
             "Boss": {
@@ -266,6 +262,10 @@
                 "ForsakenSafety": {
                     "name": "FORSAKEN SAFETY",
                     "desc": "Convert any <c=status>MITIGATION</c> into <c=status>PULSEDRIVE</c>."
+                },
+                "OverwhelmingStrike": {
+                    "name": "OVERWHELMING STRIKE",
+                    "desc": "If your attack does <c=keyword>5 or more</c> damage after status and artifact damage boosts, it ignores armor."
                 }
             },
             "EventOnly": {

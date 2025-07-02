@@ -12,6 +12,7 @@ using Nanoray.PluginManager;
 using Nanoray.EnumByNameSourceGenerator;
 using Starhunters.Pawsai.Artifacts;
 using Starhunters.Bruno.Cards;
+using Starhunters.Bruno.Artifacts;
 
 namespace Starhunters;
 
@@ -170,6 +171,8 @@ internal partial class ModEntry : SimpleMod
     public Spr Action_BreachAttack_Fail { get; private set; }
     [SpriteLoading("icon", "bruno")]
     public Spr Action_BreachAttack_PierceFail { get; private set; }
+    [SpriteLoading("artifact", "bruno")]
+    public Spr UnfairAdvantage_Depleted { get; private set; }
 
 
     private readonly static List<Type> BrunoCardTypes = [
@@ -214,19 +217,18 @@ internal partial class ModEntry : SimpleMod
     // typeof(),  // PAWSAI
     // typeof(),  // Parmesan
     ];
-    private readonly static IEnumerable<Type> BrunoArtifactTypes =
-        new List<Type>
-        {
-            // Common
-            // typeof(ThermoelectricCannonCooler),
-            // typeof(UnfairAdvantage),
-            // typeof(OverwhelmingStrike),
-            // Boss
-            // typeof(DoubleEdgedCannon),
-            // typeof(ForsakenSafety)
-            // Event
-            // Unreleased
-        }.Concat(BrunoDuoArtifactTypes);
+    private readonly static IEnumerable<Type> BrunoArtifactTypes = new List<Type>
+    {
+        // Common
+        typeof(ThermoelectricCannonCooler),
+        typeof(UnfairAdvantage),
+        // Boss
+        // typeof(OverwhelmingStrike),
+        typeof(DoubleEdgedCannon),
+        typeof(ForsakenSafety)
+        // Event
+        // Unreleased
+    }.Concat(BrunoDuoArtifactTypes);
     // private readonly static List<Type> BrunoDialogues = [
     //     typeof(StoryDialogue),
     //     typeof(EventDialogue),
