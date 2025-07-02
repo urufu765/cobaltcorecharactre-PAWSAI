@@ -260,7 +260,7 @@ internal partial class ModEntry : SimpleMod
             Definition = new StatusDef
             {
                 isGood = false,
-                affectedByTimestop = true,
+                affectedByTimestop = false,
                 color = new Color("00ff00"),
                 icon = RegisterSprite(package, "assets/icon/bruno/Status_Recoil.png").Sprite
             },
@@ -308,9 +308,9 @@ internal partial class ModEntry : SimpleMod
             Definition = new StatusDef
             {
                 isGood = false,
-                affectedByTimestop = true,
+                affectedByTimestop = false,
                 color = new Color("00ff00"),
-                icon = RegisterSprite(package, "assets/icon/bruno/Status_.png").Sprite
+                icon = RegisterSprite(package, "assets/icon/bruno/Status_Hamper.png").Sprite
             },
             Name = AnyLocalizations.Bind(["Bruno", "status", "Hamper", "name"]).Localize,
             Description = AnyLocalizations.Bind(["Bruno", "status", "Hamper", "desc"]).Localize

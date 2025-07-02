@@ -6,7 +6,7 @@ namespace Starhunters.Bruno.Artifacts;
 public class UnfairAdvantage : Artifact
 {
     public bool AdvantageActive { get; set; }
-    public bool OutOfCombatMode { get; set; }
+    public bool OutOfCombatMode { get; set; } = true;
 
 
     public override Spr GetSprite()
@@ -25,6 +25,10 @@ public class UnfairAdvantage : Artifact
         if (combat.otherShip.GetMaxShield() > 0)
         {
             AdvantageActive = true;
+        }
+        else
+        {
+            AdvantageActive = false;
         }
     }
 

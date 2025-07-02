@@ -196,7 +196,7 @@
         "status": {
             "Recoil": {
                 "name": "Recoil",
-                "desc": "Your next {0} attacks <c=downside>deal no damage</c>.\n<c=downside>Goes away at start of next turn.</c>"
+                "desc": "Your attacks <c=downside>deal no damage</c>.\n<c=downside>Always goes away at start of next turn.</c>"
             },
             "Hyperdrive": {
                 "name": "Hyperdrive",
@@ -212,7 +212,7 @@
             },
             "Hamper": {
                 "name": "Hamper",
-                "desc": "Your next {0} attacks do at most <c=downside>1</c> damage.\n<c=downside>Goes away at start of next turn.</c>"
+                "desc": "Your attacks do at most <c=downside>1</c> damage.\n<c=downside>Always goes away at start of next turn.</c>"
             }
         },
         "action": {
@@ -310,8 +310,8 @@
             "uncommon": {
                 "MomentaryBoost": {
                     "name": "Momentary Boost",
-                    "desc": "When drawn:\n{{hyper}} <c=status>HYPERDRIVE</c>\n1 <c=energy>ENERGY</c>",
-                    "descB": "When drawn:\n{{hyper}} <c=status>HYPERDRIVE</c>\n1 <c=energy>ENERGY</c>\n1 <c=status>MITIGATE</c>"
+                    "desc": "When drawn:\n{{hyper}} <c=status>HYPERDRV</c>\n1 <c=energy>ENERGY</c>",
+                    "descB": "When drawn:\n{{hyper}} <c=status>HYPERDRV</c>\n1 <c=energy>ENERGY</c>\n1 <c=status>MITIGATE</c>"
                 },
                 "Breather": {
                     "name": "Breather"
@@ -341,8 +341,8 @@
                 },
                 "DeepClean": {
                     "name": "Deep Clean",
-                    "descA": "X = Hand\nY = <c=energy>Energy</c>\nX <c=status>MITIGATE</c>\nY <c=status>HYPERDRIVE</c>\n<c=keyword>Destroy all cards in hand</c>",
-                    "desc": "X = Hand\nY = <c=energy>Energy</c>\nX <c=status>MITIGATE</c>\nY <c=status>HYPERDRIVE</c>\n<c=keyword>Exhaust all cards in hand</c>"
+                    "descA": "X = Hand\nY = <c=energy>Energy</c>\nX <c=status>MITIGATE</c>\nY <c=status>HYPERDRV</c>\n<c=keyword>Destroy all cards in hand</c>",
+                    "desc": "X = Hand\nY = <c=energy>Energy</c>\nX <c=status>MITIGATE</c>\nY <c=status>HYPERDRV</c>\n<c=keyword>Exhaust all cards in hand</c>"
                 },
                 "RecoilRebound": {
                     "name": "Recoil Rebound"

@@ -43,12 +43,6 @@ internal partial class ModEntry : SimpleMod
         );
 
         harmony.Patch(
-            original: typeof(AAttack).GetMethod(nameof(AAttack.Begin), AccessTools.all),
-            prefix: new HarmonyMethod(typeof(BrunoAttackHelper), nameof(BrunoAttackHelper.DoExtraAttackStuff)),
-            postfix: new HarmonyMethod(typeof(BrunoAttackHelper), nameof(BrunoAttackHelper.SlapSomeRecoil))
-        );
-
-        harmony.Patch(
             original: typeof(Ship).GetMethod(nameof(Ship.DirectHullDamage), AccessTools.all),
             prefix: new HarmonyMethod(typeof(DoubleEdgedCannonHelper), nameof(DoubleEdgedCannonHelper.ItWillHurtTwiceAsMuch))
         );

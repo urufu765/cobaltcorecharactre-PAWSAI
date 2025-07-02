@@ -56,6 +56,10 @@ public class Hyperdrive : IKokoroApi.IV2.IStatusLogicApi.IHook
     {
         for (int i = 0; i < __result.Count; i++)
         {
+            if (__result[i].disabled)
+            {
+                continue;
+            }
             // Finds an action with a field named "damage"
             FieldInfo? damageField = __result[i].GetType().GetField("damage", BindingFlags.Public | BindingFlags.Instance);
             if (damageField is not null && damageField.FieldType == typeof(int))
@@ -110,11 +114,11 @@ public class Hyperdrive : IKokoroApi.IV2.IStatusLogicApi.IHook
         for (; result < maxTries && repeatedVal < maxRepetition; result++)
         {
             int calculate = card.GetDmg(s, result, targetPlayer);
-            if (calculate == damageToMatch)
+            if (calculate == damageToMatch)  // Exact match
             {
                 return damageToMatch;
             }
-            else if (calculate > damageToMatch)
+            else if (calculate > damageToMatch)  // Guess has passed match
             {
                 if (calculate - damageToMatch < offBy)
                 {
@@ -125,13 +129,13 @@ public class Hyperdrive : IKokoroApi.IV2.IStatusLogicApi.IHook
                     return bestTry;
                 }
             }
-            else
+            else  // Keep updating best guess
             {
                 bestTry = result;
                 offBy = damageToMatch - calculate;
             }
 
-            if (lastVal == calculate)
+            if (lastVal == calculate)  // For repeating results
             {
                 repeatedVal++;
             }

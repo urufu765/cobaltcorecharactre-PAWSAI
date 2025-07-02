@@ -5,13 +5,23 @@ namespace Starhunters.Bruno.Actions;
 
 public class ABreachAttack : AAttack
 {
-    public int _damage;
-    public bool doubleDamage = false;
-    /// <summary>
-    /// For Hamper that sets the value to 1 max
-    /// </summary>
-    public bool overrideDamage = false;
-    public new int damage { get { return doubleDamage && !overrideDamage ? _damage * 2 : _damage; } set => _damage = value; }
+    public override void Begin(G g, State s, Combat c)
+    {
+        Ship fromShip = targetPlayer ? c.otherShip : s.ship;
+        Ship toShip = targetPlayer ? s.ship : c.otherShip;
+
+        if (toShip.Get(Status.shield) + toShip.Get(Status.tempShield) > 0 && fromShip.Get(ModEntry.Instance.Status_Hamper.Status) <= 0)
+        {
+            damage *= 2;
+        }
+        base.Begin(g, s, c);
+        c.QueueImmediate(new AStatus
+        {
+            status = ModEntry.Instance.Status_Recoil.Status,
+            statusAmount = 1,
+            targetPlayer = !targetPlayer
+        });
+    }
 
     public override List<Tooltip> GetTooltips(State s)
     {

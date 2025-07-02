@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Reflection.Emit;
+using FSPRO;
 using HarmonyLib;
 using Microsoft.Extensions.Logging;
 using Nanoray.Shrike;
@@ -32,18 +33,30 @@ public class Mitigate : IKokoroApi.IV2.IStatusLogicApi.IHook
                 .Find(
                     SequenceBlockMatcherFindOccurence.First,
                     SequenceMatcherRelativeBounds.WholeSequence,
-                    ILMatches.AnyLdloc.GetLocalIndex(out var instr),
-                    ILMatches.AnyStloc,
-                    ILMatches.Ldfld(AccessTools.DeclaredField(typeof(RaycastResult), "worldX"))
+                    ILMatches.AnyStloc.GetLocalIndex(out var index3),
+                    ILMatches.Ldarg(0)
+                )
+                .Find(
+                    SequenceBlockMatcherFindOccurence.First,
+                    SequenceMatcherRelativeBounds.After,
+                    ILMatches.Ldarg(3),
+                    ILMatches.AnyStloc.GetLocalIndex(out var index2)
+                )
+                .Find(
+                    SequenceBlockMatcherFindOccurence.First,
+                    SequenceMatcherRelativeBounds.After,
+                    ILMatches.AnyLdloc.GetLocalIndex(out var index),
+                    ILMatches.AnyStloc
                 )
                 .Insert(
-                    SequenceMatcherPastBoundsDirection.Before,
+                    SequenceMatcherPastBoundsDirection.After,
                     SequenceMatcherInsertionResultingBounds.JustInsertion,
                     [
                         new(OpCodes.Ldarg_0),
-                        new(OpCodes.Ldloc, instr.Value),
+                        new(OpCodes.Ldloc, index.Value),
+                        new(OpCodes.Ldloc, index3.Value),
                         new(OpCodes.Call, AccessTools.DeclaredMethod(typeof(Mitigate), nameof(MitigateSomeDamage))),
-                        new(OpCodes.Stloc, instr.Value),
+                        new(OpCodes.Stloc, index2.Value),
                     ]
                 ).AllElements();
         }
@@ -54,12 +67,17 @@ public class Mitigate : IKokoroApi.IV2.IStatusLogicApi.IHook
         }
     }
 
-    private static int MitigateSomeDamage(Ship ship, int incomingDamage)
+    private static int MitigateSomeDamage(Ship ship, int incomingDamage, Part? part)
     {
-        if (ship.Get(ModEntry.Instance.Status_Mitigate.Status) > 0)
+        //ModEntry.Instance.Logger.LogInformation("DAMG" + incomingDamage);
+        if (part is not null && ship.Get(ModEntry.Instance.Status_Mitigate.Status) > 0)
         {
             int mitigateAmount = Math.Min(ship.Get(ModEntry.Instance.Status_Mitigate.Status), incomingDamage);
             ship.Add(ModEntry.Instance.Status_SlowBurn.Status, mitigateAmount);
+            if (incomingDamage - mitigateAmount <= 0 && ship.Get(Status.shield) + ship.Get(Status.tempShield) <= 0)
+            {
+                Audio.Play(Event.Hits_HitDrone);
+            }
             return incomingDamage - mitigateAmount;
         }
         return incomingDamage;

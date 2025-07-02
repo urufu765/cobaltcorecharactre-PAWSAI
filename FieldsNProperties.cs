@@ -140,7 +140,7 @@ internal partial class ModEntry : SimpleMod
             "mini",
             "gameover",
         ]},
-        {5, [
+        {3, [
             "squint",
             "neutral",
         ]}

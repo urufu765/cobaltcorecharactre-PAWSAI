@@ -9,13 +9,19 @@ namespace Starhunters.Bruno.Actions;
 /// </summary>
 public class AHeavyAttack : AAttack
 {
-    public new int damage { get { return overrideDamage? _damage : Math.Max(0, _damage * 2 - baseDamage); } set => _damage = value; }
-    public int _damage;
     public int baseDamage;
-    /// <summary>
-    /// For Hamper that sets the max damage to 1
-    /// </summary>
-    public bool overrideDamage = false;
+
+    public override void Begin(G g, State s, Combat c)
+    {
+        base.damage = Math.Max(damage, damage * 2 - baseDamage);
+        base.Begin(g, s, c);
+        c.QueueImmediate(new AStatus
+        {
+            status = ModEntry.Instance.Status_Recoil.Status,
+            statusAmount = 1,
+            targetPlayer = !targetPlayer
+        });
+    }
 
     public override List<Tooltip> GetTooltips(State s)
     {
