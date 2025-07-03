@@ -13,7 +13,7 @@ public class AHeavyAttack : AAttack
 
     public override void Begin(G g, State s, Combat c)
     {
-        base.damage = Math.Max(damage, damage * 2 - baseDamage);
+        base.damage = GetDamage(damage, baseDamage);
         base.Begin(g, s, c);
         c.QueueImmediate(new AStatus
         {
@@ -21,6 +21,11 @@ public class AHeavyAttack : AAttack
             statusAmount = 1,
             targetPlayer = !targetPlayer
         });
+    }
+
+    private static int GetDamage(int damage, int baseDamage)
+    {
+        return Math.Max(damage, damage * 2 - baseDamage);
     }
 
     public override List<Tooltip> GetTooltips(State s)
@@ -37,7 +42,7 @@ public class AHeavyAttack : AAttack
                     Title = ModEntry.Instance.Localizations.Localize(["Bruno", "action", "HeavyAttackPiercing", "title"]),
                     Icon = ModEntry.Instance.Action_HeavyAttack_Pierce,
                     Description = ModEntry.Instance.Localizations.Localize(["Bruno", "action", "HeavyAttackPiercing", "desc"]),
-                    vals = [damage]
+                    vals = [GetDamage(damage, baseDamage)]
                 };
             }
             else
@@ -47,7 +52,7 @@ public class AHeavyAttack : AAttack
                     Title = ModEntry.Instance.Localizations.Localize(["Bruno", "action", "HeavyAttack", "title"]),
                     Icon = ModEntry.Instance.Action_HeavyAttack,
                     Description = ModEntry.Instance.Localizations.Localize(["Bruno", "action", "HeavyAttack", "desc"]),
-                    vals = [damage]
+                    vals = [GetDamage(damage, baseDamage)]
                 };
             }
         }
@@ -61,13 +66,13 @@ public class AHeavyAttack : AAttack
         {
             return new Icon
             (
-                piercing ? ModEntry.Instance.Action_HeavyAttack_Pierce : ModEntry.Instance.Action_HeavyAttack, damage, Colors.redd
+                piercing ? ModEntry.Instance.Action_HeavyAttack_Pierce : ModEntry.Instance.Action_HeavyAttack, GetDamage(damage, baseDamage), Colors.redd
             );
         }
 
         return new Icon
         (
-            piercing ? ModEntry.Instance.Action_HeavyAttack_PierceFail : ModEntry.Instance.Action_HeavyAttack_Fail, damage, Colors.attackFail
+            piercing ? ModEntry.Instance.Action_HeavyAttack_PierceFail : ModEntry.Instance.Action_HeavyAttack_Fail, GetDamage(damage, baseDamage), Colors.attackFail
         );
     }
 }

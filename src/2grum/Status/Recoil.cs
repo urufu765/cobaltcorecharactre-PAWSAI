@@ -61,9 +61,10 @@ public class Recoil : IKokoroApi.IV2.IStatusLogicApi.IHook
 
     public int ModifyStatusChange(IKokoroApi.IV2.IStatusLogicApi.IHook.IModifyStatusChangeArgs args)
     {
-        if (args.Status == ModEntry.Instance.Status_Recoil.Status && args.NewAmount > 0 && args.State.EnumerateAllArtifacts().Any(a => a is ThermoelectricCannonCooler))
+        if (args.Status == ModEntry.Instance.Status_Recoil.Status && args.NewAmount > 0 && args.State.EnumerateAllArtifacts().Find(a => a is ThermoelectricCannonCooler) is ThermoelectricCannonCooler tc)
         {
             args.Ship.Add(ModEntry.Instance.Status_Hamper.Status, args.NewAmount);
+            tc.Pulse();
             return 0;
         }
         return args.NewAmount;

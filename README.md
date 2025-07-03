@@ -6,15 +6,21 @@ A collection of five (or more) bounty hunters!
 
 ### Pre-release
 
-* **(0.0.15)**: More placeholder sprites to make this testable
-  * Actions to test
-    * Heavy Attack (Need better visuals)
-    * Breach Attack (Need better visuals)
-  * Status to test
-    * Hyperdrive (Don't stop for wrapped actions, switch to visual representation, change value on wherever the action occurs and keep reference using moddata)
-  * Artifacts
-    * Electrocooler (Needs better visual)
-    * ForsakenSafety (Needs better visual)
+* **(0.0.16)**: Improvements.
+  * Heavy Attack visual damage fix
+  * Breach Attack ignore drones by checking + color change when double
+  * Hyperdrive (Don't stop for wrapped actions, switch to visual representation, change value on wherever the action occurs and keep reference using moddata). ISSUE: On Draw or any direct QueueImmediate actions are not affected, values in descriptions remain the same, base damage only actions end up getting affected
+  * Hyperdrive Fixed weird damage calculation
+  * Electrocooler pulse
+  * ForsakenSafety pulse
+* **(0.0.15)**: More placeholder sprites to make this testable & various fixes
+  * DeepClean crash fix + Custom destroy actions
+  * Mitigate ILhook fix + sfx when unshielded and full mitigation
+  * Breach and Heavy attacks fixed
+  * Hyperdrive now ignores disabled actions
+  * Text fixes
+  * UnfairAdvantage unshielded foe fix and new visual placeholder
+  * Recoil and Hamper no longer affected by timestop + description fix
 * **(0.0.14)x**: Bruno Status and Artifacts
 * **(0.0.13)x**: Bruno Actions implemented
 * **(0.0.12)x**: Bruno Cards implemented

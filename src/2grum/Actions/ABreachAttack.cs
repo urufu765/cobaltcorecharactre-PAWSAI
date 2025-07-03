@@ -7,10 +7,7 @@ public class ABreachAttack : AAttack
 {
     public override void Begin(G g, State s, Combat c)
     {
-        Ship fromShip = targetPlayer ? c.otherShip : s.ship;
-        Ship toShip = targetPlayer ? s.ship : c.otherShip;
-
-        if (toShip.Get(Status.shield) + toShip.Get(Status.tempShield) > 0 && fromShip.Get(ModEntry.Instance.Status_Hamper.Status) <= 0)
+        if (WillHitShieldedFoe(s))
         {
             damage *= 2;
         }
@@ -21,6 +18,41 @@ public class ABreachAttack : AAttack
             statusAmount = 1,
             targetPlayer = !targetPlayer
         });
+    }
+
+    private bool WillHitShieldedFoe(State s)
+    {
+        if (s.route is Combat c)
+        {
+            Ship toShip = targetPlayer ? s.ship : c.otherShip;
+            Ship fromShip = targetPlayer ? c.otherShip : s.ship;
+            bool hitShield = toShip.Get(Status.shield) + toShip.Get(Status.tempShield) > 0;
+
+            // If it hits a drone, do double damage to drone if bubble shield.
+            int? n = GetFromX(s, c);
+            RaycastResult? raycast = null;
+            if (fromDroneX is int dx)
+            {
+                raycast = CombatUtils.RaycastGlobal(c, toShip, true, dx);
+            }
+            else if (n is int nx)
+            {
+                raycast = CombatUtils.RaycastFromShipLocal(s, c, nx, targetPlayer);
+            }
+            if (raycast is RaycastResult raycastResult && raycastResult.hitDrone)
+            {
+                hitShield = c.stuff[raycastResult.worldX].bubbleShield;
+            }
+
+            // Since Hamper would like this attack to only do 1 damage.
+            if (fromShip.Get(ModEntry.Instance.Status_Hamper.Status) > 0)
+            {
+                hitShield = false;
+            }
+
+            return hitShield;
+        }
+        return false;
     }
 
     public override List<Tooltip> GetTooltips(State s)
@@ -62,7 +94,7 @@ public class ABreachAttack : AAttack
         {
             return new Icon
             (
-                piercing ? ModEntry.Instance.Action_BreachAttack_Pierce : ModEntry.Instance.Action_BreachAttack, damage, Colors.redd
+                piercing ? ModEntry.Instance.Action_BreachAttack_Pierce : ModEntry.Instance.Action_BreachAttack, damage, WillHitShieldedFoe(s)? Colors.cheevoGold : Colors.redd
             );
         }
 

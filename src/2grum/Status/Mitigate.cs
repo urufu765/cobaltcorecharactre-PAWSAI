@@ -96,9 +96,10 @@ public class Mitigate : IKokoroApi.IV2.IStatusLogicApi.IHook
 
     public int ModifyStatusChange(IKokoroApi.IV2.IStatusLogicApi.IHook.IModifyStatusChangeArgs args)
     {
-        if (args.Status == ModEntry.Instance.Status_Mitigate.Status && args.NewAmount > 0 && args.State.EnumerateAllArtifacts().Any(a => a is ForsakenSafety))
+        if (args.Status == ModEntry.Instance.Status_Mitigate.Status && args.NewAmount > 0 && args.State.EnumerateAllArtifacts().Find(a => a is ForsakenSafety) is ForsakenSafety fs)
         {
             args.Ship.Add(ModEntry.Instance.KokoroApi.V2.DriveStatus.Pulsedrive, args.NewAmount);
+            fs.Pulse();
             return 0;
         }
         return args.NewAmount;
