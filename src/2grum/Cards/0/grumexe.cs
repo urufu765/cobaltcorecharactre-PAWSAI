@@ -20,7 +20,7 @@ public class BrunoExe : Card, IRegisterable
                 rarity = Rarity.common,
                 upgradesTo = [Upgrade.A, Upgrade.B]
             },
-            Name = ModEntry.Instance.AnyLocalizations.Bind(["Bruno", "card", "Token", "EXE", "name"]).Localize,
+            Name = ModEntry.Instance.AnyLocalizations.Bind(["Bruno", "card", "token", "EXE", "name"]).Localize,
             Art = ModEntry.RegisterSprite(package, "assets/card/bruno/EXE.png").Sprite
         });
     }

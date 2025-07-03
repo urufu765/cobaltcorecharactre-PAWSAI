@@ -6,6 +6,7 @@ A collection of five (or more) bounty hunters!
 
 ### Pre-release
 
+* **(0.0.17)**: Improvement to Hyperdrive formula. + more specific settings.
 * **(0.0.16)**: Improvements.
   * Heavy Attack visual damage fix
   * Breach Attack ignore drones by checking + color change when double

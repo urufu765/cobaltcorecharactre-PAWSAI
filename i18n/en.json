@@ -2,8 +2,15 @@
     "Generic": {
         "settings": {
             "AccurateCalculation": {
-                "name": "Accurate Calculations",
-                "desc": "Increases accuracy of calculations in some cards, at the cost of performance."
+                "name": "<c=status>More Accurate Calculations</c>"
+            },
+            "BetterEmergencyRetreat": {
+                "name": "<c=60ba67>PAWSAI</c>: Better Retreat Estimation",
+                "desc": "<c=white>Default: TRUE</c>\nIncreases accuracy of PAWSAI's <c=card>Emergency Retreat</c> movement, allowing you to park your ship in the middle of the enemy's ship if there's sufficient room in the middle.\n<c=keyword>Has <c=faint>little impact</c> on performance.</c>"
+            },
+            "BetterHyperdrive": {
+                "name": "<c=764535>Bruno</c>: Fancier Hyperdrive",
+                "desc": "<c=white>Default: FALSE</c>\nAllows additional computations which are needed to more accurately show the damage on text cards. <c=faint>Also correctly calculates self-attacks?</c>\n<c=keyword>Has <c=redd>significant impact</c> on performance.</c>"
             }
         }
     },

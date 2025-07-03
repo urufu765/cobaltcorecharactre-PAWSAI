@@ -20,7 +20,7 @@ public class PawsaiExe : Card, IRegisterable
                 rarity = Rarity.common,
                 upgradesTo = [Upgrade.A, Upgrade.B]
             },
-            Name = ModEntry.Instance.AnyLocalizations.Bind(["Pawsai", "card", "Token", "EXE", "name"]).Localize,
+            Name = ModEntry.Instance.AnyLocalizations.Bind(["Pawsai", "card", "token", "EXE", "name"]).Localize,
             Art = ModEntry.RegisterSprite(package, "assets/card/pawsai/EXE.png").Sprite
         });
     }

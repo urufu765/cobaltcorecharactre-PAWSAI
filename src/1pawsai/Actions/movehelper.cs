@@ -31,12 +31,14 @@ public static class PawsaiMovingHelper
         // OffensiveDefense
         if (__instance.GetMeta().deck == ModEntry.Instance.PawsaiDeck.Deck && s.EnumerateAllArtifacts().Find(a => a is OffensiveDefense) is OffensiveDefense od)
         {
-            __result.Insert(0, new AAttack
+            AAttack aAttack = new AAttack
             {
                 damage = __instance.GetDataWithOverrides(s).cost,
                 fast = true,
                 artifactPulse = od.Key()
-            });
+            };
+            ModEntry.Instance.Helper.ModData.SetModData(aAttack, "noTouch", true);
+            __result.Insert(0, aAttack);
         }
     }
 

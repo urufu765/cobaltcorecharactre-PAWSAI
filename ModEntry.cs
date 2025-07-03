@@ -354,16 +354,31 @@ internal partial class ModEntry : SimpleMod
                     () => package.Manifest.DisplayName ?? package.Manifest.UniqueName,
                     settings.ProfileBased
                 ),
+                api.MakePadding(
+                    api.MakeText(
+                        () => Localizations.Localize(["Generic", "settings", "AccurateCalculation", "name"])
+                    ).SetFont(DB.thicket), 8, 4
+                ),
                 api.MakeCheckbox(
-                    () => Localizations.Localize(["Generic", "settings", "AccurateCalculation", "name"]),
-                    () => settings.ProfileBased.Current.AccurateCalculations,
-                    (_, _, value) => settings.ProfileBased.Current.AccurateCalculations = value
+                    () => Localizations.Localize(["Generic", "settings", "BetterEmergencyRetreat", "name"]),
+                    () => settings.ProfileBased.Current.Pawsai_BetterEmergencyRetreat,
+                    (_, _, value) => settings.ProfileBased.Current.Pawsai_BetterEmergencyRetreat = value
                 ).SetTooltips(() => [
-                    new GlossaryTooltip("starhuntersSettings.accurateCalculation")
+                    new GlossaryTooltip("starhuntersSettings.BetterEmergencyRetreat")
                     {
-                        Description = Localizations.Localize(["Generic", "settings", "AccurateCalculation", "desc"])
+                        Description = Localizations.Localize(["Generic", "settings", "BetterEmergencyRetreat", "desc"])
                     }
-                ])
+                ]),
+                api.MakeCheckbox(
+                    () => Localizations.Localize(["Generic", "settings", "BetterHyperdrive", "name"]),
+                    () => settings.ProfileBased.Current.Bruno_FancyHyperdrive,
+                    (_, _, value) => settings.ProfileBased.Current.Bruno_FancyHyperdrive = value
+                ).SetTooltips(() => [
+                    new GlossaryTooltip("starhuntersSettings.BetterHyperdrive")
+                    {
+                        Description = Localizations.Localize(["Generic", "settings", "BetterHyperdrive", "desc"])
+                    }
+                ]),
             ]).SubscribeToOnMenuClose(_ =>
             {
                 helper.Storage.SaveJson(SettingsFile, settings);

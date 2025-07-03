@@ -43,6 +43,21 @@ class Settings
 
 class ProfileSettings
 {
+    /// <summary>
+    /// Obsolete, now broken up into other options.
+    /// </summary>
     [JsonProperty]
     public bool AccurateCalculations = false;
+
+    /// <summary>
+    /// Better calculation for retreat... it's not that impactful on performance and yet it's better in every way lol
+    /// </summary>
+    [JsonProperty]
+    public bool Pawsai_BetterEmergencyRetreat = true;
+
+    /// <summary>
+    /// Allows additional calculations that is rather expensive...
+    /// </summary>
+    [JsonProperty]
+    public bool Bruno_FancyHyperdrive = false;
 }

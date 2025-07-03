@@ -33,7 +33,7 @@ public class EmergencyRetreat : Card, IRegisterable, IHasCustomCardTraits
     public override List<CardAction> GetActions(State s, Combat c)
     {
         int toMove;
-        if (ModEntry.Instance.settings.ProfileBased.Current.AccurateCalculations)
+        if (ModEntry.Instance.settings.ProfileBased.Current.Pawsai_BetterEmergencyRetreat)
         {
             toMove = CalculatePreciselyHowMuchToMove(s, c);
         }
