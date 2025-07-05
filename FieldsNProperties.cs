@@ -13,6 +13,7 @@ using Nanoray.EnumByNameSourceGenerator;
 using Starhunters.Pawsai.Artifacts;
 using Starhunters.Bruno.Cards;
 using Starhunters.Bruno.Artifacts;
+using Starhunters.Kodijen.Cards;
 
 namespace Starhunters;
 
@@ -271,9 +272,9 @@ internal partial class ModEntry : SimpleMod
 
     private readonly static List<Type> KodijenCardTypes = [
         // Common
-        typeof(SmartDrone),
+        typeof(SmartDroneCard),
         typeof(DefensiveCommand),
-        typeof(MissileDrone),
+        typeof(MissileDroneCard),
         typeof(ShiftyMissile),
         typeof(BigMissile),
         typeof(FancyDrone),
@@ -293,7 +294,7 @@ internal partial class ModEntry : SimpleMod
         typeof(SuperClear),
         typeof(WallOGun),
         typeof(RocketScience),
-        typeof(MiniatureArtemis),
+        typeof(MiniatureArtemisCard),
         // Token
         typeof(KodijenExe),
         // Unreleased
@@ -314,13 +315,12 @@ internal partial class ModEntry : SimpleMod
     private readonly static IEnumerable<Type> KodijenArtifactTypes = new List<Type>
     {
         // Common
-        typeof(FirstOnesFree),
-        typeof(SelfRepairingPlaster),
-        typeof(BattleDroneBoast),
+        // typeof(FirstOnesFree),
+        // typeof(SelfRepairingPlaster),
+        // typeof(BattleDroneBoast),
         // Boss
-        // typeof(OverwhelmingStrike),
-        typeof(UngodlyAmountOfControl),
-        typeof(ModelRocketDegree)
+        // typeof(UngodlyAmountOfControl),
+        // typeof(ModelRocketDegree)
         // Event
         // Unreleased
     }.Concat(KodijenDuoArtifactTypes);

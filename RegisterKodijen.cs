@@ -3,6 +3,7 @@ using Nickel;
 using Nanoray.PluginManager;
 using System;
 using System.Collections.Generic;
+using Starhunters.Kodijen.Cards;
 
 namespace Starhunters;
 
@@ -111,4 +112,22 @@ internal partial class ModEntry : SimpleMod
         // _ = new Repetition();
         // _ = new Repulsion();
     }
+
+    /**
+    Kodijen Memory 1: At a call center
+    Gets a call from an annoying customer, who will not stop talking
+    The conversation slowly gets blurred as he loses focus
+    puts phone down and takes out his Gamedrive to play a ripoff version of Volley Fire, featuring Cobalt Core soundtrack remade in 8 bit styling
+    Once he's finished, he puts the headphones back on and says, "Please wait while I redirect you to my supervisor." and hangs up if stage clear. Otherwise "Have you tried turning the device off and on?"
+
+    Kodijen Memory 2: At a starship dmb, waiting in line
+    Kodijen complains about how it's taking so long
+    Takes out his ??? and plays a ripoff version of ???
+    
+    Kodijen Memory 3: Waiting around at his ship
+    Asks PAWSAI if there's any calls for help, which it replies no.
+    He groans and turns on his Playsystem 360, telling PAWSAI to alert him if there is any
+    The game boots and Kodijen plays a ripoff version of Metal Slug 3, featuring no blood, all balloons
+    Once he's finished, he sighs and says either "I should've been a gamer." if he finishes the stage, or "Nobody told me being a battle drone pro would lead to such a stale life."
+    */
 }

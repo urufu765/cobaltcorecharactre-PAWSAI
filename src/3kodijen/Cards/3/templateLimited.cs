@@ -3,28 +3,32 @@ using System.Reflection;
 using Nanoray.PluginManager;
 using Nickel;
 
-namespace Starhunters.Bruno.Cards;
+namespace Starhunters.Kodijen.Cards;
 
 /// <summary>
-/// Bruno.
+/// Kodijen.
 /// </summary>
-public class Template : Card, IRegisterable
+public class TemplateLimited : Card, IRegisterable, IHasCustomCardTraits
 {
     public static void Register(IPluginPackage<IModManifest> package, IModHelper helper)
     {
         Rarity rare = Rarity.rare;
-        helper.Content.Cards.RegisterCard(new CardConfiguration
+        ICardEntry ice = helper.Content.Cards.RegisterCard(new CardConfiguration
         {
             CardType = MethodBase.GetCurrentMethod()!.DeclaringType!,
             Meta = new CardMeta
             {
                 rarity = rare,
                 upgradesTo = [Upgrade.A, Upgrade.B],
-                deck = ModEntry.Instance.BrunoDeck.Deck
+                deck = ModEntry.Instance.KodijenDeck.Deck
             },
-            Name = ModEntry.Instance.AnyLocalizations.Bind(["Bruno", "card", rare.ToString(), MethodBase.GetCurrentMethod()!.DeclaringType!.Name, "name"]).Localize,
-            Art = ModEntry.RegisterSprite(package, $"assets/card/bruno/{rare}/{MethodBase.GetCurrentMethod()!.DeclaringType!.Name}.png").Sprite
+            Name = ModEntry.Instance.AnyLocalizations.Bind(["Kodijen", "card", rare.ToString(), MethodBase.GetCurrentMethod()!.DeclaringType!.Name, "name"]).Localize,
+            Art = ModEntry.RegisterSprite(package, $"assets/card/kodijen/{rare}/{MethodBase.GetCurrentMethod()!.DeclaringType!.Name}.png").Sprite
         });
+
+        ModEntry.Instance.KokoroApi.V2.Limited.SetBaseLimitedUses(ice.UniqueName, Upgrade.None, 3);
+        ModEntry.Instance.KokoroApi.V2.Limited.SetBaseLimitedUses(ice.UniqueName, Upgrade.A, 3);
+        ModEntry.Instance.KokoroApi.V2.Limited.SetBaseLimitedUses(ice.UniqueName, Upgrade.B, 3);
     }
 
 
@@ -34,21 +38,15 @@ public class Template : Card, IRegisterable
         {
             Upgrade.B =>
             [
-                
-                new AStatus
-                {
-                    status = ModEntry.Instance.Status_Mitigate.Status,
-                    statusAmount = 3,
-                    targetPlayer = true
-                }
+
             ],
             Upgrade.A =>
             [
-                
+
             ],
             _ =>
             [
-                
+
             ],
         };
     }
@@ -72,4 +70,10 @@ public class Template : Card, IRegisterable
             }
         };
     }
+
+    public IReadOnlySet<ICardTraitEntry> GetInnateTraits(State state)
+    {
+        return upgrade == Upgrade.B ? [] : new HashSet<ICardTraitEntry> { ModEntry.Instance.KokoroApi.V2.Limited.Trait };
+    }
+
 }

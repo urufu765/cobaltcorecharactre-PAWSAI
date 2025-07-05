@@ -384,7 +384,7 @@
             "MissileField": {
                 "name": "Missile Field",
                 "title": "MISSILE FIELD",
-                "desc": "Instantly turn every <c=midrow>object in the midrow</c> into <c=drone>{0}</c>."
+                "desc": "Instantly turn every <c=midrow>object in the midrow</c> into <c=drone>missiles</c>."
             }
         },
         "event": {
@@ -491,7 +491,8 @@
                     "name": "Double Drouble"
                 },
                 "RepairSchedule": {
-                    "name": "Repair Schedule"
+                    "name": "Repair Schedule",
+                    "desc": "X = <c=hull>Missing Hull</c>\n[X(<c=keyword>{{amount}}</c>)>{{requirement}}]=> <c=drone>Repair Kit</c>"
                 }
             },
             "rare": {
