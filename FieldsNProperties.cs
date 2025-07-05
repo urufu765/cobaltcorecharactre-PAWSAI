@@ -21,7 +21,7 @@ internal partial class ModEntry : SimpleMod
     internal static ModEntry Instance { get; private set; } = null!;
     internal static IPlayableCharacterEntryV2 Pawsai { get; private set; } = null!;  // Defense
     internal static IPlayableCharacterEntryV2 Bruno { get; private set; } = null!;  // Offense
-    // internal static IPlayableCharacterEntryV2 Kodijen { get; private set; } = null!;  // Mid-row
+    internal static IPlayableCharacterEntryV2 Kodijen { get; private set; } = null!;  // Mid-row
     // internal static IPlayableCharacterEntryV2 Parmesan { get; private set; } = null!;  // Movement? (Teleportation)
     // internal static IPlayableCharacterEntryV2 Varrigradona { get; private set; } = null!;  // ???
     internal string UniqueName { get; private set; }
@@ -43,10 +43,10 @@ internal partial class ModEntry : SimpleMod
     //internal ICardTraitEntry AutoE { get; private set; } = null!;
 
     #region PAWSAI stuff
-    internal IDeckEntry PawsaiDeck;
-    internal IStatusEntry Status_Repulsion { get; private set; }
-    internal IStatusEntry Status_Repetition { get; private set; }
-    internal IStatusEntry Status_Regeneration { get; private set; }
+    internal IDeckEntry PawsaiDeck = null!;
+    internal IStatusEntry Status_Repulsion { get; private set; } = null!;
+    internal IStatusEntry Status_Repetition { get; private set; } = null!;
+    internal IStatusEntry Status_Regeneration { get; private set; } = null!;
 
     [SpriteLoading("icon", "pawsai")]
     public Spr Action_MirrorMove_Random { get; private set; }
@@ -148,12 +148,12 @@ internal partial class ModEntry : SimpleMod
     #endregion
 
     #region Bruno stuff
-    internal IDeckEntry BrunoDeck;
-    internal IStatusEntry Status_Recoil { get; private set; }
-    internal IStatusEntry Status_Hyperdrive { get; private set; }
-    internal IStatusEntry Status_Mitigate { get; private set; }
-    internal IStatusEntry Status_SlowBurn { get; private set; }
-    internal IStatusEntry Status_Hamper { get; private set; }
+    internal IDeckEntry BrunoDeck = null!;
+    internal IStatusEntry Status_Recoil { get; private set; } = null!;
+    internal IStatusEntry Status_Hyperdrive { get; private set; } = null!;
+    internal IStatusEntry Status_Mitigate { get; private set; } = null!;
+    internal IStatusEntry Status_SlowBurn { get; private set; } = null!;
+    internal IStatusEntry Status_Hamper { get; private set; } = null!;
 
     [SpriteLoading("icon", "bruno")]
     public Spr Action_HeavyAttack { get; private set; }
@@ -251,8 +251,103 @@ internal partial class ModEntry : SimpleMod
 
     #endregion
 
+    #region Kodijen stuff
+    internal IDeckEntry KodijenDeck = null!;
+    internal IStatusEntry Status_BorrowedHull { get; private set; } = null!;
+    internal IStatusEntry Status_HullCapacity { get; private set; } = null!;
+
+    [SpriteLoading("icon", "kodijen")]
+    public Spr Action_MissileField { get; private set; }
+    [SpriteLoading("icon", "kodijen")]
+    public Spr Midrow_Smart { get; private set; }
+    [SpriteLoading("icon", "kodijen")]
+    public Spr Midrow_Missile { get; private set; }
+    [SpriteLoading("icon", "kodijen")]
+    public Spr Midrow_Smart2 { get; private set; }
+    [SpriteLoading("icon", "kodijen")]
+    public Spr Midrow_Missile2 { get; private set; }
+    [SpriteLoading("icon", "kodijen")]
+    public Spr Midrow_MiniArtemis { get; private set; }
+
+    private readonly static List<Type> KodijenCardTypes = [
+        // Common
+        typeof(SmartDrone),
+        typeof(DefensiveCommand),
+        typeof(MissileDrone),
+        typeof(ShiftyMissile),
+        typeof(BigMissile),
+        typeof(FancyDrone),
+        typeof(WaitHoldUp),
+        typeof(WeirdInvention),
+        typeof(BuildingSomething),
+        // Uncommon
+        typeof(AutoSignal),
+        typeof(HeatSeeker),
+        typeof(ReloadUseOnly),
+        typeof(SuperMissileDrone),
+        typeof(PreparationH),
+        typeof(DoubleDrouble),
+        typeof(RepairSchedule),
+        // Rare
+        typeof(SuperGuard),
+        typeof(SuperClear),
+        typeof(WallOGun),
+        typeof(RocketScience),
+        typeof(MiniatureArtemis),
+        // Token
+        typeof(KodijenExe),
+        // Unreleased
+    ];
+    private readonly static List<Type> KodijenDuoArtifactTypes = [
+    // typeof(),  // CAT
+    // typeof(),  // Peri
+    // typeof(),  // Isaac
+    // typeof(),  // Books
+    // typeof(),  // Drake
+    // typeof(),  // Dizzy
+    // typeof(),  // Riggs
+    // typeof(),  // Bruno
+    // typeof(),  // Varrigradona
+    // typeof(),  // PAWSAI
+    // typeof(),  // Parmesan
+    ];
+    private readonly static IEnumerable<Type> KodijenArtifactTypes = new List<Type>
+    {
+        // Common
+        typeof(FirstOnesFree),
+        typeof(SelfRepairingPlaster),
+        typeof(BattleDroneBoast),
+        // Boss
+        // typeof(OverwhelmingStrike),
+        typeof(UngodlyAmountOfControl),
+        typeof(ModelRocketDegree)
+        // Event
+        // Unreleased
+    }.Concat(KodijenDuoArtifactTypes);
+    // private readonly static List<Type> KodijenDialogues = [
+    //     typeof(StoryDialogue),
+    //     typeof(EventDialogue),
+    //     typeof(CombatDialogue),
+    //     typeof(ArtifactDialogue),
+    //     typeof(CardDialogue),
+    //     typeof(MemoryDialogue)
+    // ];
+    public readonly static Dictionary<int, List<string>> KodijenAnims = new()
+    {
+        {1, [
+            "mini",
+            "gameover",
+        ]},
+        {5, [
+            "squint",
+            "neutral",
+        ]}
+    };
+    #endregion
+
     private readonly static IEnumerable<Type> AllRegisterableTypes =
         PawsaiCardTypes
-            .Concat(BrunoCardTypes);
+            .Concat(BrunoCardTypes)
+            .Concat(KodijenCardTypes);
 
 }

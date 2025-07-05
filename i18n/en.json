@@ -368,22 +368,69 @@
     "Kodijen": {
         "character": {
             "name": "Kodijen",
-            "desc": "<c=2a767d>KODIJEN</c>\nA battle drone expert. His cards command large <c=keyword>automated drones</c> that he built himself."
+            "desc": "<c=e4b83e>KODIJEN</c>\nA battle drone expert. His cards command large <c=keyword>automated drones</c> that he built himself."
         },
         "status": {
+            "HullCapacity": {
+                "name": "Hull Capacity",
+                "desc": "<c=hull>Max hull</c> is raised by {0} for the rest of combat. Also temporarily gives {0} hull, which is deducted at the end of combat.\n<c=keyword>If you have less hull than deductible, <c=downside>lose all but 1 hull</c>.</c>"
+            },
+            "BorrowedHull": {
+                "name": "Borrowed Hull",
+                "desc": "<c=hull>Hull</c> and <c=hull>max hull</c> is reduced by {0} for the rest of combat.\nAt the end of combat, <c=keyword>regain borrowed hull and max hull</c>."
+            }
         },
         "action": {
+            "MissileField": {
+                "name": "Missile Field",
+                "title": "MISSILE FIELD",
+                "desc": "Instantly turn every <c=midrow>object in the midrow</c> into <c=drone>{0}</c>."
+            }
         },
         "event": {
         },
         "trait": {
         },
         "object": {
+            "SmartDrone": {
+                "name": "SMART DRONE",
+                "nameTwo": "SMART DRONE Mk.II",
+                "desc": "Moves up to <c=keyword>{{move}}</c> towards enemy (if possible) and shoots a <c=damage>{{damage}}</c> shot once per turn.\nBorrows {{hull}} <c=hull>hull</c>."
+            },
+            "MissileDrone": {
+                "name": "MISSILE DRONE",
+                "nameTwo": "MISSILE DRONE Mk.II",
+                "desc": "Fires a <c=drone>missile</c> every turn until it runs out.\nStarts with <c=keyword>3</c> <c=drone>{{starter}}</c>; Max missile capacity: <c=keyword>{{capacity}}</c>.\nLaunching a <c=drone>missile</c> into the drone refills the magazine with up to two additional <c=drone>missiles</c>.\nBorrows {{hull}} <c=hull>hull</c>."
+            },
+            "MiniatureArtemis": {
+                "name": "MINIATURE ARTEMIS",
+                "desc": "Every turn, regains up to <c=status>{{shield}}</c> <c=status>SHIELD</c>, moves up to <c=action>{{evade}}</c> spaces, and attacks for <c=damage>{{damage}}</c> up to <c=keyword>{{attack}}</c> times.\nFully autonomous.\nBorrows {{hull}} <c=hull>hull</c>.\n<c=faint>A functional miniature version of the sleekest ship model in interstellar history!</c>"
+            }
         },
         "artifact": {
             "Common": {
+                "FirstOnesFree": {
+                    "name": "FIRST ONE'S FREE",
+                    "desc": "Once per combat, spawning a <c=e4b83e>Kodijen</c> <c=midrow>drone</c> that borrows hull will in fact not reduce ship hull."
+                },
+                "SelfRepairingPlaster": {
+                    "name": "SELF-REPAIRING PLASTER",
+                    "desc": "If you end combat with more than 4 <c=status>HULL CAPACITY</c>, <c=healing>heal 1</c>."
+                },
+                "BattleDroneBoast": {
+                    "name": "BATTLE-DRONE KING BOAST",
+                    "desc": "Gain 2 extra <c=energy>ENERGY</c> every turn if your hull is at max.\n<c=downside>Lose 1 <c=energy>ENERGY</c> every turn if your hull is below <c=keyword>{{difficulty}}%</c>.</c>"
+                }
             },
             "Boss": {
+                "UngodlyAmountOfControl": {
+                    "name": "UNGODLY AMOUNT OF CONTROL",
+                    "desc": "At the start of every turn, gain 2 <c=status>DRONE SHIFT</c> and 1 <c=status>ENGINE STALL</c>.\nIf you have any <c=status>DRONE SHIFT</c> by the end of your turn, <c=downside>gain 1 additional <c=status>ENGINE STALL</c> next turn</c>."
+                },
+                "ModelRocketDegree": {
+                    "name": "MODEL ROCKET DEGREE",
+                    "desc": "+2 <c=drone>missile</c> damage dealt to enemy. <c=downside>-1 attack damage.</c>"
+                }
             },
             "EventOnly": {
             },
@@ -394,10 +441,81 @@
         },
         "card": {
             "common": {
+                "SmartDrone": {
+                    "name": "Smart Drone"
+                },
+                "DefensiveCommand": {
+                    "name": "Defensive Command"
+                },
+                "MissileDrone": {
+                    "name": "Missile Drone"
+                },
+                "ShiftyMissile": {
+                    "name": "Shifty Missile"
+                },
+                "BigMissile": {
+                    "name": "Big Missile"
+                },
+                "FancyDrone": {
+                    "name": "Fancy Drone"
+                },
+                "WaitHoldUp": {
+                    "name": "Wait Hold Up",
+                    "desc": "On draw, cancel all enemy intents.\n<c=downside>End turn.</c>"
+                },
+                "WeirdInvention": {
+                    "name": "Weird Invention"
+                },
+                "BuildingSomething": {
+                    "name": "Building Something"
+                }
             },
             "uncommon": {
+                "AutoSignal": {
+                    "name": "Auto-Signal",
+                    "desc": "On draw, all <c=midrow>midrow objects</c> take a turn."
+                },
+                "HeatSeeker": {
+                    "name": "Heat Seeker"
+                },
+                "ReloadUseOnly": {
+                    "name": "Reload-Use-Only"
+                },
+                "SuperMissileDrone": {
+                    "name": "Super Missile Drone"
+                },
+                "PreparationH": {
+                    "name": "Preparation-H"
+                },
+                "DoubleDrouble": {
+                    "name": "Double Drouble"
+                },
+                "RepairSchedule": {
+                    "name": "Repair Schedule"
+                }
             },
             "rare": {
+                "SuperGuard": {
+                    "name": "Super Guard",
+                    "desc": "For every <c=midrow>midrow object</c> that overlaps {{what}} ship, gain 1 <c=status>TEMP SHIELD</c>.",
+                    "base": "either",
+                    "bee": "player"
+                },
+                "SuperClear": {
+                    "name": "Super Clear",
+                    "desc": "Destroy every <c=midrow>midrow object</c> that doesn't overlap with <c=keyword>{{ship}}</c> ship.",
+                    "foe": "enemy",
+                    "player": "player"
+                },
+                "WallOGun": {
+                    "name": "Wall-O-Gun"
+                },
+                "RocketScience": {
+                    "name": "Rocket Science!"
+                },
+                "MiniatureArtemis": {
+                    "name": "Miniature Artemis"
+                }
             },
             "token": {
                 "EXE": {
