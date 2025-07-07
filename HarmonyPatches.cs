@@ -18,6 +18,7 @@ using Starhunters.Pawsai.Artifacts;
 using Starhunters.Bruno.Actions;
 using Starhunters.Bruno.Artifacts;
 using Starhunters.Kodijen.Artifacts;
+using Starhunters.Kodijen.Statuses;
 //using System.Reflection;
 
 namespace Starhunters;
@@ -57,6 +58,11 @@ internal partial class ModEntry : SimpleMod
         harmony.Patch(
             original: typeof(Artifact).GetMethod(nameof(Artifact.GetTooltips), AccessTools.all),
             postfix: new HarmonyMethod(typeof(BoastAllTheWay), nameof(BoastAllTheWay.TokenTheTooltips))
+        );
+
+        harmony.Patch(
+            original: typeof(Ship).GetMethod(nameof(Ship.ResetAfterCombat), AccessTools.all),
+            prefix: new HarmonyMethod(typeof(HullRestoration), nameof(HullRestoration.RestoreHullTheWayItUsedToBe))
         );
     }
 }

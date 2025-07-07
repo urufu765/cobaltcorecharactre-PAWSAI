@@ -6,6 +6,7 @@ A collection of five (or more) bounty hunters!
 
 ### Pre-release
 
+* **(0.0.21)x**: Kodijen Status
 * **(0.0.20)x**: Kodijen Artifacts
 * **(0.0.19)x**: Kodijen Cards implemented
 * **(0.0.18)x**: Kodijen!!!
