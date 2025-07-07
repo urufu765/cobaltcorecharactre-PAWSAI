@@ -45,7 +45,7 @@ internal partial class ModEntry : SimpleMod
             Starters = new StarterDeck
             {
                 cards = [
-                    new SmartDrone(),
+                    new SmartDroneCard(),
                     new DefensiveCommand()
                 ],
                 artifacts = [
@@ -58,7 +58,7 @@ internal partial class ModEntry : SimpleMod
         MoreDifficultiesApi?.RegisterAltStarters(KodijenDeck.Deck, new StarterDeck
         {
             cards = [
-                new MissileDrone(),
+                new MissileDroneCard(),
                 new ShiftyMissile()
             ],
             artifacts =

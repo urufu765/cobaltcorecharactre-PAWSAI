@@ -6,6 +6,7 @@ A collection of five (or more) bounty hunters!
 
 ### Pre-release
 
+* **(0.0.20)x**: Kodijen Artifacts
 * **(0.0.19)x**: Kodijen Cards implemented
 * **(0.0.18)x**: Kodijen!!!
 * **(0.0.17)**: Improvement to Hyperdrive formula. + more specific settings. (Also fixed them EXEs)

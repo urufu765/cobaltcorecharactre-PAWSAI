@@ -21,7 +21,7 @@
         },
         "status": {
             "Repulsion": {
-                "name": "Repulsion Mod",
+                "name": "Repulsion",
                 "desc": "When shot while shield is active, the hit is bounced back as a {0} damage attack.\n<c=downside>Decreases by 1 at the start of next turn.</c>"
             },
             "Repetition": {
@@ -419,17 +419,17 @@
                 },
                 "BattleDroneBoast": {
                     "name": "BATTLE-DRONE KING BOAST",
-                    "desc": "Gain 2 extra <c=energy>ENERGY</c> every turn if your hull is at max.\n<c=downside>Lose 1 <c=energy>ENERGY</c> every turn if your hull is below <c=keyword>{{difficulty}}%</c>.</c>"
+                    "desc": "Gain 2 extra <c=energy>ENERGY</c> every turn if your hull is at max.\n<c=downside>Lose 1 <c=energy>ENERGY</c> every turn for the rest of combat instead if your hull ever dips below <c=keyword>{{difficulty}}%</c>.</c>"
                 }
             },
             "Boss": {
-                "UngodlyAmountOfControl": {
-                    "name": "UNGODLY AMOUNT OF CONTROL",
-                    "desc": "At the start of every turn, gain 2 <c=status>DRONE SHIFT</c> and 1 <c=status>ENGINE STALL</c>.\nIf you have any <c=status>DRONE SHIFT</c> by the end of your turn, <c=downside>gain 1 additional <c=status>ENGINE STALL</c> next turn</c>."
-                },
                 "ModelRocketDegree": {
                     "name": "MODEL ROCKET DEGREE",
                     "desc": "+2 <c=drone>missile</c> damage dealt to enemy. <c=downside>-1 attack damage.</c>"
+                },
+                "UngodlyAmountOfControl": {
+                    "name": "UNGODLY AMOUNT OF CONTROL",
+                    "desc": "At the start of every turn, gain 2 <c=status>DRONE SHIFT</c> and 1 <c=status>ENGINE STALL</c>.\nIf you have any <c=status>DRONE SHIFT</c> by the end of your turn, <c=downside>gain 2 additional <c=status>ENGINE STALL</c> next turn</c>."
                 }
             },
             "EventOnly": {

@@ -61,6 +61,8 @@ public class SuperClear : Card, IRegisterable, IHasCustomCardTraits
             }
         };
 
+        
+
         cd.description = ModEntry.Instance.Localizations.Localize(["Kodijen", "card", rare.ToString(), MethodBase.GetCurrentMethod()!.DeclaringType!.Name, "desc"
             ], new
             {

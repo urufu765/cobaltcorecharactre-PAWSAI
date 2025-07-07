@@ -14,6 +14,7 @@ using Starhunters.Pawsai.Artifacts;
 using Starhunters.Bruno.Cards;
 using Starhunters.Bruno.Artifacts;
 using Starhunters.Kodijen.Cards;
+using Starhunters.Kodijen.Artifacts;
 
 namespace Starhunters;
 
@@ -269,6 +270,12 @@ internal partial class ModEntry : SimpleMod
     public Spr Midrow_Missile2 { get; private set; }
     [SpriteLoading("icon", "kodijen")]
     public Spr Midrow_MiniArtemis { get; private set; }
+    [SpriteLoading("artifact", "kodijen")]
+    public Spr FirstOnesFree_Depleted { get; private set; }
+    [SpriteLoading("artifact", "kodijen")]
+    public Spr BattleDroneBoast_Fail { get; private set; }
+    [SpriteLoading("artifact", "kodijen")]
+    public Spr UngodlyAmountOfControl_Fail { get; private set; }
 
     private readonly static List<Type> KodijenCardTypes = [
         // Common
@@ -315,12 +322,12 @@ internal partial class ModEntry : SimpleMod
     private readonly static IEnumerable<Type> KodijenArtifactTypes = new List<Type>
     {
         // Common
-        // typeof(FirstOnesFree),
-        // typeof(SelfRepairingPlaster),
-        // typeof(BattleDroneBoast),
+        typeof(FirstOnesFree),
+        typeof(SelfRepairingPlaster),
+        typeof(ModelRocketDegree),
         // Boss
-        // typeof(UngodlyAmountOfControl),
-        // typeof(ModelRocketDegree)
+        typeof(UngodlyAmountOfControl),
+        typeof(BattleDroneBoast),
         // Event
         // Unreleased
     }.Concat(KodijenDuoArtifactTypes);
