@@ -23,6 +23,7 @@ internal partial class ModEntry : SimpleMod
     internal static ModEntry Instance { get; private set; } = null!;
     internal static IPlayableCharacterEntryV2 Pawsai { get; private set; } = null!;  // Defense
     internal static IPlayableCharacterEntryV2 Bruno { get; private set; } = null!;  // Offense
+    internal static IPlayableCharacterEntryV2 Eriska {get; private set; } = null!;  // Super offense
     internal static IPlayableCharacterEntryV2 Kodijen { get; private set; } = null!;  // Mid-row
     // internal static IPlayableCharacterEntryV2 Parmesan { get; private set; } = null!;  // Movement? (Teleportation)
     // internal static IPlayableCharacterEntryV2 Varrigradona { get; private set; } = null!;  // ???
@@ -352,9 +353,100 @@ internal partial class ModEntry : SimpleMod
     };
     #endregion
 
+
+    #region Eriska stuff
+    internal IDeckEntry EriskaDeck = null!;
+    internal IStatusEntry Status_Burn { get; private set; } = null!;
+    internal IStatusEntry Status_Blister { get; private set; } = null!;
+
+    [SpriteLoading("icon", "eriska")]
+    public Spr Action_Burn { get; private set; }
+    [SpriteLoading("icon", "eriska")]
+    public Spr Action_Blister { get; private set; }
+    [SpriteLoading("artifact", "eriska")]
+    public Spr _Depleted { get; private set; }
+
+    private readonly static List<Type> EriskaCardTypes = [
+        // Common
+        typeof(),
+        typeof(),
+        typeof(),
+        typeof(),
+        typeof(),
+        typeof(),
+        typeof(),
+        typeof(),
+        typeof(),
+        // Uncommon
+        typeof(),
+        typeof(),
+        typeof(),
+        typeof(),
+        typeof(),
+        typeof(),
+        typeof(),
+        // Rare
+        typeof(),
+        typeof(),
+        typeof(),
+        typeof(),
+        typeof(),
+        // Token
+        typeof(EriskaExe),
+        // Unreleased
+    ];
+    private readonly static List<Type> EriskaDuoArtifactTypes = [
+    // typeof(),  // CAT
+    // typeof(),  // Peri
+    // typeof(),  // Isaac
+    // typeof(),  // Books
+        typeof(),  // Drake
+    // typeof(),  // Dizzy
+    // typeof(),  // Riggs
+    // typeof(),  // Bruno
+    // typeof(),  // Varrigradona
+    // typeof(),  // PAWSAI
+    // typeof(),  // Parmesan
+    ];
+    private readonly static IEnumerable<Type> EriskaArtifactTypes = new List<Type>
+    {
+        // Common
+        typeof(),
+        typeof(),
+        typeof(),
+        // Boss
+        typeof(),
+        typeof(),
+        typeof(),
+        // Event
+        // Unreleased
+    }.Concat(EriskaDuoArtifactTypes);
+    // private readonly static List<Type> EriskaDialogues = [
+    //     typeof(StoryDialogue),
+    //     typeof(EventDialogue),
+    //     typeof(CombatDialogue),
+    //     typeof(ArtifactDialogue),
+    //     typeof(CardDialogue),
+    //     typeof(MemoryDialogue)
+    // ];
+    public readonly static Dictionary<int, List<string>> EriskanAnims = new()
+    {
+        {1, [
+            "mini",
+            "gameover",
+        ]},
+        {5, [
+            "squint",
+            "neutral",
+        ]}
+    };
+    #endregion
+
+
     private readonly static IEnumerable<Type> AllRegisterableTypes =
         PawsaiCardTypes
             .Concat(BrunoCardTypes)
+            .Concat(EriskaCardTypes)
             .Concat(KodijenCardTypes);
 
 }

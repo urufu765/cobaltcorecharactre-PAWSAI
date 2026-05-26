@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
 		<RootNamespace>Starhunters</RootNamespace>
-		<Version>0.0.21</Version>
+		<Version>0.0.22</Version>
 		<!-- <IncludedModProjectPaths>i18n;assets</IncludedModProjectPaths> -->
 
 		<TargetFramework>net8.0</TargetFramework>
@@ -9,8 +9,8 @@
 		<ImplicitUsings>disable</ImplicitUsings>
 		<Nullable>enable</Nullable>
 		<WarningsAsErrors>Nullable</WarningsAsErrors>
-		<ModLoaderPath>A:\SteamLibrary\steamapps\common\Cobalt Core\Nickel</ModLoaderPath>
-		<GameExePath>A:\SteamLibrary\steamapps\common\Cobalt Core\CobaltCore.exe</GameExePath>
+		<ModLoaderPath>C:\Program Files(x86)\Steam\steamapps\common\Cobalt Core\Nickel</ModLoaderPath>
+		<GameExePath>C:\Program Files(x86)\Steam\steamapps\common\Cobalt Core\CobaltCore.exe</GameExePath>
 		<ModZipPath>$(MSBuildProjectDirectory)\.release\$(MSBuildProjectName)-$(Version).zip</ModZipPath>
 		<GameDllPath>$(MSBuildProjectDirectory)\..\..\..\Decompiled\CobaltCore.dll</GameDllPath>
 	</PropertyGroup>

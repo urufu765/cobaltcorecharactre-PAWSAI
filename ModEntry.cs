@@ -115,6 +115,7 @@ internal partial class ModEntry : SimpleMod
 
         Register_Pawsai(package, helper);
         Register_Bruno(package, helper);
+        Register_Eriska(package, helper);
         Register_Kodijen(package, helper);
         // Register_Parmesan(package, helper);
         // Register_Varrigradona(package, helper);

@@ -27,11 +27,21 @@ static class CommonDefinitions
     internal static string AmIsaac => Deck.goat.Key();
     internal static string AmBooks => Deck.shard.Key();
     internal static string AmMax => Deck.hacker.Key();
+
+    internal static string AmPawsai => Instance.PawsaiDeck.UniqueName;
+    internal static Deck AmPawsaiDeck => Instance.PawsaiDeck.Deck;
+    internal static string AmEriska => Instance.EriskaDeck.UniqueName;
+    internal static Deck AmEriskaDeck => Instance.EriskaDeck.Deck;
+    internal static string AmKodijen => Instance.KodijenDeck.UniqueName;
+    internal static Deck AmKodijenDeck => Instance.KodijenDeck.Deck;
+
     internal const string AmVoid = "void";
     internal const string AmShopkeeper = "nerd";
     internal const string AmStardog = "wolf";
     internal const string AmCrystalMiniboss = "crystal";
     internal const string AmWizbo = "wizard";
+    internal const string AmEriskaMom = "eriskamom";
+    internal const string AmEriskaMum = "eriskamum";
     internal readonly static string AmIlleana = "urufudoggo.Illeana::illeana";
 
     // internal static Status MissingWeth => ModEntry.WethTheSnep.MissingStatus.Status;

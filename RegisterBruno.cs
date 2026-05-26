@@ -31,7 +31,7 @@ internal partial class ModEntry : SimpleMod
             Name = AnyLocalizations.Bind(["Bruno", "character", "name"]).Localize
         });
 
-        foreach (KeyValuePair<int, List<string>> anims in PawsaiAnims)
+        foreach (KeyValuePair<int, List<string>> anims in BrunoAnims)
         {
             foreach (string anim in anims.Value)
             {
