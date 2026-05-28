@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
 		<RootNamespace>Starhunters</RootNamespace>
-		<Version>0.0.22a</Version>
+		<Version>0.0.23</Version>
 		<!-- <IncludedModProjectPaths>i18n;assets</IncludedModProjectPaths> -->
 
 		<TargetFramework>net8.0</TargetFramework>
@@ -17,7 +17,7 @@
 	<ItemGroup>
 		<ModFiles Include="assets/**" />
 		<ModFiles Include="i18n/**" />
-		<PackageReference Include="Nickel.ModBuildConfig" Version="2.0.2" />
+		<PackageReference Include="Nickel.ModBuildConfig" Version="2.1.2" />
 		<PackageReference Include="EnumByNameSourceGenerator" Version="1.1.2" />
 	</ItemGroup> 
 	<ItemGroup>
