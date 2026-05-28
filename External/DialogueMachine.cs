@@ -8,7 +8,7 @@ using Nickel;
 namespace Starhunters.External;
 
 /**
-ver.0.20c
+ver.0.21
 
 To get DialogueMachine and the custom dialogue stuff working:
 - edit the namespace of this file to at least match your project namespace
@@ -402,9 +402,11 @@ public class QMulti : Instruction  // Quick disconnect
     /// <param name="oncePerCombatTags">Once per combat tag</param>
     /// <param name="oncePerRunTags">Once per run tag</param>
     /// <param name="lastTurnEnemyStatuses">Statuses enemy had</param>
+    /// <param name="lastTurnEnemyStatusNames">Statuses enemy had by UniqueName</param>
     /// <param name="lastTurnPlayerStatuses">Statuses player had</param>
+    /// <param name="lastTurnPlayerStatusNames">Statuses player had by UniqueName</param>
     /// <param name="overrides">Delegate for any other filters that is not present in the parameters</param>
-    public QMulti(HashSet<Type>? hasArtifactTypes = null, HashSet<string>? hasArtifacts = null, HashSet<Type>? doesNotHaveArtifactTypes = null, HashSet<string>? doesNotHaveArtifacts = null, HashSet<string>? allPresent = null, HashSet<string>? oncePerCombatTags = null, HashSet<string>? oncePerRunTags = null, HashSet<Status>? lastTurnEnemyStatuses = null, HashSet<Status>? lastTurnPlayerStatuses = null, Action<DialogueMachine>? overrides = null)
+    public QMulti(HashSet<Type>? hasArtifactTypes = null, HashSet<string>? hasArtifacts = null, HashSet<Type>? doesNotHaveArtifactTypes = null, HashSet<string>? doesNotHaveArtifacts = null, HashSet<string>? allPresent = null, HashSet<string>? oncePerCombatTags = null, HashSet<string>? oncePerRunTags = null, HashSet<Status>? lastTurnEnemyStatuses = null, HashSet<string>? lastTurnEnemyStatusNames = null, HashSet<Status>? lastTurnPlayerStatuses = null, HashSet<string>? lastTurnPlayerStatusNames = null, Action<DialogueMachine>? overrides = null)
     {
         filterOverrides = new()
         {
@@ -416,7 +418,9 @@ public class QMulti : Instruction  // Quick disconnect
             doesNotHaveArtifactTypes = doesNotHaveArtifactTypes,
             doesNotHaveArtifacts = doesNotHaveArtifacts,
             lastTurnEnemyStatuses = lastTurnEnemyStatuses,
-            lastTurnPlayerStatuses = lastTurnPlayerStatuses
+            lastTurnEnemyStatusNames = lastTurnEnemyStatusNames,
+            lastTurnPlayerStatuses = lastTurnPlayerStatuses,
+            lastTurnPlayerStatusNames = lastTurnPlayerStatusNames,
         };
         overrides?.Invoke(filterOverrides);
     }
@@ -461,6 +465,18 @@ public class DialogueMachine : StoryNode
     /// Though any fields you declare will replace existing fields if you're modifying the original, lists and hashsets will be appended by default. Add the name of the list/hashset field if you want to completely replace them.
     /// </summary>
     public List<string>? dontAppendListFields;
+    /// <summary>
+    /// A "lastTurnEnemyStatuses" except it accepts the uniqueName of the status, and gets the real status by load time. For modded statuses from other mods.
+    /// </summary>
+    public HashSet<string>? lastTurnEnemyStatusNames;
+    /// <summary>
+    /// A "lastTurnPlayerStatuses" except it accepts the uniqueName of the status, and gets the real status by load time. For modded statuses from other mods.
+    /// </summary>
+    public HashSet<string>? lastTurnPlayerStatusNames;
+    /// <summary>
+    /// A "whoDidThat" except it accepts the uniqueName and gets the Deck by that string. For finding the modded deck safely.
+    /// </summary>
+    public string? whoDidThatName;
 
     /// <summary>
     /// Translates DialogueMachine into Instructions readable by LocalDB
@@ -475,7 +491,9 @@ public class DialogueMachine : StoryNode
                 // Modded
                 if (inst.Helper?.Content?.Artifacts?.LookupByArtifactType(type) is IArtifactEntry iae) hasArtifacts.Add(iae.UniqueName);
                 else if (DB.artifacts.ContainsValue(type)) hasArtifacts.Add(DB.artifacts.First(x => x.Value == type).Key);
+#if DEBUG
                 else inst.Logger.LogWarning($"Error when moving {type.Name} from [hasArtifactTypes] to [hasArtifacts]! Perhaps the artifact isn't registered yet or misspelt?");
+#endif
             }
         }
         if (doesNotHaveArtifactTypes is not null)
@@ -486,8 +504,39 @@ public class DialogueMachine : StoryNode
                 // Modded
                 if (inst.Helper?.Content?.Artifacts?.LookupByArtifactType(type) is IArtifactEntry iae) doesNotHaveArtifacts.Add(iae.UniqueName);
                 else if (DB.artifacts.ContainsValue(type)) doesNotHaveArtifacts.Add(DB.artifacts.First(x => x.Value == type).Key);
+#if DEBUG
                 else inst.Logger.LogWarning($"Error when moving {type.Name} from [doesNotHaveArtifactTypes] to [doesNotHaveArtifacts]! Perhaps the artifact isn't registered yet or misspelt?");
+#endif
             }
+        }
+        if (lastTurnEnemyStatusNames is not null)
+        {
+            lastTurnEnemyStatuses ??= [];
+            foreach (string e_stat in lastTurnEnemyStatusNames)
+            {
+                if (inst.Helper?.Content?.Statuses?.LookupByUniqueName(e_stat) is IStatusEntry ise) lastTurnEnemyStatuses.Add(ise.Status);
+#if DEBUG
+                else inst.Logger.LogWarning("Error when moving {} from [lastTurnEnemyStatusNames] to [lastTurnEnemyStatuses]! Perhaps the status isn't registered yet or misspelt? Or perhaps it is a vanilla status, in which case you should be using [lastTurnEnemyStatuses]!", e_stat);
+#endif
+            }
+        }
+        if (lastTurnPlayerStatusNames is not null)
+        {
+            lastTurnPlayerStatuses ??= [];
+            foreach (string p_stat in lastTurnPlayerStatusNames)
+            {
+                if (inst.Helper?.Content?.Statuses?.LookupByUniqueName(p_stat) is IStatusEntry ise) lastTurnPlayerStatuses.Add(ise.Status);
+#if DEBUG
+                else inst.Logger.LogWarning("Error when moving {} from [lastTurnPlayerStatusNames] to [lastTurnPlayerStatuses]! Perhaps the status isn't registered yet or misspelt? Or perhaps it is a vanilla status, in which case you should be using [lastTurnPlayerStatuses]!", p_stat);
+#endif
+            }
+        }
+        if (whoDidThatName is not null)
+        {
+            if (inst.Helper?.Content?.Decks?.LookupByUniqueName(whoDidThatName) is IDeckEntry ide) whoDidThat = ide.Deck;
+#if DEBUG
+            else inst.Logger.LogWarning("Error when moving {} from [whoDidThatName] to [whoDidThat]! Perhaps the deck isn't registered yet or misspelt? Or perhaps it is a vanilla deck, in which case you should be using [whoDidThat]!", whoDidThatName);
+#endif
         }
         if (edit is not null)  // Skips dialogue conversion if edits are available
         {
@@ -601,6 +650,13 @@ public class DialogueMachine : StoryNode
         return false;
     }
 
+    public static bool DeckExists(Deck name, SimpleMod inst)
+    {
+        if (inst.Helper.Content?.Decks?.LookupByDeck(name) is not null) return true;
+        if (DB.decks.ContainsKey(name)) return true;
+        return false;
+    }
+
     /// <summary>
     /// Checks if inputted string is a valid Artifact
     /// </summary>
@@ -612,6 +668,12 @@ public class DialogueMachine : StoryNode
         if (inst.Helper.Content?.Artifacts?.LookupByUniqueName(name) is not null) return true;
         // Game artifacts
         if (DB.artifacts.ContainsKey(name)) return true;
+        return false;
+    }
+
+    public static bool StatusExists(Status name, SimpleMod inst)
+    {
+        if (inst.Helper.Content?.Statuses?.LookupByStatus(name) is not null) return true;
         return false;
     }
 }
@@ -906,7 +968,7 @@ public class LocalDB
             {
                 if (!DialogueMachine.ArtifactExists(artifact, Inst))
                 {
-                    Inst.Logger.LogWarning(sn.Key + "'s <hasArtifacts> may contain an erroneous artifact [" + artifact + "] that may not be recognized by the game! (or if it's a modded artifact: the mod isn't loaded.)");
+                    Inst.Logger.LogWarning("{Key}'s <hasArtifacts> may contain an erroneous artifact [{Artifact}] that may not be recognized by the game! (or if it's a modded artifact: the mod isn't loaded.)", sn.Key, artifact);
                 }
             }
         }
@@ -916,7 +978,7 @@ public class LocalDB
             {
                 if (!DialogueMachine.ArtifactExists(artifact, Inst))
                 {
-                    Inst.Logger.LogWarning(sn.Key + "'s <doesNotHaveArtifacts> may contain an erroneous artifact [" + artifact + "] that may not be recognized by the game! (or if it's a modded artifact: the mod isn't loaded.)");
+                    Inst.Logger.LogWarning("{Key}'s <doesNotHaveArtifacts> may contain an erroneous artifact [{Artifact}] that may not be recognized by the game! (or if it's a modded artifact: the mod isn't loaded.)", sn.Key, artifact);
                 }
             }
         }
@@ -928,7 +990,7 @@ public class LocalDB
             {
                 if (!DialogueMachine.CharExists(characer, Inst))
                 {
-                    Inst.Logger.LogWarning(sn.Key + "'s <allPresent> may contain an erroneous character [" + characer + "] that may not be recognized by the game! (or if it's a modded character: the mod isn't loaded or is a modded enemy.)");
+                    Inst.Logger.LogWarning("{Key}'s <allPresent> may contain an erroneous character [{Character}] that may not be recognized by the game! (or if it's a modded character: the mod isn't loaded or is a modded enemy.)", sn.Key, characer);
                 }
             }
         }
@@ -938,7 +1000,31 @@ public class LocalDB
             {
                 if (!DialogueMachine.CharExists(characer, Inst))
                 {
-                    Inst.Logger.LogWarning(sn.Key + "'s <nonePresent> may contain an erroneous character [" + characer + "] that may not be recognized by the game! (or if it's a modded character: the mod isn't loaded or is a modded enemy.)");
+                    Inst.Logger.LogWarning("{Key}'s <nonePresent> may contain an erroneous character [{Character}] that may not be recognized by the game! (or if it's a modded character: the mod isn't loaded or is a modded enemy.)", sn.Key, characer);
+                }
+            }
+        }
+        if (sn.Value.whoDidThat is not null && !DialogueMachine.DeckExists(sn.Value.whoDidThat.Value, Inst))
+        {
+            Inst.Logger.LogWarning("{Key}'s <whoDidThat> may contain an erroneous deck [{WhoDidThat}] that may not be recognized by the game! (or if it's a modded deck: the mod isn't loaded or the mod loads way later than anticipated!)", sn.Key, sn.Value.whoDidThat.Value.Key());
+        }
+        if (sn.Value.lastTurnEnemyStatuses is not null)
+        {
+            foreach (Status status in sn.Value.lastTurnEnemyStatuses)
+            {
+                if (!DialogueMachine.StatusExists(status, Inst))
+                {
+                    Inst.Logger.LogWarning("{Key}'s <lastTurnEnemyStatuses> may contain an erroneous status [{Status}] that may not be recognized by the game! (or if it's a modded status: the mod isn't loaded or the mod it belongs to loads it way too late.)", sn.Key, status);
+                }
+            }
+        }
+        if (sn.Value.lastTurnPlayerStatuses is not null)
+        {
+            foreach (Status status in sn.Value.lastTurnPlayerStatuses)
+            {
+                if (!DialogueMachine.StatusExists(status, Inst))
+                {
+                    Inst.Logger.LogWarning("{Key}'s <lastTurnPlayerStatuses> may contain an erroneous status [{Status}] that may not be recognized by the game! (or if it's a modded status: the mod isn't loaded or the mod it belongs to loads it way too late.)", sn.Key, status);
                 }
             }
         }
@@ -952,7 +1038,7 @@ public class LocalDB
                 {
                     if (et.who is not null && !DialogueMachine.CharExists(et.who, Inst))
                     {
-                        Inst.Logger.LogWarning(sn.Key + "'s <edit> contains a line with an invalid character [" + et.who + "] that may not be recognized by the game! Did you spell the character correctly? (or if it's a modded character: the mod isn't loaded or is a modded enemy.)");
+                        Inst.Logger.LogWarning("{Key}'s <edit> contains a line with an invalid character [{Who}] that may not be recognized by the game! Did you spell the character correctly? (or if it's a modded character: the mod isn't loaded or is a modded enemy.)", sn.Key, et.who);
                     }
                 }
             }
@@ -966,13 +1052,13 @@ public class LocalDB
                         {
                             if (dtss.who is not null && !DialogueMachine.CharExists(dtss.who, Inst))
                             {
-                                Inst.Logger.LogWarning(sn.Key + "'s <dialogue(sayswitch)> contains a line with an invalid character [" + dtss.who + "] that may not be recognized by the game! Did you spell the character correctly? (or if it's a modded character: the mod isn't loaded or is a modded enemy.)");
+                                Inst.Logger.LogWarning("{Key}'s <dialogue(sayswitch)> contains a line with an invalid character [{Who}] that may not be recognized by the game! Did you spell the character correctly? (or if it's a modded character: the mod isn't loaded or is a modded enemy.)", sn.Key, dtss.who);
                             }
                         }
                     }
                     else if (dt.who is not null && !DialogueMachine.CharExists(dt.who, Inst))
                     {
-                        Inst.Logger.LogWarning(sn.Key + "'s <dialogue> contains a line with an invalid character [" + dt.who + "] that may not be recognized by the game! Did you spell the character correctly? (or if it's a modded character: the mod isn't loaded or is a modded enemy.)");
+                        Inst.Logger.LogWarning("{Key}'s <dialogue> contains a line with an invalid character [{Who}] that may not be recognized by the game! Did you spell the character correctly? (or if it's a modded character: the mod isn't loaded or is a modded enemy.)", sn.Key, dt.who);
                     }
                 }
             }
@@ -980,7 +1066,7 @@ public class LocalDB
             // Checks if the edit dialogue thing's key is valid
             if (dm.edit is not null && !DB.story.all.ContainsKey(sn.Key))
             {
-                Inst.Logger.LogWarning(sn.Key + " is trying to add to a dialogue that doesn't exist in game (yet)! If you're trying to edit modded dialogue, this may not be the appropriate way!");
+                Inst.Logger.LogWarning("{Key} is trying to add to a dialogue that doesn't exist in game (yet)! If you're trying to edit modded dialogue, this may not be the appropriate way!", sn.Key);
             }
         }
 #endif
@@ -1384,12 +1470,17 @@ public class LocalDB
             result.hasArtifactTypes = kiddo.hasArtifactTypes ?? man.hasArtifactTypes;
             result.doesNotHaveArtifactTypes = kiddo.doesNotHaveArtifactTypes ?? man.doesNotHaveArtifactTypes;
             result.dontAppendListFields = kiddo.dontAppendListFields ?? man.dontAppendListFields;
+            result.whoDidThatName = kiddo.whoDidThatName ?? man.whoDidThatName;
+            result.lastTurnEnemyStatusNames = kiddo.lastTurnEnemyStatusNames ?? man.lastTurnEnemyStatusNames;
+            result.lastTurnPlayerStatusNames = kiddo.lastTurnPlayerStatusNames ?? man.lastTurnPlayerStatusNames;
             if (appendLists)
             {
                 if (!excludeFields.Contains("dialogue")) result.dialogue = [.. man.dialogue ?? [], .. child.dialogue ?? []];
                 if (!excludeFields.Contains("edit")) result.edit = [.. man.edit ?? [], .. child.edit ?? []];
                 if (!excludeFields.Contains("hasArtifactTypes")) result.hasArtifactTypes = [.. man.hasArtifactTypes ?? [], .. child.hasArtifactTypes ?? []];
                 if (!excludeFields.Contains("doesNotHaveArtifactTypes")) result.doesNotHaveArtifactTypes = [.. man.doesNotHaveArtifactTypes ?? [], .. child.doesNotHaveArtifactTypes ?? []];
+                if (!excludeFields.Contains("lastTurnEnemyStatusNames")) result.lastTurnEnemyStatusNames = [.. man.lastTurnEnemyStatusNames ?? [], .. child.lastTurnEnemyStatusNames ?? []];
+                if (!excludeFields.Contains("lastTurnPlayerStatusNames")) result.lastTurnPlayerStatusNames = [.. man.lastTurnPlayerStatusNames ?? [], .. child.lastTurnPlayerStatusNames ?? []];
             }
         }
         return result ?? new();
@@ -1540,6 +1631,9 @@ public class LocalDB
             result.hasArtifactTypes = origin.hasArtifactTypes?.ToHashSet();
             result.doesNotHaveArtifactTypes = origin.doesNotHaveArtifactTypes?.ToHashSet();
             result.dontAppendListFields = origin.dontAppendListFields?.ToList();
+            result.lastTurnPlayerStatusNames = origin.lastTurnPlayerStatusNames?.ToHashSet();
+            result.lastTurnEnemyStatusNames = origin.lastTurnEnemyStatusNames?.ToHashSet();
+            result.whoDidThatName = origin.whoDidThatName;
         }
         return result ?? new();
     }
@@ -1559,7 +1653,10 @@ public class LocalDB
             result.dialogue = excludeFields.Contains("dialogue") ? default : origin.dialogue?.Select(d => new DialogueThing(d)).ToList();
             result.hasArtifactTypes = excludeFields.Contains("hasArtifactTypes") ? default : origin.hasArtifactTypes?.ToHashSet();
             result.doesNotHaveArtifactTypes = excludeFields.Contains("doesNotHaveArtifactTypes") ? default : origin.doesNotHaveArtifactTypes?.ToHashSet();
-            result.dontAppendListFields = excludeFields.Contains("replaceFields") ? default : origin.dontAppendListFields?.ToList();
+            result.dontAppendListFields = excludeFields.Contains("dontAppendListFields") ? default : origin.dontAppendListFields?.ToList();
+            result.whoDidThatName = excludeFields.Contains("whoDidThatName") ? default : origin.whoDidThatName;
+            result.lastTurnEnemyStatusNames = excludeFields.Contains("lastTurnEnemyStatusNames") ? default : origin.lastTurnEnemyStatusNames?.ToHashSet();
+            result.lastTurnPlayerStatusNames = excludeFields.Contains("lastTurnPlayerStatusNames") ? default : origin.lastTurnPlayerStatusNames?.ToHashSet();
         }
         return result ?? new();
     }

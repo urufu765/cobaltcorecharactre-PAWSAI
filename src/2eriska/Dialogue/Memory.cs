@@ -86,24 +86,24 @@ internal class EriskaMemoryDialogue : IRegisterable
                     new(new Wait{secs = 3}),
                     new(AmEriska, "explain", "I know you still disapprove of me going this route and..."),
                     new(AmEriska, "down", "I probably should've wrote home at least once..."),
-                    new(new Wait(secs = 1)),
-                    new(new BGAction(action = "lean back")),
-                    new(new Wait(secs = 2)),
+                    new(new Wait{secs = 1}),
+                    new(new BGAction{action = "lean back"}),
+                    new(new Wait{secs = 2}),
                     new(AmEriska, "up", "I'm such an awful daughter, aren't I?"),
                     new(AmEriska, "upwince", "I mean what kind of daughter runs away from home and hitchhikes her way across the galaxy?"),
                     new(AmEriska, "explain", "To chase after the wishing star, a storybook legend, that grants any wish."),
-                    new(new Wait(secs = 4)),
+                    new(new Wait{secs = 4}),
                     new(AmEriska, "chuckle", "Psh. All so I could wish for that approval you would never give."),
                     new(AmEriska, "up", "What was I thinking?"),
-                    new(new Wait(secs = 2)),
-                    new(new BGAction(action = "wrap arms")),
-                    new(new Wait(secs = 3)),
+                    new(new Wait{secs = 2}),
+                    new(new BGAction{action = "wrap arms"}),
+                    new(new Wait{secs = 3}),
                     new(AmEriska, "down", "I never found the star."),
                     new(AmEriska, "But! I made new friends, found a new purpose..."),
                     new(AmEriska, "Aren't you satisfied that at least your daughter is happy now?"),
-                    new(new Wait(secs = 2)),
-                    new(new BGAction(action = "nuh uh")),
-                    new(new Wait(secs = 8)),
+                    new(new Wait{secs = 2}),
+                    new(new BGAction{action = "nuh uh"}),
+                    new(new Wait{secs = 8}),
                     new(AmEriska, "downunamused", "..."),
                     new(AmEriska, "downdisappointed", "Of course not.")
                 ]
@@ -117,10 +117,12 @@ internal class EriskaMemoryDialogue : IRegisterable
                     $"vault_{AmEriska}"
                 ],
                 dialogue = [
-                    new("T-8098 days"),
+                    new("T-1208 days"),
                     new(new Wait{secs = 2}),
                     new(title: null),
                     new(new Wait{secs = 1 }),
+                    new(AmBruno, "eyebrow", "So, what makes you qualified for this gunner position?", true),
+                    new(AmEriska, "smug", "I've destroyed an entire organization using just a matchbox.")
                 ]
             }},
         });

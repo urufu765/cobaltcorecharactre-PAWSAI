@@ -34,6 +34,8 @@ static class CommonDefinitions
     internal static Deck AmEriskaDeck => Instance.EriskaDeck.Deck;
     internal static string AmKodijen => Instance.KodijenDeck.UniqueName;
     internal static Deck AmKodijenDeck => Instance.KodijenDeck.Deck;
+    internal static string AmBruno => Instance.BrunoDeck.UniqueName;
+    internal static Deck AmBrunoDeck => Instance.BrunoDeck.Deck;
 
     internal const string AmVoid = "void";
     internal const string AmShopkeeper = "nerd";
